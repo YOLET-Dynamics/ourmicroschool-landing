@@ -33,12 +33,14 @@ interface FooterProps {
   navItems: string[];
   orbitron: OrbitronFont;
   sectionAnimation: SectionAnimation;
+  handleComingSoonClick: () => void;
 }
 
 const Footer: React.FC<FooterProps> = ({
   navItems,
   orbitron,
   sectionAnimation,
+  handleComingSoonClick,
 }) => {
   return (
     <motion.footer
@@ -85,7 +87,11 @@ const Footer: React.FC<FooterProps> = ({
               {navItems.map((item) => (
                 <li key={item}>
                   <Link
-                    href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                    href={
+                      item.toLowerCase() === "partners"
+                        ? "/partners"
+                        : `#${item.toLowerCase().replace(/\\s+/g, "-")}`
+                    }
                     className="text-gray-700 hover:text-blue-600 transition-colors"
                   >
                     {item}
@@ -101,6 +107,7 @@ const Footer: React.FC<FooterProps> = ({
               <li>
                 <Link
                   href="#coming-soon"
+                  onClick={handleComingSoonClick}
                   className="text-gray-700 hover:text-blue-600 transition-colors"
                 >
                   Terms of Service
@@ -109,6 +116,7 @@ const Footer: React.FC<FooterProps> = ({
               <li>
                 <Link
                   href="#coming-soon"
+                  onClick={handleComingSoonClick}
                   className="text-gray-700 hover:text-blue-600 transition-colors"
                 >
                   Privacy Policy
@@ -125,13 +133,7 @@ const Footer: React.FC<FooterProps> = ({
                   size={18}
                   className="mt-1 text-blue-600 flex-shrink-0"
                 />
-                <span>
-                  Washington DC, USA 
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Phone size={16} className="text-blue-600 flex-shrink-0" />
-                <span>(571) 235-6218</span>
+                <span>Washington DC, USA</span>
               </div>
             </div>
           </div>
@@ -139,7 +141,8 @@ const Footer: React.FC<FooterProps> = ({
 
         <div className="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-700 mb-4 md:mb-0">
-            © {new Date().getFullYear()} OurMicroSchool. All rights reserved.
+            © {new Date().getFullYear()} OurMicroSchool, a product of SYM L.L.C.
+            All rights reserved.
           </p>
           <p className="text-gray-700">
             Built by{" "}
@@ -158,4 +161,4 @@ const Footer: React.FC<FooterProps> = ({
   );
 };
 
-export default React.memo(Footer); 
+export default React.memo(Footer);

@@ -12,7 +12,7 @@
 
 @layer components {
   .floating-nav {
-    @apply mx-4 max-w-5xl sm:mx-auto bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-200/30 shadow-lg;
+    @apply mx-4 max-w-7xl sm:mx-auto bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-200/30 shadow-lg;
   }
   .mobile-menu-overlay {
     @apply bg-transparent backdrop-blur-md;

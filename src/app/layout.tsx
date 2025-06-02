@@ -14,10 +14,10 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ourmicroschool.com"
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "OMS - Homeschooling OSS",
-    template: "%s | OMS - Homeschooling OSS",
+    default: "OMS - Homeschool OSS",
+    template: "%s | OMS - Homeschool OSS",
   },
-  description: "Discover OMS - Homeschooling OSS: the all-in-one homeschooling software designed to streamline curriculum planning, track student progress, and foster collaboration. Personalized learning, simplified.",
+  description: "Discover OMS - Homeschool OSS: the all-in-one homeschooling software designed to streamline curriculum planning, track student progress, and foster collaboration. Personalized learning, simplified.",
   keywords: ["homeschooling", "oss", "open source homeschooling software", "education software", "personalized learning", "curriculum planning", "student progress tracking", "online learning platform", "K-12 education", "microschool", "homeschool co-op", "homeschooling resources"],
   authors: [{ name: "YOLET Labs", url: "https://yoletent.com" }],
   creator: "YOLET Labs",

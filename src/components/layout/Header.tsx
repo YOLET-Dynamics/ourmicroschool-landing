@@ -21,6 +21,7 @@ interface HeaderProps {
   isMenuOpen: boolean;
   toggleMenu: () => void;
   isScrolled: boolean;
+  handleComingSoonClick: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -29,10 +30,11 @@ const Header: React.FC<HeaderProps> = ({
   isMenuOpen,
   toggleMenu,
   isScrolled,
+  handleComingSoonClick,
 }) => {
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed max-w-7xl mx-auto top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? "py-2" : "py-4"
       }`}
     >
@@ -60,7 +62,7 @@ const Header: React.FC<HeaderProps> = ({
               {navItems.map((item) => (
                 <Link
                   key={item}
-                  href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                  href={item.toLowerCase() === "partners" ? "/partners" : `#${item.toLowerCase().replace(/\\s+/g, "-")}`}
                   className="text-gray-700 hover:text-blue-600 transition-colors duration-200 relative group"
                 >
                   {item}
@@ -68,7 +70,11 @@ const Header: React.FC<HeaderProps> = ({
                 </Link>
               ))}
               <Link href="#contact" passHref>
-                <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white rounded-full">
+                <Button 
+                  size="sm" 
+                  className="bg-blue-600 hover:bg-blue-700 text-white rounded-full"
+                  onClick={handleComingSoonClick}
+                >
                   Get Started
                   <ArrowRight className="ml-2" size={16} />
                 </Button>
@@ -94,7 +100,7 @@ const Header: React.FC<HeaderProps> = ({
               {navItems.map((item) => (
                 <Link
                   key={item}
-                  href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                  href={item.toLowerCase() === "partners" ? "/partners" : `#${item.toLowerCase().replace(/\\s+/g, "-")}`}
                   className="text-lg text-gray-700 hover:text-blue-600 transition-colors py-2"
                   onClick={toggleMenu} // Close menu on click
                 >
@@ -106,7 +112,10 @@ const Header: React.FC<HeaderProps> = ({
                   <Button 
                     size="lg"
                     className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-full py-3"
-                    onClick={toggleMenu} // Close menu on click
+                    onClick={() => { 
+                      handleComingSoonClick();
+                      toggleMenu();
+                    }}
                   >
                     Get Started
                     <ArrowRight className="ml-2" size={20} />

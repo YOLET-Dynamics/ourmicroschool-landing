@@ -34,13 +34,13 @@ import {
 } from "lucide-react";
 import { Orbitron } from "next/font/google";
 import { motion } from "framer-motion";
-import { Toaster, toast } from 'sonner';
+import { Toaster, toast } from "sonner";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 const orbitron = Orbitron({ subsets: ["latin"] });
 
-const navItems = ["Features", "Contact"];
+const navItems = ["Features", "Partners", "Contact"];
 
 const sectionAnimation = {
   initial: { opacity: 0, y: 50 },
@@ -53,36 +53,39 @@ const benefitsData = [
   {
     id: "personalized",
     title: "Personalized Learning Paths",
-    description: "Our platform adapts to each student's pace and learning style, ensuring effective and engaging education.",
+    description:
+      "Our platform adapts to each student's pace and learning style, ensuring effective and engaging education.",
     listIcon: Target,
     displayIcon: Target,
     displayTitle: "Adaptive Learning",
     bgColorClass: "bg-blue-50",
     iconContainerBgClass: "bg-blue-600",
-    iconColorClass: "text-white"
+    iconColorClass: "text-white",
   },
   {
     id: "all-in-one",
     title: "All-In-One Homeschooling Hub",
-    description: "Manage curriculum, assignments, progress, and communication seamlessly in one intuitive platform.",
+    description:
+      "Manage curriculum, assignments, progress, and communication seamlessly in one intuitive platform.",
     listIcon: LayoutDashboard,
     displayIcon: LayoutDashboard,
     displayTitle: "Centralized Hub",
     bgColorClass: "bg-green-50",
     iconContainerBgClass: "bg-green-600",
-    iconColorClass: "text-white"
+    iconColorClass: "text-white",
   },
   {
     id: "user-friendly",
     title: "User-Friendly for the Whole Family",
-    description: "Designed for ease of use by students, parents, and educators of all technical skill levels.",
+    description:
+      "Designed for ease of use by students, parents, and educators of all technical skill levels.",
     listIcon: Smile,
     displayIcon: Smile,
     displayTitle: "Intuitive Design",
     bgColorClass: "bg-purple-50",
     iconContainerBgClass: "bg-purple-600",
-    iconColorClass: "text-white"
-  }
+    iconColorClass: "text-white",
+  },
 ];
 
 export default function LandingPage() {
@@ -103,8 +106,14 @@ export default function LandingPage() {
   }, []);
 
   const handleNotifyMeClick = () => {
-    toast.success("We'll keep you posted!", {
-      description: "You'll be the first to know about new features.",
+    toast.info("Coming soon!", {
+      description: "This feature is under development.",
+    });
+  };
+
+  const handleComingSoonClick = () => {
+    toast.info("Coming soon!", {
+      description: "This feature is under development and will be available shortly.",
     });
   };
 
@@ -112,13 +121,14 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Toaster richColors position="top-right" />
-      <Header 
+      <Toaster richColors position="bottom-right" />
+      <Header
         navItems={navItems}
         orbitron={orbitron}
         isMenuOpen={isMenuOpen}
         toggleMenu={toggleMenu}
         isScrolled={isScrolled}
+        handleComingSoonClick={handleComingSoonClick}
       />
 
       {/* Hero Section */}
@@ -129,7 +139,7 @@ export default function LandingPage() {
         <div className="max-w-7xl w-full mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-black mb-6 leading-snug md:leading-relaxed break-words overflow-hidden">
             The Operating System for Your
-            <span className="text-blue-600"> Homeschooling Hub</span>
+            <span className="text-blue-600"> Homeschool</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
             Streamline curriculum planning, track student progress, and foster
@@ -139,6 +149,7 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <Button
               size="lg"
+              onClick={handleComingSoonClick}
               className="bg-transparent hover:bg-blue-600 text-blue-700 hover:text-white border-2 border-blue-600 px-8 py-4 text-lg rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 active:bg-blue-700"
             >
               Get Started
@@ -147,6 +158,7 @@ export default function LandingPage() {
             <Button
               variant="outline"
               size="lg"
+              onClick={handleComingSoonClick}
               className="border-blue-600 text-blue-600 hover:bg-blue-700 hover:text-white px-8 py-4 text-lg rounded-full"
             >
               <Play className="mr-2" size={20} />
@@ -362,31 +374,48 @@ export default function LandingPage() {
               </h2>
               <div className="space-y-6">
                 {benefitsData.map((benefit, index) => (
-                  <div 
+                  <div
                     key={benefit.id}
-                    className={`flex items-start space-x-4 p-4 rounded-lg cursor-pointer transition-all duration-200 ${activeBenefitIndex === index ? 'bg-white shadow-lg scale-105' : 'hover:bg-gray-100'}`}
+                    className={`flex items-start space-x-4 p-4 rounded-lg cursor-pointer transition-all duration-200 ${
+                      activeBenefitIndex === index
+                        ? "bg-white shadow-lg scale-105"
+                        : "hover:bg-gray-100"
+                    }`}
                     onMouseEnter={() => setActiveBenefitIndex(index)}
                   >
-                    <div className={`w-8 h-8 ${benefit.iconContainerBgClass} ${benefit.iconColorClass} rounded-full flex items-center justify-center flex-shrink-0 mt-1`}>
+                    <div
+                      className={`w-8 h-8 ${benefit.iconContainerBgClass} ${benefit.iconColorClass} rounded-full flex items-center justify-center flex-shrink-0 mt-1`}
+                    >
                       <benefit.listIcon size={20} />
-                  </div>
-                  <div>
-                      <h3 className="text-xl font-semibold mb-1">{benefit.title}</h3>
-                      <p className="text-gray-700 text-sm">{benefit.description}</p>
-                </div>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold mb-1">
+                        {benefit.title}
+                      </h3>
+                      <p className="text-gray-700 text-sm">
+                        {benefit.description}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
             {/* Right-hand dynamic display area */}
-            <div className={`rounded-3xl p-8 text-center transition-all duration-300 ease-in-out ${currentBenefit.bgColorClass}`}>
-              <div className={`w-32 h-32 ${currentBenefit.iconContainerBgClass} rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 ease-in-out`}>
-                <currentBenefit.displayIcon className={currentBenefit.iconColorClass} size={64} />
+            <div
+              className={`rounded-3xl p-8 text-center transition-all duration-300 ease-in-out ${currentBenefit.bgColorClass}`}
+            >
+              <div
+                className={`w-32 h-32 ${currentBenefit.iconContainerBgClass} rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 ease-in-out`}
+              >
+                <currentBenefit.displayIcon
+                  className={currentBenefit.iconColorClass}
+                  size={64}
+                />
               </div>
-              <h3 className="text-2xl font-bold mb-4">{currentBenefit.displayTitle}</h3>
-              <p className="text-gray-700">
-                {currentBenefit.description}
-              </p>
+              <h3 className="text-2xl font-bold mb-4">
+                {currentBenefit.displayTitle}
+              </h3>
+              <p className="text-gray-700">{currentBenefit.description}</p>
             </div>
           </div>
         </div>
@@ -399,9 +428,9 @@ export default function LandingPage() {
         className="py-20 px-6 bg-white text-center"
       >
         <div className="max-w-2xl w-full mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
             Exciting New Features Coming Soon!
-            </h2>
+          </h2>
           <p className="text-xl text-gray-700 mb-8">
             We are constantly enhancing OurMicroSchool with powerful tools for
             your homeschooling journey. Sign up to be the first to know when new
@@ -412,14 +441,15 @@ export default function LandingPage() {
               type="email"
               placeholder="Enter your email address"
               className="border-gray-300 flex-1"
+              disabled
             />
-                  <Button
+            <Button
               type="button"
-              onClick={handleNotifyMeClick}
+              onClick={handleComingSoonClick}
               className="bg-blue-600 hover:bg-blue-700 text-white"
             >
               Notify Me
-                  </Button>
+            </Button>
           </div>
         </div>
       </motion.section>
@@ -444,37 +474,43 @@ export default function LandingPage() {
           <Card className="border-2 border-gray-200">
             <CardContent className="p-8">
               <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Your Name
-                    </label>
-                    <Input
-                      placeholder="Full Name"
-                      className="border-gray-300"
-                    />
+                <fieldset disabled>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
+                        Your Name
+                      </label>
+                      <Input
+                        placeholder="Full Name"
+                        className="border-gray-300"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">
+                        Your Email
+                      </label>
+                      <Input
+                        type="email"
+                        placeholder="your.email@example.com"
+                        className="border-gray-300"
+                      />
+                    </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2">
-                      Your Email
+                      How can we help you?
                     </label>
-                    <Input
-                      type="email"
-                      placeholder="your.email@example.com"
-                      className="border-gray-300"
+                    <Textarea
+                      placeholder="Describe your question or how we can support your homeschooling needs..."
+                      className="border-gray-300 min-h-[120px]"
                     />
                   </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    How can we help you?
-                  </label>
-                  <Textarea
-                    placeholder="Describe your question or how we can support your homeschooling needs..."
-                    className="border-gray-300 min-h-[120px]"
-                  />
-                </div>
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3">
+                </fieldset>
+                <Button
+                  type="button"
+                  onClick={handleComingSoonClick}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3"
+                >
                   Send Message
                 </Button>
               </form>
@@ -483,10 +519,11 @@ export default function LandingPage() {
         </div>
       </motion.section>
 
-      <Footer 
+      <Footer
         navItems={navItems}
         orbitron={orbitron}
         sectionAnimation={sectionAnimation}
+        handleComingSoonClick={handleComingSoonClick}
       />
     </div>
   );
