@@ -33,9 +33,9 @@ const PartnerCard = ({ partner }: { partner: (typeof partnersData)[0] }) => {
   const partnerSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": partner.name,
-    "description": partner.description.substring(0, 250) + "...",
-    "logo": `https://ourmicroschool.com${partner.logoUrl}`,
+    name: partner.name,
+    description: partner.description.substring(0, 250) + "...",
+    logo: `https://ourmicroschool.com${partner.logoUrl}`,
     // "url": partner.websiteUrl,
   };
 

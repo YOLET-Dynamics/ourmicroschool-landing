@@ -40,7 +40,8 @@ export default function PartnersLayout({
 
   const handleComingSoonClick = () => {
     toast.info("Coming soon!", {
-      description: "This feature is under development and will be available shortly.",
+      description:
+        "This feature is under development and will be available shortly.",
     });
   };
 
@@ -59,8 +60,9 @@ export default function PartnersLayout({
       <Footer
         navItems={navItems}
         orbitron={orbitron}
-        sectionAnimation={sectionAnimation} // Pass sectionAnimation if Footer uses it consistently
+        sectionAnimation={sectionAnimation}
+        handleComingSoonClick={handleComingSoonClick}
       />
     </>
   );
-} 
+}

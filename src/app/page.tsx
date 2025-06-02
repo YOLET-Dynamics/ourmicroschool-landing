@@ -113,7 +113,8 @@ export default function LandingPage() {
 
   const handleComingSoonClick = () => {
     toast.info("Coming soon!", {
-      description: "This feature is under development and will be available shortly.",
+      description:
+        "This feature is under development and will be available shortly.",
     });
   };
 
