@@ -1,6 +1,9 @@
+import QueryProvider from "@/providers/QueryProvider";
+import HttpInterceptor from "@/providers/HttpInterceptor";
 import type { Metadata } from "next";
 import "./globals.css";
 import { DM_Sans } from "next/font/google";
+import { Toaster } from "sonner";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -60,8 +63,7 @@ export const metadata: Metadata = {
     title: "OMS - Homeschooling OSS | Revolutionizing Homeschooling",
     description:
       "Personalized learning, curriculum tools, and progress tracking. Discover the future of homeschooling with OMS - Homeschooling OSS.",
-    // site: "@YourTwitterHandle", // Your site's Twitter @username
-    creator: "@yoletlabs", // Creator's Twitter @username
+    creator: "@yoletlabs",
     images: [`/twitter-image.png`], // Relative path
   },
   robots: {
@@ -82,18 +84,6 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: `/site.webmanifest`,
-  // viewport: "width=device-width, initial-scale=1", // Next.js handles this by default
-  // themeColor: "#007bff", // Example theme color
-  // verification: { // Example for Google Search Console verification
-  //   google: "your_google_verification_code",
-  // },
-  // alternates: { // If you have other languages
-  //   canonical: '/', // Default canonical path
-  //   languages: {
-  //     'en-US': '/',
-  //     // 'es-ES': '/es',
-  //   },
-  // },
 };
 
 export default function RootLayout({
@@ -103,7 +93,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={dmSans.className}>
-      <body>{children}</body>
+      <body>
+        <QueryProvider>
+          <HttpInterceptor>{children}</HttpInterceptor>
+          <Toaster richColors position="bottom-right" />
+        </QueryProvider>
+      </body>
     </html>
   );
 }

@@ -34,7 +34,7 @@ import {
 } from "lucide-react";
 import { Orbitron } from "next/font/google";
 import { motion } from "framer-motion";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -105,12 +105,6 @@ export default function LandingPage() {
     setIsMenuOpen((prev) => !prev);
   }, []);
 
-  const handleNotifyMeClick = () => {
-    toast.info("Coming soon!", {
-      description: "This feature is under development.",
-    });
-  };
-
   const handleComingSoonClick = () => {
     toast.info("Coming soon!", {
       description:
@@ -122,7 +116,6 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Toaster richColors position="bottom-right" />
       <Header
         navItems={navItems}
         orbitron={orbitron}
@@ -202,7 +195,7 @@ export default function LandingPage() {
       <motion.section
         {...sectionAnimation}
         id="features"
-        className="py-20 px-6 bg-white"
+        className="py-20 px-6 bg-white scroll-mt-32"
       >
         <div className="max-w-7xl w-full mx-auto">
           <div className="text-center mb-16">
@@ -426,7 +419,7 @@ export default function LandingPage() {
       <motion.section
         {...sectionAnimation}
         id="coming-soon"
-        className="py-20 px-6 bg-white text-center"
+        className="py-20 px-6 bg-white text-center scroll-mt-32"
       >
         <div className="max-w-2xl w-full mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
@@ -459,7 +452,7 @@ export default function LandingPage() {
       <motion.section
         {...sectionAnimation}
         id="contact"
-        className="py-20 px-6 bg-white"
+        className="py-20 px-6 bg-white scroll-mt-32"
       >
         <div className="max-w-4xl w-full mx-auto">
           <div className="text-center mb-16">
