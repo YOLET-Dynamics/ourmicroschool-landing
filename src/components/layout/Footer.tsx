@@ -98,6 +98,14 @@ const Footer: React.FC<FooterProps> = ({
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/corporate-social-responsibility"
+                  className="text-gray-700 hover:text-blue-600 transition-colors"
+                >
+                  CSR
+                </Link>
+              </li>
             </ul>
           </div>
 

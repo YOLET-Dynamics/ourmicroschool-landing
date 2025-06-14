@@ -490,14 +490,92 @@ export default function LandingPage() {
                       />
                     </div>
                   </div>
-                  <div>
+
+                  <div className="mt-6">
+                    <label className="block text-sm font-medium mb-2">
+                      I am a...
+                    </label>
+                    <div className="grid md:grid-cols-3 gap-4">
+                      {["Student", "Parent", "Teacher/Educator"].map((role) => (
+                        <div
+                          key={role}
+                          className="flex items-center space-x-2 border rounded-lg p-4 cursor-not-allowed opacity-60"
+                        >
+                          <input
+                            type="radio"
+                            name="role"
+                            value={role}
+                            className="h-4 w-4 text-blue-600"
+                          />
+                          <label className="text-sm">{role}</label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-6">
+                    <label className="block text-sm font-medium mb-2">
+                      What interests you most about OurMicroSchool?
+                    </label>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {[
+                        "Curriculum Planning",
+                        "Progress Tracking",
+                        "Interactive Learning",
+                        "Co-op Management",
+                        "Parent-Teacher Communication",
+                        "Student Assessment",
+                        "Resource Library",
+                        "Other"
+                      ].map((interest) => (
+                        <div
+                          key={interest}
+                          className="flex items-center space-x-2"
+                        >
+                          <input
+                            type="checkbox"
+                            value={interest}
+                            className="h-4 w-4 text-blue-600 rounded"
+                          />
+                          <label className="text-sm">{interest}</label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-6">
+                    <label className="block text-sm font-medium mb-2">
+                      Number of Students
+                    </label>
+                    <select className="w-full border-gray-300 rounded-md">
+                      <option value="">Select number of students</option>
+                      <option value="1">1 student</option>
+                      <option value="2-5">2-5 students</option>
+                      <option value="6-10">6-10 students</option>
+                      <option value="11+">11+ students</option>
+                    </select>
+                  </div>
+
+                  <div className="mt-6">
                     <label className="block text-sm font-medium mb-2">
                       How can we help you?
                     </label>
                     <Textarea
-                      placeholder="Describe your question or how we can support your homeschooling needs..."
+                      placeholder="Tell us about your specific needs, questions, or how we can support your homeschooling journey..."
                       className="border-gray-300 min-h-[120px]"
                     />
+                  </div>
+
+                  <div className="mt-6">
+                    <div className="flex items-start space-x-2">
+                      <input
+                        type="checkbox"
+                        className="h-4 w-4 mt-1 text-blue-600 rounded"
+                      />
+                      <label className="text-sm text-gray-600">
+                        I'd like to receive updates about new features, educational resources, and homeschooling tips from OurMicroSchool
+                      </label>
+                    </div>
                   </div>
                 </fieldset>
                 <Button
