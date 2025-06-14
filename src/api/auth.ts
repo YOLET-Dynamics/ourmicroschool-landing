@@ -6,10 +6,9 @@ import { User } from "@/models/user";
 export const authApi = {
   async login(data: LoginSchema) {
     try {
-      const result = await identityClient.post<HttpResponse<{ user: User }>>(
-        "/auth/login",
-        data
-      );
+      const result = await identityClient.post<
+        HttpResponse<{ user: User; redirectUrl: string }>
+      >("/auth/login", data);
 
       console.log(result);
 
@@ -17,7 +16,12 @@ export const authApi = {
         return Promise.reject(result.data.message);
       }
 
-      return result.data.data;
+      const redirectUrl = result.headers["x-redirect-url"] || "/";
+
+      return {
+        userData: result.data.data,
+        redirectUrl,
+      };
     } catch (error) {
       console.log(error);
 

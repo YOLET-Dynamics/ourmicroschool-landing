@@ -47,7 +47,7 @@ export default function LoginPage() {
     mutationFn: authApi.login,
     onSuccess: (data) => {
       toast.success("Login successful!");
-      return;
+      router.replace(data.redirectUrl);
     },
     onError: (error: any) => {
       toast.error(formatError(error));
