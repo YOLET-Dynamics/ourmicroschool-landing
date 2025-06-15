@@ -2,13 +2,13 @@ import QueryProvider from "@/providers/QueryProvider";
 import HttpInterceptor from "@/providers/HttpInterceptor";
 import type { Metadata } from "next";
 import "./globals.css";
-import { DM_Sans } from "next/font/google";
+import { Manrope } from "next/font/google";
 import { Toaster } from "sonner";
 
-const dmSans = DM_Sans({
+const manrope = Manrope({
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const siteUrl =
@@ -92,7 +92,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={dmSans.className}>
+    <html lang="en" className={manrope.className}>
       <body>
         <QueryProvider>
           <HttpInterceptor>{children}</HttpInterceptor>

@@ -14,6 +14,7 @@ export const identityClient = axios.create({
   validateStatus: (status) => {
     return [200, 201, 202, 204, 400, 401, 403, 404, 500].includes(status);
   },
+  withCredentials: true,
 });
 
 const onRequest = (
