@@ -21,17 +21,19 @@ services:
     container_name: oms-identity
     env_file:
       - ../../oms/oms-identity/.env
-    networks:
-      - internal
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.oms-identity.rule=Host(`identity-api.ourmicroschool.com`)"
+      - "traefik.http.routers.oms-identity-options.rule=Host(`identity-api.ourmicroschool.com`) && Method(`OPTIONS`)"
+      - "traefik.http.routers.oms-identity-options.entrypoints=websecure"
+      - "traefik.http.routers.oms-identity-options.tls.certresolver=myresolver"
+      - "traefik.http.routers.oms-identity-options.service=oms-identity"
       - "traefik.http.routers.oms-identity.entrypoints=websecure"
       - "traefik.http.routers.oms-identity.tls.certresolver=myresolver"
       - "traefik.http.services.oms-identity.loadbalancer.server.port=8001"
-      - "traefik.http.middlewares.id-cors.headers.accesscontrolalloworiginlist=https://ourmicroschool.com"
-
     restart: always
+    networks:
+      - internal
 
   reverse-proxy:
     image: traefik:v3.2
