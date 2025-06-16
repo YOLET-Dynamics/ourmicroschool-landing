@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ArrowRight } from "lucide-react";
 import React, { useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 interface NavItem {
   toLowerCase: () => string;
@@ -26,14 +26,11 @@ const Header: React.FC<HeaderProps> = ({
   isScrolled,
   handleComingSoonClick,
 }) => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   useEffect(() => {
-    // Handle scroll to section when coming from other pages
     const hash = window.location.hash;
     if (hash) {
-      // Add a small delay to ensure the page is fully loaded
       setTimeout(() => {
         const element = document.querySelector(hash);
         if (element) {
@@ -41,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({
         }
       }, 100);
     }
-  }, [searchParams]);
+  }, [pathname]);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -77,11 +74,7 @@ const Header: React.FC<HeaderProps> = ({
           >
             <div className="flex items-center justify-between">
               <Link href="/" className="flex items-center space-x-2">
-                <div
-                  className={`text-2xl font-bold text-blue-600`}
-                >
-                  OMS
-                </div>
+                <div className={`text-2xl font-bold text-blue-600`}>OMS</div>
               </Link>
 
               <div className="hidden md:flex items-center space-x-8">
