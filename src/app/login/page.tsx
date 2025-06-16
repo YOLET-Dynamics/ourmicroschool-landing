@@ -72,7 +72,7 @@ export default function LoginPage() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Button
             variant="ghost"
-            onClick={() => router.back()}
+            onClick={() => router.push("/")}
             className="text-gray-600 hover:text-blue-600 hover:bg-blue-50 -ml-3"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
