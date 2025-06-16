@@ -24,7 +24,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.oms-identity.rule=Host(`identity-api.ourmicroschool.com`)"
-      - "traefik.http.routers.oms-identity.entrypoints=web"
+      - "traefik.http.routers.oms-identity.entrypoints=websecure"
       - "traefik.http.routers.oms-identity.tls.certresolver=myresolver"
       - "traefik.http.services.oms-identity.loadbalancer.server.port=8001"
     restart: always
