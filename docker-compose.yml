@@ -14,7 +14,6 @@ services:
       - "traefik.http.middlewares.oms-headers.headers.customResponseHeaders.Pragma=no-cache"
       - "traefik.http.middlewares.oms-headers.headers.customResponseHeaders.Expires=0"
       - "traefik.http.routers.oms.middlewares=oms-headers"
-      - "com.centurylinklabs.watchtower.enable=true"
     restart: always
     networks:
       - internal
