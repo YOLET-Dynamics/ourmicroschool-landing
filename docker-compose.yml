@@ -32,6 +32,7 @@ services:
       - "traefik.http.routers.oms-identity-options.rule=Host(`identity-api.ourmicroschool.com`) && Method(`OPTIONS`)"
       - "traefik.http.routers.oms-identity-options.entrypoints=websecure"
       - "traefik.http.routers.oms-identity-options.tls.certresolver=myresolver"
+      - "traefik.http.routers.oms-identity-options.service=oms-identity" 
     restart: always
 
   reverse-proxy:
