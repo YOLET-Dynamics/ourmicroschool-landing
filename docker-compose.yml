@@ -1,0 +1,52 @@
+services:
+  oms-landing:
+    build:
+      context: .
+    image: oms-landing
+    container_name: oms-landing
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.oms.rule=Host(`ourmicroschool.com`) || Host(`www.ourmicroschool.com`)"
+      - "traefik.http.routers.oms.entrypoints=websecure"
+      - "traefik.http.routers.oms.tls.certresolver=myresolver"
+      - "traefik.http.services.oms.loadbalancer.server.port=3000"
+      - "traefik.http.middlewares.oms-headers.headers.customResponseHeaders.Cache-Control=no-store,no-cache,must-revalidate"
+      - "traefik.http.middlewares.oms-headers.headers.customResponseHeaders.Pragma=no-cache"
+      - "traefik.http.middlewares.oms-headers.headers.customResponseHeaders.Expires=0"
+      - "traefik.http.routers.oms.middlewares=oms-headers"
+      - "com.centurylinklabs.watchtower.enable=true"
+    restart: always
+    networks:
+      - internal
+
+  reverse-proxy:
+    image: traefik:v3.2
+    container_name: reverse-proxy
+    networks:
+      - internal
+      - default
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entryPoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=yonit.anosie@ourmicroschool.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--entryPoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/letsencrypt:/letsencrypt"
+    restart: always
+
+networks:
+  internal:
+    name: internal
+volumes:
+  letsencrypt:
