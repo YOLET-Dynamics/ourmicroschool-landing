@@ -23,33 +23,22 @@ services:
       - ../../oms/oms-identity/.env
     labels:
       - "traefik.enable=true"
-
-    # ── main router (unchanged) ─────────────────────────────────────────
-    - "traefik.http.routers.oms-identity.rule=Host(`identity-api.ourmicroschool.com`)"
-    - "traefik.http.routers.oms-identity.entrypoints=web"
-    - "traefik.http.routers.oms-identity.tls.certresolver=myresolver"
-
-    # load-balancer
-    - "traefik.http.services.oms-identity.loadbalancer.server.port=8001"
-
-    # ── OPTIONS router (forward every pre-flight) ───────────────────────
-    - "traefik.http.routers.oms-identity-options.rule=Host(`identity-api.ourmicroschool.com`) && Method(`OPTIONS`)"
-    - "traefik.http.routers.oms-identity-options.entrypoints=websecure"
-    - "traefik.http.routers.oms-identity-options.tls.certresolver=myresolver"
-    - "traefik.http.routers.oms-identity-options.service=oms-identity"
-
-    # ── CORS middleware on Traefik (adds the headers) ───────────────────
-    - "traefik.http.middlewares.id-cors.headers.accesscontrolalloworiginlist=https://ourmicroschool.com"
-    - "traefik.http.middlewares.id-cors.headers.accesscontrolallowmethods=GET,POST,PUT,PATCH,DELETE,OPTIONS"
-    - "traefik.http.middlewares.id-cors.headers.accesscontrolallowheaders=Origin,Content-Type,Accept,Authorization"
-    - "traefik.http.middlewares.id-cors.headers.accesscontrolallowcredentials=true"
-    - "traefik.http.middlewares.id-cors.headers.accesscontrolmaxage=100"
-    - "traefik.http.middlewares.id-cors.headers.addvaryheader=true"
-
-    # attach the middleware to BOTH routers
-    - "traefik.http.routers.oms-identity.middlewares=id-cors"
-    - "traefik.http.routers.oms-identity-options.middlewares=id-cors"
-    
+      - "traefik.http.routers.oms-identity.rule=Host(`identity-api.ourmicroschool.com`)"
+      - "traefik.http.routers.oms-identity.entrypoints=web"
+      - "traefik.http.routers.oms-identity.tls.certresolver=myresolver"
+      - "traefik.http.services.oms-identity.loadbalancer.server.port=8001"
+      - "traefik.http.routers.oms-identity-options.rule=Host(`identity-api.ourmicroschool.com`) && Method(`OPTIONS`)"
+      - "traefik.http.routers.oms-identity-options.entrypoints=websecure"
+      - "traefik.http.routers.oms-identity-options.tls.certresolver=myresolver"
+      - "traefik.http.routers.oms-identity-options.service=oms-identity"
+      - "traefik.http.middlewares.id-cors.headers.accesscontrolalloworiginlist=https://ourmicroschool.com"
+      - "traefik.http.middlewares.id-cors.headers.accesscontrolallowmethods=GET,POST,PUT,PATCH,DELETE,OPTIONS"
+      - "traefik.http.middlewares.id-cors.headers.accesscontrolallowheaders=Origin,Content-Type,Accept,Authorization"
+      - "traefik.http.middlewares.id-cors.headers.accesscontrolallowcredentials=true"
+      - "traefik.http.middlewares.id-cors.headers.accesscontrolmaxage=100"
+      - "traefik.http.middlewares.id-cors.headers.addvaryheader=true"
+      - "traefik.http.routers.oms-identity.middlewares=id-cors"
+      - "traefik.http.routers.oms-identity-options.middlewares=id-cors"
     restart: always
     networks:
       - internal
