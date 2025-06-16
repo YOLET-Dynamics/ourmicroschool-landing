@@ -24,21 +24,24 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useMutation } from "@tanstack/react-query";
-import { authApi, ROLE_PERMISSION_ERROR } from "@/api/auth";
+import { authApi } from "@/api/auth";
 import { toast } from "sonner";
 import { loginSchema, LoginSchema as LoginFormValues } from "@/api/schema/auth";
 import { formatError } from "@/lib/formatError";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 export default function LoginPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const hcaptchaRef = useRef<HCaptcha>(null);
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       identifier: "",
       password: "",
+      captcha: "",
     },
   });
 
@@ -59,6 +62,14 @@ export default function LoginPage() {
       description:
         "This feature is under development and will be available shortly.",
     });
+  };
+
+  const handleCaptchaVerify = (token: string) => {
+    form.setValue("captcha", token, { shouldValidate: true });
+  };
+
+  const handleCaptchaExpire = () => {
+    form.setValue("captcha", "", { shouldValidate: true });
   };
 
   const onSubmit = (data: LoginFormValues) => {
@@ -165,10 +176,33 @@ export default function LoginPage() {
                       </FormItem>
                     )}
                   />
+                  <FormField
+                    control={form.control}
+                    name="captcha"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-col items-center pt-2">
+                        <FormControl>
+                          <HCaptcha
+                            sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY!}
+                            onVerify={handleCaptchaVerify}
+                            onExpire={handleCaptchaExpire}
+                            onError={(err) => {
+                              toast.error("Captcha Error", {
+                                description:
+                                  "An issue occurred with the captcha service. Please refresh and try again.",
+                              });
+                            }}
+                            ref={hcaptchaRef}
+                          />
+                        </FormControl>
+                        <FormMessage className="text-xs sm:text-sm" />
+                      </FormItem>
+                    )}
+                  />
                   <Button
                     type="submit"
                     className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5 sm:py-6 text-base sm:text-lg font-medium rounded-xl mt-6 transition-all duration-200 hover:shadow-lg"
-                    disabled={isPending}
+                    disabled={isPending || !form.formState.isValid}
                   >
                     {isPending ? "Signing In..." : "Sign In"}
                   </Button>

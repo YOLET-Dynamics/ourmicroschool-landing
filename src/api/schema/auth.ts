@@ -17,6 +17,7 @@ export const loginSchema = z.object({
       passwordRegex,
       "Password must contain at least one lowercase letter, one uppercase letter, and one number"
     ),
+  captcha: z.string().min(1, "Captcha is required"),
 });
 
 export const requestOTPSchema = z.object({
