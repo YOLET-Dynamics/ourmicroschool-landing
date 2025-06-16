@@ -10,7 +10,8 @@ export const loginSchema = z.object({
     z.string().email(),
     z.string().regex(phoneRegex, "Please enter a valid US phone number"),
   ]),
-  password: z.string()
+  password: z
+    .string()
     .min(8, "Password must be at least 8 characters")
     .regex(
       passwordRegex,
@@ -18,4 +19,21 @@ export const loginSchema = z.object({
     ),
 });
 
+export const requestOTPSchema = z.object({
+  identifier: z.union([
+    z.string().email(),
+    z.string().regex(phoneRegex, "Please enter a valid US phone number"),
+  ]),
+});
+
+export const forgotPasswordSchema = z.object({
+  identifier: z.union([
+    z.string().email(),
+    z.string().regex(phoneRegex, "Please enter a valid US phone number"),
+  ]),
+  otp: z.string().min(6, "OTP must be 6 digits"),
+});
+
 export type LoginSchema = z.infer<typeof loginSchema>;
+export type RequestOTPSchema = z.infer<typeof requestOTPSchema>;
+export type ForgotPasswordSchema = z.infer<typeof forgotPasswordSchema>;

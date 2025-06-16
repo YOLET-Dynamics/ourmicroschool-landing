@@ -8,37 +8,26 @@ import {
   MapPin,
   Phone,
   Mail,
+  Facebook,
+  Youtube,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import React from "react";
-import { Orbitron } from "next/font/google"; // Assuming Orbitron type might be needed
+import { Button } from "@/components/ui/button";
 
 interface NavItem {
-  toLowerCase: () => string;
-  replace: (pattern: RegExp, replacement: string) => string;
-}
-
-interface OrbitronFont {
-  className: string;
-}
-
-interface SectionAnimation {
-  initial: { opacity: number; y: number };
-  whileInView: { opacity: number; y: number };
-  viewport: { once: boolean; amount: number };
-  transition: { duration: number; ease: string };
+  label: string;
+  href: string;
 }
 
 interface FooterProps {
   navItems: string[];
-  orbitron: OrbitronFont;
-  sectionAnimation: SectionAnimation;
+  sectionAnimation: any;
   handleComingSoonClick: () => void;
 }
 
 const Footer: React.FC<FooterProps> = ({
   navItems,
-  orbitron,
   sectionAnimation,
   handleComingSoonClick,
 }) => {
@@ -50,9 +39,7 @@ const Footer: React.FC<FooterProps> = ({
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
-            <div
-              className={`text-2xl font-bold text-blue-600 mb-4 ${orbitron.className}`}
-            >
+            <div className="text-2xl font-bold text-blue-600 mb-4">
               OMS
             </div>
             <p className="text-gray-700 mb-4">

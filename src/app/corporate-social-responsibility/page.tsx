@@ -6,9 +6,6 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { toast } from "sonner";
-import { Orbitron } from "next/font/google";
-
-const orbitron = Orbitron({ subsets: ["latin"] });
 
 const navItems = ["Features", "Partners", "Contact"];
 
@@ -34,7 +31,6 @@ export default function CSRPage() {
         toggleMenu={() => {}}
         isScrolled={false}
         handleComingSoonClick={handleComingSoonClick}
-        orbitron={orbitron}
       />
 
       <main className="pt-32 pb-20">
@@ -129,7 +125,6 @@ export default function CSRPage() {
         navItems={navItems}
         sectionAnimation={sectionAnimation}
         handleComingSoonClick={handleComingSoonClick}
-        orbitron={orbitron}
       />
     </div>
   );

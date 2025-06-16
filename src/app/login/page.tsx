@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
-import { Orbitron } from "next/font/google";
 import {
   Form,
   FormControl,
@@ -30,8 +29,6 @@ import { toast } from "sonner";
 import { loginSchema, LoginSchema as LoginFormValues } from "@/api/schema/auth";
 import { formatError } from "@/lib/formatError";
 import { useState } from "react";
-
-const orbitron = Orbitron({ subsets: ["latin"] });
 
 export default function LoginPage() {
   const router = useRouter();
@@ -86,9 +83,7 @@ export default function LoginPage() {
             Back
           </Button>
           <Link href="/" className="flex items-center space-x-2">
-            <div
-              className={`text-xl sm:text-2xl font-bold text-blue-600 ${orbitron.className}`}
-            >
+            <div className="text-xl sm:text-2xl font-bold text-blue-600">
               OMS
             </div>
           </Link>
@@ -188,7 +183,7 @@ export default function LoginPage() {
               <Button
                 variant="link"
                 className="text-blue-600 hover:text-blue-800 font-normal h-auto p-0 text-sm sm:text-base transition-colors"
-                onClick={handleComingSoonClick}
+                onClick={() => router.push("/forgot-password")}
               >
                 Forgot your password?
               </Button>

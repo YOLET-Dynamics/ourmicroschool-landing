@@ -1,16 +1,12 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { Orbitron } from "next/font/google";
+import { useState } from "react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { Toaster, toast } from "sonner"; // Import toast
+import { toast } from "sonner";
 
-const orbitron = Orbitron({ subsets: ["latin"] });
+const navItems = ["Features", "Partners", "Contact"];
 
-const navItems = ["Features", "Partners", "Contact"]; // Consistent with page.tsx
-
-// sectionAnimation can be defined here if Footer needs it, or passed as undefined/null if not critical for partners page
 const sectionAnimation = {
   initial: { opacity: 0, y: 50 },
   whileInView: { opacity: 1, y: 0 },
@@ -26,17 +22,9 @@ export default function PartnersLayout({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const toggleMenu = useCallback(() => {
+  const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
-  }, []);
+  };
 
   const handleComingSoonClick = () => {
     toast.info("Coming soon!", {
@@ -46,23 +34,20 @@ export default function PartnersLayout({
   };
 
   return (
-    <>
-      <Toaster richColors position="bottom-right" />
+    <div className="min-h-screen bg-gray-50">
       <Header
         navItems={navItems}
-        orbitron={orbitron}
         isMenuOpen={isMenuOpen}
         toggleMenu={toggleMenu}
         isScrolled={isScrolled}
         handleComingSoonClick={handleComingSoonClick}
       />
-      <main>{children}</main>
+      {children}
       <Footer
         navItems={navItems}
-        orbitron={orbitron}
         sectionAnimation={sectionAnimation}
         handleComingSoonClick={handleComingSoonClick}
       />
-    </>
+    </div>
   );
 }

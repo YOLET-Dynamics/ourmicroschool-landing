@@ -32,13 +32,10 @@ import {
   LayoutDashboard,
   Smile,
 } from "lucide-react";
-import { Orbitron } from "next/font/google";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-
-const orbitron = Orbitron({ subsets: ["latin"] });
 
 const navItems = ["Features", "Partners", "Contact"];
 
@@ -118,7 +115,6 @@ export default function LandingPage() {
     <div className="min-h-screen bg-gray-50">
       <Header
         navItems={navItems}
-        orbitron={orbitron}
         isMenuOpen={isMenuOpen}
         toggleMenu={toggleMenu}
         isScrolled={isScrolled}
@@ -593,7 +589,6 @@ export default function LandingPage() {
 
       <Footer
         navItems={navItems}
-        orbitron={orbitron}
         sectionAnimation={sectionAnimation}
         handleComingSoonClick={handleComingSoonClick}
       />

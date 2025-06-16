@@ -11,13 +11,8 @@ interface NavItem {
   replace: (pattern: RegExp, replacement: string) => string;
 }
 
-interface OrbitronFont {
-  className: string;
-}
-
 interface HeaderProps {
   navItems: string[];
-  orbitron: OrbitronFont;
   isMenuOpen: boolean;
   toggleMenu: () => void;
   isScrolled: boolean;
@@ -26,7 +21,6 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({
   navItems,
-  orbitron,
   isMenuOpen,
   toggleMenu,
   isScrolled,
@@ -84,7 +78,7 @@ const Header: React.FC<HeaderProps> = ({
             <div className="flex items-center justify-between">
               <Link href="/" className="flex items-center space-x-2">
                 <div
-                  className={`text-2xl font-bold text-blue-600 ${orbitron.className}`}
+                  className={`text-2xl font-bold text-blue-600`}
                 >
                   OMS
                 </div>
