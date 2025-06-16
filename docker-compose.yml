@@ -30,10 +30,6 @@ services:
       - "traefik.http.routers.oms-identity.tls.certresolver=myresolver"
       - "traefik.http.services.oms-identity.loadbalancer.server.port=8001"
       - "traefik.http.middlewares.id-cors.headers.accesscontrolalloworiginlist=https://ourmicroschool.com"
-      - "traefik.http.middlewares.id-cors.headers.accesscontrolallowmethods=GET,POST,PUT,PATCH,DELETE,OPTIONS"
-      - "traefik.http.middlewares.id-cors.headers.accesscontrolallowheaders=Origin,Content-Type,Accept,Authorization,X-Requested-With"
-      - "traefik.http.middlewares.id-cors.headers.accesscontrolallowcredentials=true"
-      - "traefik.http.routers.oms-identity.middlewares=id-cors"
 
     restart: always
 
@@ -44,7 +40,6 @@ services:
       - internal
       - default
     command:
-      - "api.insecure=true"
       - "--api.dashboard=true"
       - "--providers.docker"
       - "--providers.docker.exposedbydefault=false"
