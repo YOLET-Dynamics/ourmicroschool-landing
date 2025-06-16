@@ -13,12 +13,7 @@ services:
       - "traefik.http.middlewares.oms-headers.headers.customResponseHeaders.Cache-Control=no-store,no-cache,must-revalidate"
       - "traefik.http.middlewares.oms-headers.headers.customResponseHeaders.Pragma=no-cache"
       - "traefik.http.middlewares.oms-headers.headers.customResponseHeaders.Expires=0"
-      - "traefik.http.middlewares.cors.headers.accessControlAllowMethods=GET,POST,PUT,DELETE,OPTIONS"
-      - "traefik.http.middlewares.cors.headers.accessControlAllowHeaders=Accept,Authorization,Content-Type,X-Requested-With,Origin"
-      - "traefik.http.middlewares.cors.headers.accessControlAllowOriginList=https://identity-api.ourmicroschool.com,https://ourmicroschool.com,https://www.ourmicroschool.com"
-      - "traefik.http.middlewares.cors.headers.accessControlMaxAge=100"
-      - "traefik.http.middlewares.cors.headers.addVaryHeader=true"
-      - "traefik.http.routers.oms.middlewares=oms-headers,cors"
+      - "traefik.http.routers.oms.middlewares=oms-headers"
     restart: always
     networks:
       - internal
@@ -38,12 +33,14 @@ services:
       - "traefik.http.routers.oms-identity.entrypoints=websecure"
       - "traefik.http.routers.oms-identity.tls.certresolver=myresolver"
       - "traefik.http.services.oms-identity.loadbalancer.server.port=8001"
-      - "traefik.http.middlewares.identity-cors.headers.accessControlAllowMethods=GET,POST,PUT,DELETE,OPTIONS"
-      - "traefik.http.middlewares.identity-cors.headers.accessControlAllowHeaders=Accept,Authorization,Content-Type,X-Requested-With,Origin"
-      - "traefik.http.middlewares.identity-cors.headers.accessControlAllowOriginList=https://ourmicroschool.com,https://www.ourmicroschool.com,https://parents.ourmicroschool.com,https://classrooms.ourmicroschool.com,https://admin.ourmicroschool.com"
-      - "traefik.http.middlewares.identity-cors.headers.accessControlMaxAge=100"
-      - "traefik.http.middlewares.identity-cors.headers.addVaryHeader=true"
-      - "traefik.http.routers.oms-identity.middlewares=identity-cors"
+      # Add these new CORS middleware labels:
+      - "traefik.http.middlewares.oms-identity-cors.headers.accesscontrolallowcredentials=true"
+      - "traefik.http.middlewares.oms-identity-cors.headers.accesscontrolallowmethods=GET,POST,PUT,OPTIONS"
+      - "traefik.http.middlewares.oms-identity-cors.headers.accesscontrolalloworiginlist=https://ourmicroschool.com,https://www.ourmicroschool.com,https://admin.ourmicroschool.com,https://app.ourmicroschool.com,https://classrooms.ourmicroschool.com,https://parents.ourmicroschool.com"
+      - "traefik.http.middlewares.oms-identity-cors.headers.accesscontrolallowheaders=Origin,Content-Type,Accept,Authorization"
+      - "traefik.http.middlewares.oms-identity-cors.headers.accessControlMaxAge=100"
+      # Add the middleware to the router
+      - "traefik.http.routers.oms-identity.middlewares=oms-identity-cors"
     restart: always
 
   reverse-proxy:
@@ -77,5 +74,4 @@ networks:
     name: internal
 
 volumes:
-  redis-data:
   letsencrypt:
