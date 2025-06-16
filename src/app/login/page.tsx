@@ -50,11 +50,7 @@ export default function LoginPage() {
     },
     onError: (error: any) => {
       const errorMessage = formatError(error);
-      if (errorMessage === ROLE_PERMISSION_ERROR) {
-        router.push(`/login/error?message=${encodeURIComponent(errorMessage)}`);
-      } else {
-        toast.error(errorMessage);
-      }
+      toast.error(errorMessage);
     },
   });
 

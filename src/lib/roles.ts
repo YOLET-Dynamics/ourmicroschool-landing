@@ -14,7 +14,7 @@ export const roleDomain: Record<RoleCode, string> = {
 };
 
 /* role precedence when user has >1 role */
-const precedence: RoleCode[] = ["teacher", "student", "parent"];
+const precedence: RoleCode[] = ["teacher", "student", "parent", "admin"];
 
 export function pickPrimary(roles: string[]): RoleCode {
   const set = new Set(roles.map((r) => r.toLowerCase()));
