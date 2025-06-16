@@ -19,6 +19,23 @@ services:
     networks:
       - internal
 
+  oms-identity:
+    build:
+      context: ../../oms/oms-identity
+    image: oms-identity
+    container_name: oms-identity
+    env_file:
+      - ../../oms/oms-identity/.env
+    networks:
+      - internal
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.oms-identity.rule=Host(`identity-api.ourmicroschool.com`)"
+      - "traefik.http.routers.oms-identity.entrypoints=websecure"
+      - "traefik.http.routers.oms-identity.tls.certresolver=myresolver"
+      - "traefik.http.services.oms-identity.loadbalancer.server.port=8001"
+    restart: always
+
   reverse-proxy:
     image: traefik:v3.2
     container_name: reverse-proxy
@@ -48,5 +65,7 @@ services:
 networks:
   internal:
     name: internal
+
 volumes:
+  redis-data:
   letsencrypt:

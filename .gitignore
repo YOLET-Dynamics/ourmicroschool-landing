@@ -134,3 +134,14 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Environment variables
+.env.*
+
+# Redis data
+*.rdb
+*.aof
+redis-data/
+
+# Let's Encrypt certificates
+/letsencrypt/
