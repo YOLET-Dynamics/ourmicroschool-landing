@@ -33,6 +33,24 @@ services:
     networks:
       - internal
 
+  oms-content:
+    build:
+      context: ../../oms/oms-content
+    image: oms-content
+    container_name: oms-content
+    env_file:
+      - ../../oms/oms-content/.env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.oms-content.rule=Host(`content-api.ourmicroschool.com`)"
+      - "traefik.http.routers.oms-content.entrypoints=websecure"
+      - "traefik.http.routers.oms-content.tls=true"
+      - "traefik.http.routers.oms-content.tls.certresolver=myresolver"
+      - "traefik.http.services.oms-content.loadbalancer.server.port=8002"
+    restart: always
+    networks:
+      - internal
+
   oms-admin:
     build:
       context: ../../oms/oms-admin
