@@ -1,4 +1,4 @@
-export type RoleCode = "student" | "teacher" | "parent" | "admin";
+export type RoleCode = "student" | "teacher" | "parent" | "admin" | "root-admin";
 
 export const roleDomain: Record<RoleCode, string> = {
   student:
@@ -11,10 +11,13 @@ export const roleDomain: Record<RoleCode, string> = {
     "https://parents.ourmicroschool.com",
   admin:
     process.env.NEXT_PUBLIC_ADMIN_APP_URL || "https://admin.ourmicroschool.com",
+  "root-admin":
+    process.env.NEXT_PUBLIC_ADMIN_APP_URL ||
+    "https://admin.ourmicroschool.com",
 };
 
 /* role precedence when user has >1 role */
-const precedence: RoleCode[] = ["teacher", "student", "parent", "admin"];
+const precedence: RoleCode[] = ["teacher", "student", "parent", "admin", "root-admin"];
 
 export function pickPrimary(roles: string[]): RoleCode {
   const set = new Set(roles.map((r) => r.toLowerCase()));
