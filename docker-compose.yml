@@ -51,6 +51,42 @@ services:
     networks:
       - internal
 
+  oms-app:
+    build:
+      context: ../../oms/oms-app
+    image: oms-app
+    container_name: oms-app
+    env_file:
+      - ../../oms/oms-app/.env.local
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.oms-app.rule=Host(`app.ourmicroschool.com`)"
+      - "traefik.http.routers.oms-app.entrypoints=websecure"
+      - "traefik.http.routers.oms-app.tls=true"
+      - "traefik.http.routers.oms-app.tls.certresolver=myresolver"
+      - "traefik.http.services.oms-app.loadbalancer.server.port=3001"
+    restart: always
+    networks:
+      - internal
+
+  oms-classrooms:
+    build:
+      context: ../../oms/oms-classrooms
+    image: oms-classrooms
+    container_name: oms-classrooms
+    env_file:
+      - ../../oms/oms-classrooms/.env.local
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.oms-classrooms.rule=Host(`classrooms.ourmicroschool.com`)"
+      - "traefik.http.routers.oms-classrooms.entrypoints=websecure"
+      - "traefik.http.routers.oms-classrooms.tls=true"
+      - "traefik.http.routers.oms-classrooms.tls.certresolver=myresolver"
+      - "traefik.http.services.oms-classrooms.loadbalancer.server.port=3002"
+    restart: always
+    networks:
+      - internal
+
   reverse-proxy:
     image: traefik:v3.2
     container_name: reverse-proxy
