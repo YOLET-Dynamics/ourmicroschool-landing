@@ -31,6 +31,23 @@ services:
     networks:
       - internal
 
+  oms-admin:
+    build:
+      context: ../../oms/oms-admin
+    image: oms-admin
+    container_name: oms-admin
+    env_file:
+      - ../../oms/oms-admin/.env.local
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.oms-admin.rule=Host(`admin.ourmicroschool.com`)"
+      - "traefik.http.routers.oms-admin.entrypoints=websecure"
+      - "traefik.http.routers.oms-admin.tls.certresolver=myresolver"
+      - "traefik.http.services.oms-admin.loadbalancer.server.port=3004"
+    restart: always
+    networks:
+      - internal
+
   reverse-proxy:
     image: traefik:v3.2
     container_name: reverse-proxy
