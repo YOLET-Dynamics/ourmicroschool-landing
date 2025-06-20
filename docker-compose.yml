@@ -105,6 +105,24 @@ services:
     networks:
       - internal
 
+  oms-parents:
+    build:
+      context: ../../oms/oms-parents
+    image: oms-parents
+    container_name: oms-parents
+    env_file:
+      - ../../oms/oms-parents/.env.local
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.oms-parents.rule=Host(`parents.ourmicroschool.com`)"
+      - "traefik.http.routers.oms-parents.entrypoints=websecure"
+      - "traefik.http.routers.oms-parents.tls=true"
+      - "traefik.http.routers.oms-parents.tls.certresolver=myresolver"
+      - "traefik.http.services.oms-parents.loadbalancer.server.port=3003"
+    restart: always
+    networks:
+      - internal
+
   reverse-proxy:
     image: traefik:v3.2
     container_name: reverse-proxy
