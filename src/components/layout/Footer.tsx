@@ -99,7 +99,7 @@ const Footer: React.FC<FooterProps> = ({
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="#coming-soon"
+                  href="/#coming-soon"
                   onClick={handleComingSoonClick}
                   className="text-gray-700 hover:text-blue-600 transition-colors"
                 >
@@ -108,7 +108,7 @@ const Footer: React.FC<FooterProps> = ({
               </li>
               <li>
                 <Link
-                  href="#coming-soon"
+                  href="/#coming-soon"
                   onClick={handleComingSoonClick}
                   className="text-gray-700 hover:text-blue-600 transition-colors"
                 >
@@ -126,7 +126,7 @@ const Footer: React.FC<FooterProps> = ({
                   size={18}
                   className="mt-1 text-blue-600 flex-shrink-0"
                 />
-                <span>Washington DC, USA</span>
+                <span>Incorporated in Virginia, USA</span>
               </div>
             </div>
           </div>
