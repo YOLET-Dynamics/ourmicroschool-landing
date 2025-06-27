@@ -39,9 +39,7 @@ const Footer: React.FC<FooterProps> = ({
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
-            <div className="text-2xl font-bold text-blue-600 mb-4">
-              OMS
-            </div>
+            <div className="text-2xl font-bold text-blue-600 mb-4">OMS</div>
             <p className="text-gray-700 mb-4">
               The complete operating system for your family's homeschooling
               success.
@@ -136,8 +134,8 @@ const Footer: React.FC<FooterProps> = ({
 
         <div className="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-700 mb-4 md:mb-0">
-            © {new Date().getFullYear()} OurMicroSchool, a product of SYM L.L.C.
-            All rights reserved.
+            © {new Date().getFullYear()} OurMicroSchool, a product of SYMVERGE
+            Platform L.L.C. All rights reserved.
           </p>
           <p className="text-gray-700">
             Built by{" "}
