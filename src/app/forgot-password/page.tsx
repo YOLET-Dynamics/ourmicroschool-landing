@@ -14,7 +14,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Sparkles, ArrowRight } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import {
   Form,
   FormControl,
@@ -98,7 +99,7 @@ export default function ForgotPasswordPage() {
   return (
     <main className="min-h-screen flex flex-col bg-gradient-to-br from-accent/10 via-white to-accent/20">
       {/* Navigation Bar */}
-      <div className="w-full px-4 py-4 mt-4 sm:mt-6">
+      <div className="w-full px-4 py-4 mt-6 sm:mt-8">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Button
             variant="ghost"
@@ -118,6 +119,16 @@ export default function ForgotPasswordPage() {
       {/* Forgot Password Form */}
       <div className="flex-1 flex items-center justify-center p-4">
         <div className="w-full max-w-md space-y-4 sm:space-y-6">
+          <div className="flex justify-center">
+            <Badge
+              variant="secondary"
+              className="px-4 py-2 text-sm font-medium bg-accent/10 text-accent border-accent/20 hover:bg-accent/20 transition-colors animate-slide-in-up"
+            >
+              <Sparkles className="w-4 h-4 mr-2" />
+              Reset your credentials securely
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Badge>
+          </div>
           <Card className="border border-gray-100 shadow bg-white/80 backdrop-blur-sm rounded-3xl">
             <CardHeader className="space-y-3 pb-4 sm:pb-6 px-4 sm:px-6">
               <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-center tracking-tight">

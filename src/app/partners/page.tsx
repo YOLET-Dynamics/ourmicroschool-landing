@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { Badge } from "@/components/ui/badge";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 const sectionAnimation = {
   initial: { opacity: 0, y: 50 },
@@ -97,6 +99,16 @@ const PartnerPage = () => {
           {...sectionAnimation}
           className="text-center mb-12 md:mb-16"
         >
+          <div className="flex justify-center mb-4">
+            <Badge
+              variant="secondary"
+              className="px-4 py-2 text-sm font-medium bg-accent/10 text-accent border-accent/20 hover:bg-accent/20 transition-colors animate-slide-in-up"
+            >
+              <Sparkles className="w-4 h-4 mr-2" />
+              Collaborations and partners
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Badge>
+          </div>
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-4">
             Our Partners
           </h1>

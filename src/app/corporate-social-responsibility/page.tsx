@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Heart, Sprout, Users, Globe } from "lucide-react";
+import { Heart, Sprout, Users, Globe, Sparkles, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { toast } from "sonner";
@@ -40,6 +41,16 @@ export default function CSRPage() {
           className="text-center px-6 mb-24"
         >
           <div className="max-w-4xl mx-auto">
+            <div className="flex justify-center mb-6">
+              <Badge
+                variant="secondary"
+                className="px-4 py-2 text-sm font-medium bg-accent/10 text-accent border-accent/20 hover:bg-accent/20 transition-colors animate-slide-in-up animate-delay-100"
+              >
+                <Sparkles className="w-4 h-4 mr-2" />
+                Community-driven impact initiatives
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Badge>
+            </div>
             <h1 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mb-6">
               Our Commitment to{" "}
               <span className="text-accent">Social Impact</span>

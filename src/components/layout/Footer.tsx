@@ -75,7 +75,7 @@ const Footer: React.FC<FooterProps> = ({
                     href={
                       item.toLowerCase() === "partners"
                         ? "/partners"
-                        : `#${item.toLowerCase().replace(/\\s+/g, "-")}`
+                        : `/#${item.toLowerCase().replace(/\\s+/g, "-")}`
                     }
                     className="text-gray-700 hover:text-accent transition-colors"
                   >

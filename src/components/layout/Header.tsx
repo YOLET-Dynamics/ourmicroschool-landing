@@ -40,7 +40,9 @@ const Header: React.FC<HeaderProps> = ({
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
-    if (href.startsWith("/#")) {
+    if (!href.startsWith("/#")) return;
+    // Only intercept for smooth scroll when already on home page
+    if (pathname === "/") {
       e.preventDefault();
       const element = document.querySelector(href.substring(1));
       if (element) {
