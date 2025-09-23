@@ -2,12 +2,19 @@ import QueryProvider from "@/providers/QueryProvider";
 import HttpInterceptor from "@/providers/HttpInterceptor";
 import type { Metadata } from "next";
 import "./globals.css";
-import { Manrope } from "next/font/google";
+import { Inter, Fredoka } from "next/font/google";
 import { Toaster } from "sonner";
 
-const manrope = Manrope({
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-inter",
+});
+
+const fredoka = Fredoka({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-fredoka",
   weight: ["400", "500", "600", "700"],
 });
 
@@ -92,7 +99,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={manrope.className}>
+    <html lang="en" className={`${inter.variable} ${fredoka.variable}`}>
       <body>
         <QueryProvider>
           <HttpInterceptor>{children}</HttpInterceptor>

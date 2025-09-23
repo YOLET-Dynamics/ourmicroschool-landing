@@ -77,22 +77,20 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 via-white to-blue-100">
+    <main className="min-h-screen flex flex-col bg-gradient-to-br from-accent/10 via-white to-accent/20">
       {/* Navigation Bar */}
       <div className="w-full px-4 py-4 mt-4 sm:mt-6">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Button
             variant="ghost"
             onClick={() => router.push("/")}
-            className="text-gray-600 hover:text-blue-600 hover:bg-blue-50 -ml-3"
+            className="text-gray-600 hover:text-accent hover:bg-accent/10 -ml-3"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back
           </Button>
           <Link href="/" className="flex items-center space-x-2">
-            <div className="text-xl sm:text-2xl font-bold text-blue-600">
-              OMS
-            </div>
+            <span className="text-xl sm:text-2xl font-bold text-primary font-display tracking-tight">OMS</span>
           </Link>
           <div className="w-16 sm:w-20" />
         </div>
@@ -101,9 +99,9 @@ export default function LoginPage() {
       {/* Login Form */}
       <div className="flex-1 flex items-center justify-center p-4">
         <div className="w-full max-w-md space-y-4 sm:space-y-6">
-          <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+          <Card className="border border-gray-100 shadow bg-white/80 backdrop-blur-sm rounded-3xl">
             <CardHeader className="space-y-3 pb-4 sm:pb-6 px-4 sm:px-6">
-              <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-center">
+              <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-center tracking-tight">
                 Welcome Back
               </CardTitle>
               <CardDescription className="text-center text-gray-600 text-sm sm:text-base">
@@ -201,7 +199,7 @@ export default function LoginPage() {
                   />
                   <Button
                     type="submit"
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5 sm:py-6 text-base sm:text-lg font-medium rounded-xl mt-6 transition-all duration-200 hover:shadow-lg"
+                    className="w-full bg-accent hover:bg-accent/90 text-accent-foreground py-5 sm:py-6 text-base sm:text-lg font-medium rounded-xl mt-6 transition-all duration-200 hover:shadow"
                     disabled={isPending || !form.formState.isValid}
                   >
                     {isPending ? "Signing In..." : "Sign In"}
@@ -210,18 +208,18 @@ export default function LoginPage() {
               </Form>
             </CardContent>
             <CardFooter className="flex flex-col space-y-4 sm:space-y-6 pt-2 pb-6 sm:pb-8 px-4 sm:px-6">
-              <Button
+            <Button
                 variant="link"
-                className="text-blue-600 hover:text-blue-800 font-normal h-auto p-0 text-sm sm:text-base transition-colors"
+              className="text-accent hover:text-accent/80 font-normal h-auto p-0 text-sm sm:text-base transition-colors"
                 onClick={() => router.push("/forgot-password")}
               >
                 Forgot your password?
               </Button>
               <div className="text-xs sm:text-sm text-center text-gray-500">
                 Don't have an account?{" "}
-                <Button
+              <Button
                   variant="link"
-                  className="text-blue-600 hover:text-blue-800 font-normal h-auto p-0 text-xs sm:text-sm"
+                className="text-accent hover:text-accent/80 font-normal h-auto p-0 text-xs sm:text-sm"
                   onClick={() => router.push("/#contact")}
                 >
                   Contact us to get started

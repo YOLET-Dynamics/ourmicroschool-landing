@@ -47,11 +47,11 @@ const PartnerCard = ({ partner }: { partner: (typeof partnersData)[0] }) => {
       />
       <motion.div
         {...sectionAnimation}
-        className="bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-200 mb-12"
+        className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow mb-12"
       >
         <div className="p-6 sm:p-8 md:p-10">
           <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8 mb-6 md:mb-8">
-            <div className="flex-shrink-0 w-32 h-32 md:w-40 md:h-40 relative rounded-lg overflow-hidden shadow-md border border-gray-100">
+            <div className="flex-shrink-0 w-32 h-32 md:w-40 md:h-40 relative rounded-xl overflow-hidden border border-gray-100">
               <Image
                 src={partner.logoUrl}
                 alt={`${partner.name} Logo`}
@@ -61,7 +61,7 @@ const PartnerCard = ({ partner }: { partner: (typeof partnersData)[0] }) => {
               />
             </div>
             <div className="text-center md:text-left">
-              <h2 className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">
+              <h2 className="text-3xl sm:text-4xl font-bold text-accent tracking-tight mb-2">
                 {partner.name}
               </h2>
               <p className="text-lg text-gray-600">Our Valued Partner</p>
@@ -70,7 +70,7 @@ const PartnerCard = ({ partner }: { partner: (typeof partnersData)[0] }) => {
                   href={partner.websiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-500 hover:text-blue-700 hover:underline transition-colors duration-200 mt-2 inline-block"
+                  className="text-accent hover:underline transition-colors duration-200 mt-2 inline-block"
                 >
                   Visit Website →
                 </a>

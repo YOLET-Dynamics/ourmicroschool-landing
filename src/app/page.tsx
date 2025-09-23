@@ -55,9 +55,9 @@ const benefitsData = [
     listIcon: Target,
     displayIcon: Target,
     displayTitle: "Adaptive Learning",
-    bgColorClass: "bg-blue-50",
-    iconContainerBgClass: "bg-blue-600",
-    iconColorClass: "text-white",
+    bgColorClass: "bg-accent/10",
+    iconContainerBgClass: "bg-accent",
+    iconColorClass: "text-accent-foreground",
   },
   {
     id: "all-in-one",
@@ -67,9 +67,9 @@ const benefitsData = [
     listIcon: LayoutDashboard,
     displayIcon: LayoutDashboard,
     displayTitle: "Centralized Hub",
-    bgColorClass: "bg-green-50",
-    iconContainerBgClass: "bg-green-600",
-    iconColorClass: "text-white",
+    bgColorClass: "bg-accent/10",
+    iconContainerBgClass: "bg-accent",
+    iconColorClass: "text-accent-foreground",
   },
   {
     id: "user-friendly",
@@ -79,9 +79,9 @@ const benefitsData = [
     listIcon: Smile,
     displayIcon: Smile,
     displayTitle: "Intuitive Design",
-    bgColorClass: "bg-purple-50",
-    iconContainerBgClass: "bg-purple-600",
-    iconColorClass: "text-white",
+    bgColorClass: "bg-accent/10",
+    iconContainerBgClass: "bg-accent",
+    iconColorClass: "text-accent-foreground",
   },
 ];
 
@@ -121,67 +121,156 @@ export default function LandingPage() {
         handleComingSoonClick={handleComingSoonClick}
       />
 
-      {/* Hero Section */}
+      {/* Hero Section - Two Columns with Animated Visuals */}
       <motion.section
         {...sectionAnimation}
-        className="min-h-screen flex flex-col justify-center items-center pt-32 pb-20 px-6 bg-gradient-to-b from-white via-blue-50 to-blue-200"
+        className="relative overflow-hidden min-h-screen flex items-center pt-32 pb-20 px-6 bg-gradient-to-b from-white via-destructive/5 to-destructive/20"
       >
-        <div className="max-w-7xl w-full mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-black mb-6 leading-snug md:leading-relaxed break-words overflow-hidden">
-            The Operating System for Your
-            <span className="text-blue-600"> Homeschool</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-700 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Streamline curriculum planning, track student progress, and foster
-            collaboration between parents and educators. Personalized learning,
-            simplified.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button
-              size="lg"
-              onClick={handleComingSoonClick}
-              className="bg-transparent hover:bg-blue-600 text-blue-700 hover:text-white border-2 border-blue-600 px-8 py-4 text-lg rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 active:bg-blue-700"
-            >
-              Get Started
-              <ArrowRight className="ml-2" size={20} />
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={handleComingSoonClick}
-              className="border-blue-600 text-blue-600 hover:bg-blue-700 hover:text-white px-8 py-4 text-lg rounded-full"
-            >
-              <Play className="mr-2" size={20} />
-              See Demo
-            </Button>
-          </div>
-          <div className="relative max-w-4xl mx-auto w-full">
-            <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-200">
-              <div className="grid md:grid-cols-3 gap-8 text-center">
-                <div className="space-y-4">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-                    <GraduationCap className="text-blue-600" size={32} />
-                  </div>
-                  <h3 className="font-semibold text-lg">Students</h3>
-                  <p className="text-gray-600">
-                    Engaging lessons and tools for independent learning
-                  </p>
-                </div>
-                <div className="space-y-4">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-                    <Users className="text-green-600" size={32} />
-                  </div>
-                  <h3 className="font-semibold text-lg">Teachers</h3>
-                  <p className="text-gray-600">Powerful curriculum tools</p>
-                </div>
-                <div className="space-y-4">
-                  <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto">
-                    <Heart className="text-purple-600" size={32} />
-                  </div>
-                  <h3 className="font-semibold text-lg">Parents</h3>
-                  <p className="text-gray-600">Complete oversight & insights</p>
-                </div>
+        {/* Subtle pattern overlay */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.5) 1px, transparent 0)",
+            backgroundSize: "24px 24px",
+          }}
+        />
+        <div className="max-w-7xl w-full mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left: Copy & CTAs */}
+            <div>
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="inline-flex items-center gap-2 rounded-full bg-white/70 border border-gray-100 px-3 py-1 text-sm text-gray-700 backdrop-blur"
+              >
+                <span className="inline-block h-2 w-2 rounded-full bg-accent" />
+                Homeschool OSS for families and co-ops
+              </motion.div>
+
+              <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black leading-snug md:leading-tight tracking-tight">
+                Run Your <span className="text-destructive">Microschool</span>: Plan, Teach, and Grow Together
+              </h1>
+              <p className="mt-6 text-lg md:text-xl text-gray-700 max-w-xl">
+                Plan curriculum, manage assignments, and track progress—all in one
+                place. Built for students, parents, and educators.
+              </p>
+
+              <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                <Button
+                  size="lg"
+                  onClick={handleComingSoonClick}
+                  className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-4 rounded-full"
+                >
+                  Get Started
+                  <ArrowRight className="ml-2" size={20} />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={handleComingSoonClick}
+                  className="border-accent text-accent hover:bg-accent/10 px-8 py-4 rounded-full"
+                >
+                  <Play className="mr-2" size={20} />
+                  See Demo
+                </Button>
               </div>
+
+              <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-gray-700">
+                <span className="inline-flex items-center gap-2 rounded-full bg-white/80 border border-gray-200 px-3 py-1 backdrop-blur transition-all hover:shadow-sm">
+                  <BookOpen className="h-4 w-4 text-accent" />
+                  Curriculum Planning
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full bg-white/80 border border-gray-200 px-3 py-1 backdrop-blur transition-all hover:shadow-sm">
+                  <BarChart3 className="h-4 w-4 text-accent" />
+                  Progress Tracking
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full bg-white/80 border border-gray-200 px-3 py-1 backdrop-blur transition-all hover:shadow-sm">
+                  <Users className="h-4 w-4 text-accent" />
+                  Co-op Management
+                </span>
+              </div>
+            </div>
+
+            {/* Right: Animated Visuals */}
+            <div className="relative">
+              {/* Ambient blobs */}
+              <div className="absolute -top-10 -right-10 h-64 w-64 rounded-full bg-destructive/20 blur-3xl" />
+              <div className="absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-accent/20 blur-3xl" />
+
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6 }}
+                className="relative bg-white/80 backdrop-blur-sm border border-gray-100 shadow-xl rounded-3xl p-8 sm:p-10"
+              >
+                <div className="grid sm:grid-cols-3 gap-6">
+                  {/* Students */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="rounded-2xl border border-gray-100 p-4 text-center hover:shadow-md transition-shadow"
+                  >
+                    <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-accent/10">
+                      <GraduationCap className="text-accent" size={24} />
+                    </div>
+                    <div className="font-semibold">Students</div>
+                    <div className="text-xs text-gray-600">Interactive modules</div>
+                  </motion.div>
+
+                  {/* Educators */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="rounded-2xl border border-gray-100 p-4 text-center hover:shadow-md transition-shadow"
+                  >
+                    <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-accent/10">
+                      <Users className="text-accent" size={24} />
+                    </div>
+                    <div className="font-semibold">Educators</div>
+                    <div className="text-xs text-gray-600">Curriculum planner</div>
+                  </motion.div>
+
+                  {/* Parents */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="rounded-2xl border border-gray-100 p-4 text-center hover:shadow-md transition-shadow"
+                  >
+                    <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-accent/10">
+                      <Heart className="text-accent" size={24} />
+                    </div>
+                    <div className="font-semibold">Parents</div>
+                    <div className="text-xs text-gray-600">Insights & alerts</div>
+                  </motion.div>
+                </div>
+
+                {/* Floating badges */}
+                <motion.div
+                  aria-hidden
+                  className="hidden sm:flex items-center gap-2 absolute -top-4 -left-4 rounded-full bg-white border border-gray-100 px-3 py-1 text-xs shadow"
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <Star className="text-accent" size={14} />
+                  Adaptive Learning
+                </motion.div>
+                <motion.div
+                  aria-hidden
+                  className="hidden sm:flex items-center gap-2 absolute -bottom-4 -right-4 rounded-full bg-white border border-gray-100 px-3 py-1 text-xs shadow"
+                  animate={{ y: [0, 6, 0] }}
+                  transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <CheckCircle className="text-accent" size={14} />
+                  Secure & Private
+                </motion.div>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -191,11 +280,11 @@ export default function LandingPage() {
       <motion.section
         {...sectionAnimation}
         id="features"
-        className="py-20 px-6 bg-white scroll-mt-32"
+        className="py-24 px-6 bg-white scroll-mt-32"
       >
         <div className="max-w-7xl w-full mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-black tracking-tight mb-6">
               Built for Every Learning Journey
             </h2>
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">
@@ -206,10 +295,10 @@ export default function LandingPage() {
 
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Students */}
-            <Card className="border-2 border-blue-100 hover:border-blue-200 transition-colors">
+            <Card className="border border-gray-100 hover:border-gray-200 transition-colors">
               <CardHeader className="text-center">
-                <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <GraduationCap className="text-blue-600" size={40} />
+                <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <GraduationCap className="text-accent" size={40} />
                 </div>
                 <CardTitle className="text-2xl">For Students</CardTitle>
                 <CardDescription>
@@ -218,7 +307,7 @@ export default function LandingPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-start space-x-3">
-                  <Brain className="text-blue-600 mt-1" size={20} />
+                  <Brain className="text-accent mt-1" size={20} />
                   <div>
                     <h4 className="font-semibold">
                       Interactive Learning Modules
@@ -229,7 +318,7 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <BarChart3 className="text-blue-600 mt-1" size={20} />
+                  <BarChart3 className="text-accent mt-1" size={20} />
                   <div>
                     <h4 className="font-semibold">
                       Personalized Progress Dashboards
@@ -240,7 +329,7 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <Award className="text-blue-600 mt-1" size={20} />
+                  <Award className="text-accent mt-1" size={20} />
                   <div>
                     <h4 className="font-semibold">Adaptive Skill Building</h4>
                     <p className="text-gray-600 text-sm">
@@ -252,10 +341,10 @@ export default function LandingPage() {
             </Card>
 
             {/* Teachers */}
-            <Card className="border-2 border-green-100 hover:border-green-200 transition-colors">
+            <Card className="border border-gray-100 hover:border-gray-200 transition-colors">
               <CardHeader className="text-center">
-                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <BookOpen className="text-green-600" size={40} />
+                <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <BookOpen className="text-accent" size={40} />
                 </div>
                 <CardTitle className="text-2xl">
                   For Educators & Co-ops
@@ -266,7 +355,7 @@ export default function LandingPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-start space-x-3">
-                  <Monitor className="text-green-600 mt-1" size={20} />
+                  <Monitor className="text-accent mt-1" size={20} />
                   <div>
                     <h4 className="font-semibold">
                       Flexible Curriculum Planner
@@ -277,7 +366,7 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="text-green-600 mt-1" size={20} />
+                  <CheckCircle className="text-accent mt-1" size={20} />
                   <div>
                     <h4 className="font-semibold">
                       Automated Grading & Feedback
@@ -288,7 +377,7 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <Calendar className="text-green-600 mt-1" size={20} />
+                  <Calendar className="text-accent mt-1" size={20} />
                   <div>
                     <h4 className="font-semibold">
                       Class & Assignment Scheduling
@@ -302,10 +391,10 @@ export default function LandingPage() {
             </Card>
 
             {/* Parents */}
-            <Card className="border-2 border-purple-100 hover:border-purple-200 transition-colors">
+            <Card className="border border-gray-100 hover:border-gray-200 transition-colors">
               <CardHeader className="text-center">
-                <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Heart className="text-purple-600" size={40} />
+                <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Heart className="text-accent" size={40} />
                 </div>
                 <CardTitle className="text-2xl">For Parents</CardTitle>
                 <CardDescription>
@@ -314,7 +403,7 @@ export default function LandingPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-start space-x-3">
-                  <BarChart3 className="text-purple-600 mt-1" size={20} />
+                  <BarChart3 className="text-accent mt-1" size={20} />
                   <div>
                     <h4 className="font-semibold">
                       Comprehensive Progress Reports
@@ -326,7 +415,7 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <Bell className="text-purple-600 mt-1" size={20} />
+                  <Bell className="text-accent mt-1" size={20} />
                   <div>
                     <h4 className="font-semibold">
                       Timely Notifications & Alerts
@@ -338,7 +427,7 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <MessageSquare className="text-purple-600 mt-1" size={20} />
+                  <MessageSquare className="text-accent mt-1" size={20} />
                   <div>
                     <h4 className="font-semibold">
                       Secure Communication Tools
@@ -436,7 +525,7 @@ export default function LandingPage() {
             <Button
               type="button"
               onClick={handleComingSoonClick}
-              className="bg-blue-600 hover:bg-blue-700 text-white"
+              className="bg-accent hover:bg-accent/90 text-accent-foreground"
             >
               Notify Me
             </Button>
@@ -501,7 +590,7 @@ export default function LandingPage() {
                             type="radio"
                             name="role"
                             value={role}
-                            className="h-4 w-4 text-blue-600"
+                            className="h-4 w-4 accent-accent"
                           />
                           <label className="text-sm">{role}</label>
                         </div>
@@ -531,7 +620,7 @@ export default function LandingPage() {
                           <input
                             type="checkbox"
                             value={interest}
-                            className="h-4 w-4 text-blue-600 rounded"
+                            className="h-4 w-4 rounded accent-accent"
                           />
                           <label className="text-sm">{interest}</label>
                         </div>
@@ -566,7 +655,7 @@ export default function LandingPage() {
                     <div className="flex items-start space-x-2">
                       <input
                         type="checkbox"
-                        className="h-4 w-4 mt-1 text-blue-600 rounded"
+                        className="h-4 w-4 mt-1 rounded accent-accent"
                       />
                       <label className="text-sm text-gray-600">
                         I'd like to receive updates about new features, educational resources, and homeschooling tips from OurMicroSchool
@@ -577,7 +666,7 @@ export default function LandingPage() {
                 <Button
                   type="button"
                   onClick={handleComingSoonClick}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3"
+                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground py-3"
                 >
                   Send Message
                 </Button>

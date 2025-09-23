@@ -1,15 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ArrowRight } from "lucide-react";
 import React, { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
-
-interface NavItem {
-  toLowerCase: () => string;
-  replace: (pattern: RegExp, replacement: string) => string;
-}
 
 interface HeaderProps {
   navItems: string[];
@@ -64,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({
           className={`transition-all duration-300 ${
             isScrolled
               ? "floating-nav"
-              : "mx-4 rounded-2xl border border-gray-200/70 bg-white/95 backdrop-blur-sm shadow-sm"
+              : "mx-4 rounded-3xl border border-gray-100 bg-white/90 backdrop-blur-sm shadow"
           }`}
         >
           <div
@@ -74,7 +70,14 @@ const Header: React.FC<HeaderProps> = ({
           >
             <div className="flex items-center justify-between">
               <Link href="/" className="flex items-center space-x-2">
-                <div className={`text-2xl font-bold text-blue-600`}>OMS</div>
+                <Image
+                  src="/logos/OMS_LogoDesign_01-09.png"
+                  alt="OMS logo"
+                  width={72}
+                  height={72}
+                  className="h-18 w-18"
+                  priority
+                />
               </Link>
 
               <div className="hidden md:flex items-center space-x-8">
@@ -86,7 +89,7 @@ const Header: React.FC<HeaderProps> = ({
                         ? "/partners"
                         : `/#${item.toLowerCase().replace(/\\s+/g, "-")}`
                     }
-                    className="text-gray-700 hover:text-blue-600 transition-colors duration-200 relative group"
+                    className="text-foreground hover:text-accent transition-colors duration-200 relative group"
                     onClick={(e) =>
                       handleNavClick(
                         e,
@@ -97,14 +100,14 @@ const Header: React.FC<HeaderProps> = ({
                     }
                   >
                     {item}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
                   </Link>
                 ))}
                 <Link href="/login" passHref>
                   <Button
                     variant="outline"
                     size="sm"
-                    className="text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-full transition-colors duration-200 border-gray-300"
+                    className="text-foreground hover:text-accent hover:bg-accent/10 rounded-full transition-colors duration-200 border-gray-300"
                   >
                     Login
                   </Button>
@@ -112,7 +115,7 @@ const Header: React.FC<HeaderProps> = ({
                 <Link href="#contact" passHref>
                   <Button
                     size="sm"
-                    className="bg-blue-600 hover:bg-blue-700 text-white rounded-full"
+                    className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-full"
                     onClick={handleComingSoonClick}
                   >
                     Get Started
@@ -143,7 +146,7 @@ const Header: React.FC<HeaderProps> = ({
                         ? "/partners"
                         : `/#${item.toLowerCase().replace(/\\s+/g, "-")}`
                     }
-                    className="text-lg text-gray-700 hover:text-blue-600 transition-colors py-2"
+                    className="text-lg text-gray-700 hover:text-accent transition-colors py-2"
                     onClick={(e) => {
                       toggleMenu();
                       handleNavClick(
@@ -161,7 +164,7 @@ const Header: React.FC<HeaderProps> = ({
                   <Link href="#contact" passHref>
                     <Button
                       size="lg"
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-full py-3"
+                      className="w-full bg-accent hover:bg-accent/90 text-accent-foreground rounded-full py-3"
                       onClick={() => {
                         handleComingSoonClick();
                         toggleMenu();
@@ -175,7 +178,7 @@ const Header: React.FC<HeaderProps> = ({
                     <Button
                       variant="outline"
                       size="lg"
-                      className="w-full text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-full mt-2 transition-colors duration-200 border-gray-300"
+                      className="w-full text-gray-700 hover:text-accent hover:bg-accent/10 rounded-full mt-2 transition-colors duration-200 border-gray-300"
                       onClick={() => toggleMenu()}
                     >
                       Login

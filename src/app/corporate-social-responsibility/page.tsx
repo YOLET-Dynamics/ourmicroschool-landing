@@ -33,16 +33,16 @@ export default function CSRPage() {
         handleComingSoonClick={handleComingSoonClick}
       />
 
-      <main className="pt-32 pb-20">
+      <main className="pt-32 pb-24">
         {/* Hero Section */}
         <motion.section
           {...sectionAnimation}
-          className="text-center px-6 mb-20"
+          className="text-center px-6 mb-24"
         >
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mb-6">
               Our Commitment to{" "}
-              <span className="text-blue-600">Social Impact</span>
+              <span className="text-accent">Social Impact</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8">
               Empowering communities through education and fostering a more inclusive future for all learners.
@@ -56,7 +56,7 @@ export default function CSRPage() {
           className="px-6"
         >
           <div className="max-w-7xl mx-auto">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
               {[
                 {
                   icon: Heart,
@@ -81,10 +81,10 @@ export default function CSRPage() {
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-xl p-6 text-center shadow-lg hover:shadow-xl transition-shadow"
+                  className="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow hover:shadow-md transition-all"
                 >
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <item.icon className="w-8 h-8 text-blue-600" />
+                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <item.icon className="w-8 h-8 text-accent" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
                   <p className="text-gray-600">{item.description}</p>
@@ -92,8 +92,8 @@ export default function CSRPage() {
               ))}
             </div>
 
-            <div className="bg-white rounded-2xl p-8 md:p-12 text-center shadow-lg">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <div className="bg-white rounded-3xl p-10 md:p-12 text-center border border-gray-100 shadow">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
                 Exciting Initiatives Coming Soon
               </h2>
               <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -104,14 +104,14 @@ export default function CSRPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   onClick={handleComingSoonClick}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg rounded-full"
+                  className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-4 text-lg rounded-full"
                 >
                   Get Notified
                 </Button>
                 <Button
                   variant="outline"
                   onClick={handleComingSoonClick}
-                  className="border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 text-lg rounded-full"
+                  className="border-accent text-accent hover:bg-accent/10 px-8 py-4 text-lg rounded-full"
                 >
                   Partner With Us
                 </Button>

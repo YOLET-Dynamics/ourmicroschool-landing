@@ -1,24 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   Twitter,
   Instagram,
   Linkedin,
   MapPin,
-  Phone,
-  Mail,
-  Facebook,
-  Youtube,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import React from "react";
-import { Button } from "@/components/ui/button";
-
-interface NavItem {
-  label: string;
-  href: string;
-}
 
 interface FooterProps {
   navItems: string[];
@@ -34,12 +25,21 @@ const Footer: React.FC<FooterProps> = ({
   return (
     <motion.footer
       {...sectionAnimation}
-      className="bg-gray-50 py-16 px-4 border-t border-gray-200"
+      className="bg-gray-50 py-16 px-4 border-t border-gray-100"
     >
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+        <div className="grid md:grid-cols-4 gap-10 mb-10">
           <div>
-            <div className="text-2xl font-bold text-blue-600 mb-4">OMS</div>
+            <div className="mb-4">
+              <Image
+                src="/logos/OMS_LogoDesign_01-09.png"
+                alt="OMS logo with wordmark"
+                width={448}
+                height={112}
+                className="h-28 w-auto"
+                priority
+              />
+            </div>
             <p className="text-gray-700 mb-4">
               The complete operating system for your family's homeschooling
               success.
@@ -47,19 +47,19 @@ const Footer: React.FC<FooterProps> = ({
             <div className="flex space-x-4">
               <Link
                 href="#coming-soon"
-                className="text-gray-400 hover:text-blue-600 transition-colors"
+                className="text-gray-400 hover:text-accent transition-colors"
               >
                 <Twitter size={24} />
               </Link>
               <Link
                 href="#coming-soon"
-                className="text-gray-400 hover:text-blue-600 transition-colors"
+                className="text-gray-400 hover:text-accent transition-colors"
               >
                 <Instagram size={24} />
               </Link>
               <Link
                 href="#coming-soon"
-                className="text-gray-400 hover:text-blue-600 transition-colors"
+                className="text-gray-400 hover:text-accent transition-colors"
               >
                 <Linkedin size={24} />
               </Link>
@@ -77,7 +77,7 @@ const Footer: React.FC<FooterProps> = ({
                         ? "/partners"
                         : `#${item.toLowerCase().replace(/\\s+/g, "-")}`
                     }
-                    className="text-gray-700 hover:text-blue-600 transition-colors"
+                    className="text-gray-700 hover:text-accent transition-colors"
                   >
                     {item}
                   </Link>
@@ -86,7 +86,7 @@ const Footer: React.FC<FooterProps> = ({
               <li>
                 <Link
                   href="/corporate-social-responsibility"
-                  className="text-gray-700 hover:text-blue-600 transition-colors"
+                  className="text-gray-700 hover:text-accent transition-colors"
                 >
                   CSR
                 </Link>
@@ -101,7 +101,7 @@ const Footer: React.FC<FooterProps> = ({
                 <Link
                   href="/#coming-soon"
                   onClick={handleComingSoonClick}
-                  className="text-gray-700 hover:text-blue-600 transition-colors"
+                  className="text-gray-700 hover:text-accent transition-colors"
                 >
                   Terms of Service
                 </Link>
@@ -110,7 +110,7 @@ const Footer: React.FC<FooterProps> = ({
                 <Link
                   href="/#coming-soon"
                   onClick={handleComingSoonClick}
-                  className="text-gray-700 hover:text-blue-600 transition-colors"
+                  className="text-gray-700 hover:text-accent transition-colors"
                 >
                   Privacy Policy
                 </Link>
@@ -124,7 +124,7 @@ const Footer: React.FC<FooterProps> = ({
               <div className="flex items-start space-x-2">
                 <MapPin
                   size={18}
-                  className="mt-1 text-blue-600 flex-shrink-0"
+                  className="mt-1 text-accent flex-shrink-0"
                 />
                 <span>Incorporated in Virginia, USA</span>
               </div>
@@ -141,7 +141,7 @@ const Footer: React.FC<FooterProps> = ({
             Built by{" "}
             <Link
               href="https://yoletent.com"
-              className="text-blue-600 hover:underline transition-all duration-200 hover:scale-105 inline-block"
+              className="text-accent hover:underline transition-all duration-200 hover:scale-105 inline-block"
               target="_blank"
               rel="noopener noreferrer"
             >
