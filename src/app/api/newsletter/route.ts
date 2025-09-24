@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { newsletterSchema } from "@/api/schema/newsletter";
 import { Resend } from "resend";
-import NewsletterEmail from "@/emails/NewsletterEmail";
+import NewsletterEmail, { NewsletterAcknowledgementEmail } from "@/emails/NewsletterEmail";
 import { getClientIp, isRateLimited } from "@/lib/rate-limit";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -28,11 +28,18 @@ export async function POST(req: Request) {
     const { email } = parsed.data;
 
     await resend.emails.send({
-      from: "OMS Newsletter <noreply@ourmicroschool.com>",
+      from: "OMS Newsletter <no-reply@ourmicroschool.com>",
       to: ["newsletter@ourmicroschool.com"],
       subject: "New newsletter signup",
       replyTo: email,
       react: NewsletterEmail({ email }),
+    });
+
+    await resend.emails.send({
+      from: "OMS <no-reply@ourmicroschool.com>",
+      to: [email],
+      subject: "Thanks for subscribing",
+      react: NewsletterAcknowledgementEmail({ email }),
     });
 
     return NextResponse.json({ success: true, data: { ok: true } });
