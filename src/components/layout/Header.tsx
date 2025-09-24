@@ -4,7 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ArrowRight } from "lucide-react";
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useRouter, usePathname } from "next/navigation";
 
 interface HeaderProps {
@@ -51,9 +52,25 @@ const Header: React.FC<HeaderProps> = ({
     }
   };
 
+  const headerRef = useRef<HTMLElement | null>(null);
+
+  const updateHeaderHeight = useCallback(() => {
+    if (headerRef.current) {
+      const height = headerRef.current.offsetHeight;
+      document.documentElement.style.setProperty("--header-height", `${height}px`);
+    }
+  }, []);
+
+  useEffect(() => {
+    updateHeaderHeight();
+    window.addEventListener("resize", updateHeaderHeight);
+    return () => window.removeEventListener("resize", updateHeaderHeight);
+  }, [updateHeaderHeight, isScrolled]);
+
   return (
     <>
       <header
+        ref={headerRef}
         className={`fixed max-w-7xl mx-auto top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled ? "py-2" : "py-4"
         }`}
@@ -73,7 +90,7 @@ const Header: React.FC<HeaderProps> = ({
             <div className="flex items-center justify-between">
               <Link href="/" className="flex items-center space-x-2">
                 <Image
-                  src="/logos/OMS_LogoDesign_01-09.png"
+                  src="/logos/OMS_LogoDesign_01-08.png"
                   alt="OMS logo"
                   width={72}
                   height={72}
@@ -89,6 +106,8 @@ const Header: React.FC<HeaderProps> = ({
                     href={
                       item.toLowerCase() === "partners"
                         ? "/partners"
+                        : item.toLowerCase() === "contact"
+                        ? "/contact"
                         : `/#${item.toLowerCase().replace(/\\s+/g, "-")}`
                     }
                     className="text-foreground hover:text-accent transition-colors duration-200 relative group"
@@ -97,6 +116,8 @@ const Header: React.FC<HeaderProps> = ({
                         e,
                         item.toLowerCase() === "partners"
                           ? "/partners"
+                          : item.toLowerCase() === "contact"
+                          ? "/contact"
                           : `/#${item.toLowerCase().replace(/\\s+/g, "-")}`
                       )
                     }
@@ -114,7 +135,7 @@ const Header: React.FC<HeaderProps> = ({
                     Login
                   </Button>
                 </Link>
-                <Link href="#contact" passHref>
+                <Link href="/contact" passHref>
                   <Button
                     size="sm"
                     className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-full"
@@ -136,61 +157,79 @@ const Header: React.FC<HeaderProps> = ({
           </div>
         </nav>
 
-        {isMenuOpen && (
-          <div className="md:hidden fixed inset-0 top-20 mobile-menu-overlay z-40">
-            <div className="bg-white mx-4 mt-2 rounded-2xl shadow-xl border border-gray-200 p-6">
-              <div className="flex flex-col space-y-4">
-                {navItems.map((item) => (
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              className="md:hidden fixed inset-x-0 bottom-0 top-header mobile-menu-overlay z-40"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
+           >
+              <motion.div
+                className="bg-white mx-4 mt-2 rounded-2xl shadow-xl border border-gray-200 p-6"
+                initial={{ y: -8, opacity: 0, scale: 0.98 }}
+                animate={{ y: 0, opacity: 1, scale: 1 }}
+                exit={{ y: -6, opacity: 0, scale: 0.98 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                <div className="flex flex-col space-y-4">
+                  {navItems.map((item) => (
                   <Link
-                    key={item}
-                    href={
+                      key={item}
+                      href={
                       item.toLowerCase() === "partners"
                         ? "/partners"
+                        : item.toLowerCase() === "contact"
+                        ? "/contact"
                         : `/#${item.toLowerCase().replace(/\\s+/g, "-")}`
-                    }
-                    className="text-lg text-gray-700 hover:text-accent transition-colors py-2"
-                    onClick={(e) => {
-                      toggleMenu();
-                      handleNavClick(
-                        e,
+                      }
+                      className="text-lg text-gray-700 hover:text-accent transition-colors py-2"
+                      onClick={(e) => {
+                        toggleMenu();
+                        handleNavClick(
+                          e,
                         item.toLowerCase() === "partners"
                           ? "/partners"
+                          : item.toLowerCase() === "contact"
+                          ? "/contact"
                           : `/#${item.toLowerCase().replace(/\\s+/g, "-")}`
-                      );
-                    }}
-                  >
-                    {item}
-                  </Link>
-                ))}
-                <div className="mt-4 pt-4 border-t border-gray-200">
-                  <Link href="#contact" passHref>
-                    <Button
-                      size="lg"
-                      className="w-full bg-accent hover:bg-accent/90 text-accent-foreground rounded-full py-3"
-                      onClick={() => {
-                        handleComingSoonClick();
-                        toggleMenu();
+                        );
                       }}
                     >
-                      Get Started
-                      <ArrowRight className="ml-2" size={20} />
-                    </Button>
-                  </Link>
-                  <Link href="/login" passHref>
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      className="w-full text-gray-700 hover:text-accent hover:bg-accent/10 rounded-full mt-2 transition-colors duration-200 border-gray-300"
-                      onClick={() => toggleMenu()}
-                    >
-                      Login
-                    </Button>
-                  </Link>
+                      {item}
+                    </Link>
+                  ))}
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    <Link href="/contact" passHref>
+                      <Button
+                        size="lg"
+                        className="w-full bg-accent hover:bg-accent/90 text-accent-foreground rounded-full py-3"
+                        onClick={() => {
+                          handleComingSoonClick();
+                          toggleMenu();
+                        }}
+                      >
+                        Get Started
+                        <ArrowRight className="ml-2" size={20} />
+                      </Button>
+                    </Link>
+                    <Link href="/login" passHref>
+                      <Button
+                        variant="outline"
+                        size="lg"
+                        className="w-full text-gray-700 hover:text-accent hover:bg-accent/10 rounded-full mt-2 transition-colors duration-200 border-gray-300"
+                        onClick={() => toggleMenu()}
+                      >
+                        Login
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
     </>
   );

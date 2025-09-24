@@ -78,44 +78,41 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col bg-gradient-to-br from-accent/10 via-white to-accent/20">
+    <main className="min-h-screen flex flex-col">
       {/* Navigation Bar */}
-      <div className="w-full px-4 py-4 mt-6 sm:mt-8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="w-full px-4 sm:px-6 py-4">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
           <Button
             variant="ghost"
             onClick={() => router.push("/")}
-            className="text-gray-600 hover:text-accent hover:bg-accent/10 -ml-3"
+            className="text-gray-600 hover:text-primary hover:bg-primary/10"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back
           </Button>
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="text-xl sm:text-2xl font-bold text-primary font-display tracking-tight">OMS</span>
-          </Link>
           <div className="w-16 sm:w-20" />
         </div>
       </div>
 
       {/* Login Form */}
-      <div className="flex-1 flex items-center justify-center p-4">
+      <div className="flex-1 flex items-start justify-center p-4">
         <div className="w-full max-w-md space-y-4 sm:space-y-6">
           <div className="flex justify-center">
             <Badge
               variant="secondary"
-              className="px-4 py-2 text-sm font-medium bg-accent/10 text-accent border-accent/20 hover:bg-accent/20 transition-colors animate-slide-in-up"
+              className="px-4 py-2 text-sm font-medium bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-colors animate-slide-in-up"
             >
               <Sparkles className="w-4 h-4 mr-2" />
               Secure, simple sign in
               <ArrowRight className="w-4 h-4 ml-2" />
             </Badge>
           </div>
-          <Card className="border border-gray-100 shadow bg-white/80 backdrop-blur-sm rounded-3xl">
+          <Card className="border border-primary/10 shadow bg-white/80 backdrop-blur-sm rounded-3xl">
             <CardHeader className="space-y-3 pb-4 sm:pb-6 px-4 sm:px-6">
-              <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-center tracking-tight">
+              <CardTitle className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-center tracking-tight">
                 Welcome Back
               </CardTitle>
-              <CardDescription className="text-center text-gray-600 text-sm sm:text-base">
+              <CardDescription className="text-center text-muted-foreground text-sm sm:text-base">
                 Enter your credentials to access your account
               </CardDescription>
             </CardHeader>
@@ -137,7 +134,7 @@ export default function LoginPage() {
                           <Input
                             placeholder="Email or Phone"
                             type="text"
-                            className="border-gray-200 h-10 sm:h-11 bg-white text-sm sm:text-base"
+                            className="border-gray-200 h-10 sm:h-11 bg-white text-sm sm:text-base focus:border-primary focus:ring-primary/20"
                             {...field}
                           />
                         </FormControl>
@@ -158,7 +155,7 @@ export default function LoginPage() {
                             <Input
                               placeholder="Enter your password"
                               type={showPassword ? "text" : "password"}
-                              className="border-gray-200 h-10 sm:h-11 bg-white text-sm sm:text-base pr-10"
+                              className="border-gray-200 h-10 sm:h-11 bg-white text-sm sm:text-base pr-10 focus:border-primary focus:ring-primary/20"
                               {...field}
                             />
                             <Button
@@ -210,7 +207,7 @@ export default function LoginPage() {
                   />
                   <Button
                     type="submit"
-                    className="w-full bg-accent hover:bg-accent/90 text-accent-foreground py-5 sm:py-6 text-base sm:text-lg font-medium rounded-xl mt-6 transition-all duration-200 hover:shadow"
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-5 sm:py-6 text-base sm:text-lg font-medium rounded-xl mt-6 transition-all duration-200 hover:shadow"
                     disabled={isPending || !form.formState.isValid}
                   >
                     {isPending ? "Signing In..." : "Sign In"}
@@ -231,7 +228,7 @@ export default function LoginPage() {
               <Button
                   variant="link"
                 className="text-accent hover:text-accent/80 font-normal h-auto p-0 text-xs sm:text-sm"
-                  onClick={() => router.push("/#contact")}
+                  onClick={() => router.push("/contact")}
                 >
                   Contact us to get started
                 </Button>

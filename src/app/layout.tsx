@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Inter, Fredoka } from "next/font/google";
 import { Toaster } from "sonner";
+import SiteChrome from "@/components/layout/SiteChrome";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -102,7 +103,9 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${fredoka.variable}`}>
       <body>
         <QueryProvider>
-          <HttpInterceptor>{children}</HttpInterceptor>
+          <SiteChrome>
+            <HttpInterceptor>{children}</HttpInterceptor>
+          </SiteChrome>
           <Toaster richColors position="bottom-right" />
         </QueryProvider>
       </body>

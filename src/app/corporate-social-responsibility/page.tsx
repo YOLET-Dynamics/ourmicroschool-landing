@@ -4,11 +4,8 @@ import { motion } from "framer-motion";
 import { Heart, Sprout, Users, Globe, Sparkles, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import { toast } from "sonner";
 
-const navItems = ["Features", "Partners", "Contact"];
 
 const sectionAnimation = {
   initial: { opacity: 0, y: 50 },
@@ -26,14 +23,6 @@ export default function CSRPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header
-        navItems={navItems}
-        isMenuOpen={false}
-        toggleMenu={() => {}}
-        isScrolled={false}
-        handleComingSoonClick={handleComingSoonClick}
-      />
-
       <main className="pt-32 pb-24">
         {/* Hero Section */}
         <motion.section
@@ -51,7 +40,7 @@ export default function CSRPage() {
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Badge>
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mb-6">
+            <h1 className="font-display text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mb-6">
               Our Commitment to{" "}
               <span className="text-accent">Social Impact</span>
             </h1>
@@ -104,7 +93,7 @@ export default function CSRPage() {
             </div>
 
             <div className="bg-white rounded-3xl p-10 md:p-12 text-center border border-gray-100 shadow">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
+              <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-6">
                 Exciting Initiatives Coming Soon
               </h2>
               <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -132,11 +121,6 @@ export default function CSRPage() {
         </motion.section>
       </main>
 
-      <Footer
-        navItems={navItems}
-        sectionAnimation={sectionAnimation}
-        handleComingSoonClick={handleComingSoonClick}
-      />
     </div>
   );
 } 
