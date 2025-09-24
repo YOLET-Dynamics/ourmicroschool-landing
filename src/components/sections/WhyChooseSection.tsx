@@ -24,7 +24,7 @@ export function WhyChooseSection() {
   ];
 
   return (
-    <section id="features" className="py-20 px-6 lg:px-8 scroll-mt-32">
+    <section id="features" className="py-20 px-6 lg:px-8 scroll-mt-32 bg-background">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>

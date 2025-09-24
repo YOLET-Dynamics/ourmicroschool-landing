@@ -22,14 +22,14 @@ export default function CSRPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background text-foreground">
       <main className="pt-32 pb-24">
         {/* Hero Section */}
         <motion.section
           {...sectionAnimation}
           className="text-center px-6 mb-24"
         >
-          <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto">
             <div className="flex justify-center mb-6">
               <Badge
                 variant="secondary"
@@ -40,11 +40,11 @@ export default function CSRPage() {
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Badge>
             </div>
-            <h1 className="font-display text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mb-6">
-              Our Commitment to{" "}
-              <span className="text-accent">Social Impact</span>
-            </h1>
-            <p className="text-xl text-gray-600 mb-8">
+          <h1 className="font-display text-3xl md:text-5xl font-bold text-foreground tracking-tight mb-6">
+            Our Commitment to{" "}
+            <span className="text-accent">Social Impact</span>
+          </h1>
+          <p className="text-xl text-muted-foreground mb-8">
               Empowering communities through education and fostering a more inclusive future for all learners.
             </p>
           </div>
@@ -81,22 +81,22 @@ export default function CSRPage() {
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-2xl p-6 text-center border border-gray-100 shadow hover:shadow-md transition-all"
+                  className="bg-card text-card-foreground rounded-2xl p-6 text-center border border-border shadow hover:shadow-md transition-all"
                 >
                   <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
                     <item.icon className="w-8 h-8 text-accent" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-gray-600">{item.description}</p>
+                  <p className="text-muted-foreground">{item.description}</p>
                 </div>
               ))}
             </div>
 
-            <div className="bg-white rounded-3xl p-10 md:p-12 text-center border border-gray-100 shadow">
+            <div className="bg-card text-card-foreground rounded-3xl p-10 md:p-12 text-center border border-border shadow">
               <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-6">
                 Exciting Initiatives Coming Soon
               </h2>
-              <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
                 We're working on impactful programs that will make a real difference
                 in education accessibility and community development. Stay tuned for
                 our upcoming initiatives!

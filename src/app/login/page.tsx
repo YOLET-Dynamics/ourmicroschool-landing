@@ -85,7 +85,7 @@ export default function LoginPage() {
           <Button
             variant="ghost"
             onClick={() => router.push("/")}
-            className="text-gray-600 hover:text-primary hover:bg-primary/10"
+            className="text-muted-foreground hover:text-primary hover:bg-primary/10"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back
@@ -107,14 +107,14 @@ export default function LoginPage() {
               <ArrowRight className="w-4 h-4 ml-2" />
             </Badge>
           </div>
-          <Card className="border border-primary/10 shadow bg-white/80 backdrop-blur-sm rounded-3xl">
+          <Card className="bg-card text-card-foreground border border-border shadow-lg rounded-3xl">
             <CardHeader className="space-y-3 pb-4 sm:pb-6 px-4 sm:px-6">
               <CardTitle className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-center tracking-tight">
                 Welcome Back
               </CardTitle>
-              <CardDescription className="text-center text-muted-foreground text-sm sm:text-base">
-                Enter your credentials to access your account
-              </CardDescription>
+            <CardDescription className="text-center text-muted-foreground text-sm sm:text-base">
+              Enter your credentials to access your account
+            </CardDescription>
             </CardHeader>
             <CardContent className="pb-4 sm:pb-6 px-4 sm:px-6">
               <Form {...form}>
@@ -127,14 +127,14 @@ export default function LoginPage() {
                     name="identifier"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-700 text-sm sm:text-base">
+                        <FormLabel className="text-sm sm:text-base text-muted-foreground">
                           Email or Phone
                         </FormLabel>
                         <FormControl>
                           <Input
                             placeholder="Email or Phone"
                             type="text"
-                            className="border-gray-200 h-10 sm:h-11 bg-white text-sm sm:text-base focus:border-primary focus:ring-primary/20"
+                            className="border-border h-10 sm:h-11 bg-card text-sm sm:text-base focus:border-primary focus:ring-primary/20"
                             {...field}
                           />
                         </FormControl>
@@ -147,7 +147,7 @@ export default function LoginPage() {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-gray-700 text-sm sm:text-base">
+                        <FormLabel className="text-sm sm:text-base text-muted-foreground">
                           Password
                         </FormLabel>
                         <FormControl>
@@ -155,14 +155,14 @@ export default function LoginPage() {
                             <Input
                               placeholder="Enter your password"
                               type={showPassword ? "text" : "password"}
-                              className="border-gray-200 h-10 sm:h-11 bg-white text-sm sm:text-base pr-10 focus:border-primary focus:ring-primary/20"
+                              className="border-border h-10 sm:h-11 bg-card text-sm sm:text-base pr-10 focus:border-primary focus:ring-primary/20"
                               {...field}
                             />
                             <Button
                               type="button"
                               variant="ghost"
                               size="icon"
-                              className="absolute right-0 top-0 h-10 sm:h-11 w-10 text-gray-500 hover:text-gray-700"
+                              className="absolute right-0 top-0 h-10 sm:h-11 w-10 text-muted-foreground hover:text-foreground"
                               onClick={() => setShowPassword(!showPassword)}
                             >
                               {showPassword ? (
@@ -223,7 +223,7 @@ export default function LoginPage() {
               >
                 Forgot your password?
               </Button>
-              <div className="text-xs sm:text-sm text-center text-gray-500">
+              <div className="text-xs sm:text-sm text-center text-muted-foreground">
                 Don't have an account?{" "}
               <Button
                   variant="link"
@@ -233,11 +233,11 @@ export default function LoginPage() {
                   Contact us to get started
                 </Button>
               </div>
-              <div className="text-xs sm:text-sm text-center text-gray-500 pt-2">
+              <div className="text-xs sm:text-sm text-center text-muted-foreground pt-2">
                 By continuing, you agree to our{" "}
                 <Button
                   variant="link"
-                  className="text-gray-600 hover:text-gray-800 font-normal h-auto p-0 text-xs sm:text-sm"
+                  className="text-muted-foreground hover:text-foreground font-normal h-auto p-0 text-xs sm:text-sm"
                   onClick={handleComingSoonClick}
                 >
                   Terms of Service
@@ -245,7 +245,7 @@ export default function LoginPage() {
                 and{" "}
                 <Button
                   variant="link"
-                  className="text-gray-600 hover:text-gray-800 font-normal h-auto p-0 text-xs sm:text-sm"
+                  className="text-muted-foreground hover:text-foreground font-normal h-auto p-0 text-xs sm:text-sm"
                   onClick={handleComingSoonClick}
                 >
                   Privacy Policy

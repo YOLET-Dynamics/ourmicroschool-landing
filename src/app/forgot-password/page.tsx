@@ -104,7 +104,7 @@ export default function ForgotPasswordPage() {
           <Button
             variant="ghost"
             onClick={() => router.push("/login")}
-            className="text-gray-600 hover:text-primary hover:bg-primary/10"
+            className="text-muted-foreground hover:text-primary hover:bg-primary/10"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back
@@ -126,12 +126,12 @@ export default function ForgotPasswordPage() {
               <ArrowRight className="w-4 h-4 ml-2" />
             </Badge>
           </div>
-          <Card className="border border-primary/10 shadow bg-white/80 backdrop-blur-sm rounded-3xl">
+          <Card className="bg-card text-card-foreground border border-border shadow-lg rounded-3xl">
             <CardHeader className="space-y-3 pb-4 sm:pb-6 px-4 sm:px-6">
               <CardTitle className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-center tracking-tight">
                 {step === "request" ? "Forgot Password" : "Verify OTP"}
               </CardTitle>
-              <CardDescription className="text-center text-muted-foreground text-sm sm:text-base">
+            <CardDescription className="text-center text-muted-foreground text-sm sm:text-base">
                 {step === "request"
                   ? "Enter your email or phone to receive a verification code"
                   : "Enter the verification code sent to your email/phone"}
@@ -149,14 +149,14 @@ export default function ForgotPasswordPage() {
                       name="identifier"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700 text-sm sm:text-base">
+                          <FormLabel className="text-sm sm:text-base text-muted-foreground">
                             Email or Phone
                           </FormLabel>
                           <FormControl>
                             <Input
                               placeholder="Enter your email or phone"
                               type="text"
-                              className="border-gray-200 h-10 sm:h-11 bg-white text-sm sm:text-base focus:border-primary focus:ring-primary/20"
+                              className="border-border h-10 sm:h-11 bg-card text-sm sm:text-base focus:border-primary focus:ring-primary/20"
                               {...field}
                             />
                           </FormControl>
@@ -180,7 +180,7 @@ export default function ForgotPasswordPage() {
                     className="space-y-4 sm:space-y-5"
                   >
                     <FormItem>
-                      <FormLabel className="text-gray-700 text-sm sm:text-base">
+                      <FormLabel className="text-sm sm:text-base text-muted-foreground">
                         Email or Phone
                       </FormLabel>
                       <FormControl>
@@ -188,7 +188,7 @@ export default function ForgotPasswordPage() {
                           type="text"
                           value={identifier}
                           disabled
-                          className="border-gray-200 h-10 sm:h-11 bg-gray-50/50 text-sm sm:text-base opacity-70"
+                          className="border-border h-10 sm:h-11 bg-muted/50 text-sm sm:text-base opacity-70"
                         />
                       </FormControl>
                     </FormItem>
@@ -197,7 +197,7 @@ export default function ForgotPasswordPage() {
                       name="otp"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-gray-700 text-sm sm:text-base">
+                          <FormLabel className="text-sm sm:text-base text-muted-foreground">
                             Verification Code
                           </FormLabel>
                           <FormControl>
@@ -244,7 +244,7 @@ export default function ForgotPasswordPage() {
               )}
             </CardContent>
             <CardFooter className="flex flex-col space-y-4 sm:space-y-6 pt-2 pb-6 sm:pb-8 px-4 sm:px-6">
-              <div className="text-xs sm:text-sm text-center text-gray-500">
+              <div className="text-xs sm:text-sm text-center text-muted-foreground">
                 Remember your password?{" "}
                 <Button
                   variant="link"

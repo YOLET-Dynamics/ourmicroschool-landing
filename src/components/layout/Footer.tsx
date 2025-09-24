@@ -25,7 +25,7 @@ const Footer: React.FC<FooterProps> = ({
   return (
     <motion.footer
       {...sectionAnimation}
-      className="bg-gray-50 py-16 px-4 border-t border-gray-100"
+      className="py-16 px-4 border-t border-border"
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-4 gap-10 mb-10">
@@ -40,26 +40,26 @@ const Footer: React.FC<FooterProps> = ({
                 priority
               />
             </div>
-            <p className="text-gray-700 mb-4">
+            <p className="text-muted-foreground mb-4">
               The complete operating system for your family's homeschooling
               success.
             </p>
             <div className="flex space-x-4">
               <Link
                 href="#coming-soon"
-                className="text-gray-400 hover:text-accent transition-colors"
+                className="text-muted-foreground hover:text-accent transition-colors"
               >
                 <Twitter size={24} />
               </Link>
               <Link
                 href="#coming-soon"
-                className="text-gray-400 hover:text-accent transition-colors"
+                className="text-muted-foreground hover:text-accent transition-colors"
               >
                 <Instagram size={24} />
               </Link>
               <Link
                 href="#coming-soon"
-                className="text-gray-400 hover:text-accent transition-colors"
+                className="text-muted-foreground hover:text-accent transition-colors"
               >
                 <Linkedin size={24} />
               </Link>
@@ -79,7 +79,7 @@ const Footer: React.FC<FooterProps> = ({
                         ? "/contact"
                         : `/#${item.toLowerCase().replace(/\\s+/g, "-")}`
                     }
-                    className="text-gray-700 hover:text-accent transition-colors"
+                    className="text-muted-foreground hover:text-accent transition-colors"
                   >
                     {item}
                   </Link>
@@ -88,7 +88,7 @@ const Footer: React.FC<FooterProps> = ({
               <li>
                 <Link
                   href="/corporate-social-responsibility"
-                  className="text-gray-700 hover:text-accent transition-colors"
+                  className="text-muted-foreground hover:text-accent transition-colors"
                 >
                   CSR
                 </Link>
@@ -103,7 +103,7 @@ const Footer: React.FC<FooterProps> = ({
                 <Link
                   href="/#coming-soon"
                   onClick={handleComingSoonClick}
-                  className="text-gray-700 hover:text-accent transition-colors"
+                  className="text-muted-foreground hover:text-accent transition-colors"
                 >
                   Terms of Service
                 </Link>
@@ -112,7 +112,7 @@ const Footer: React.FC<FooterProps> = ({
                 <Link
                   href="/#coming-soon"
                   onClick={handleComingSoonClick}
-                  className="text-gray-700 hover:text-accent transition-colors"
+                  className="text-muted-foreground hover:text-accent transition-colors"
                 >
                   Privacy Policy
                 </Link>
@@ -122,7 +122,7 @@ const Footer: React.FC<FooterProps> = ({
 
           <div>
             <h3 className="font-semibold mb-4">Contact Info</h3>
-            <div className="space-y-3 text-gray-700">
+            <div className="space-y-3 text-muted-foreground">
               <div className="flex items-start space-x-2">
                 <MapPin
                   size={18}
@@ -134,12 +134,12 @@ const Footer: React.FC<FooterProps> = ({
           </div>
         </div>
 
-        <div className="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-700 mb-4 md:mb-0">
+        <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-muted-foreground mb-4 md:mb-0">
             © {new Date().getFullYear()} OurMicroSchool, a product of SYMVERGE
             Platform L.L.C. All rights reserved.
           </p>
-          <p className="text-gray-700">
+          <p className="text-muted-foreground">
             Built by{" "}
             <Link
               href="https://yoletent.com"

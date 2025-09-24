@@ -32,7 +32,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background text-foreground">
       <Header
         navItems={navItems}
         isMenuOpen={isMenuOpen}

@@ -86,7 +86,7 @@ export function HeroSection() {
   ];
 
   return (
-    <section className="pt-36 md:pt-40 pb-12 px-6 lg:px-8 relative">
+    <section className="pb-12 px-6 lg:px-8 relative">
       <div className="max-w-7xl mx-auto">
         <div className={`flex justify-center mb-12 ${isVisible ? "animate-slide-in-up" : "opacity-0"}`}>
           <Badge

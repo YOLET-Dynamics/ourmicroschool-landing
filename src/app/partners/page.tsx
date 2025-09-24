@@ -51,7 +51,7 @@ const PartnerCard = ({ partner }: { partner: (typeof partnersData)[0] }) => {
         <div className="relative p-8 lg:p-10">
           <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 mb-8">
             <div className="flex-shrink-0 relative group/logo">
-              <div className="w-28 h-28 lg:w-36 lg:h-36 relative rounded-2xl overflow-hidden border-2 border-gray-100 bg-white shadow-lg group-hover:shadow-xl transition-all duration-500">
+              <div className="w-28 h-28 lg:w-36 lg:h-36 relative rounded-2xl overflow-hidden border border-border bg-card shadow-lg group-hover:shadow-xl transition-all duration-500">
                 <Image
                   src={partner.logoUrl || "/placeholder.svg"}
                   alt={`${partner.name} Logo`}
@@ -76,11 +76,11 @@ const PartnerCard = ({ partner }: { partner: (typeof partnersData)[0] }) => {
               </div>
 
               <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
-                <span className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full">
+                <span className="flex items-center gap-2 bg-muted px-3 py-1.5 rounded-full">
                   <MapPin className="w-4 h-4 text-primary" />
                   {partner.location}
                 </span>
-                <span className="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-full">
+                <span className="flex items-center gap-2 bg-muted px-3 py-1.5 rounded-full">
                   <Calendar className="w-4 h-4 text-primary" />
                   Est. {partner.established}
                 </span>
@@ -164,7 +164,7 @@ export default function PartnersPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background text-foreground">
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-20 left-10 w-72 h-72 bg-accent/5 rounded-full blur-3xl animate-pulse" />
         <div
@@ -178,7 +178,7 @@ export default function PartnersPage() {
       </div>
 
       {/* Hero */}
-      <section className="pt-32 pb-20 px-6 lg:px-8">
+      <section className="pb-20 px-6 lg:px-8">
         <div className="max-w-5xl mx-auto text-center">
           <div className="flex justify-center mb-8">
             <Badge
@@ -204,21 +204,21 @@ export default function PartnersPage() {
       <section className="pb-20 px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="p-8 text-center hover:shadow-xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-white to-gray-50/50 border-0 shadow-lg group">
+            <Card className="bg-card text-card-foreground border border-border shadow-lg p-8 text-center hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
               <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 transition-colors duration-300">
                 <Users className="w-8 h-8 text-primary" />
               </div>
               <h3 className="font-display font-bold text-3xl mb-3 text-foreground">1+</h3>
               <p className="text-muted-foreground text-lg">Active Partners</p>
             </Card>
-            <Card className="p-8 text-center hover:shadow-xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-white to-gray-50/50 border-0 shadow-lg group">
+            <Card className="bg-card text-card-foreground border border-border shadow-lg p-8 text-center hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
               <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-accent/20 transition-colors duration-300">
                 <Handshake className="w-8 h-8 text-accent" />
               </div>
               <h3 className="font-display font-bold text-3xl mb-3 text-foreground">Growing</h3>
               <p className="text-muted-foreground text-lg">Network</p>
             </Card>
-            <Card className="p-8 text-center hover:shadow-xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-white to-gray-50/50 border-0 shadow-lg group">
+            <Card className="bg-card text-card-foreground border border-border shadow-lg p-8 text-center hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
               <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 transition-colors duration-300">
                 <Globe className="w-8 h-8 text-primary" />
               </div>
@@ -235,8 +235,8 @@ export default function PartnersPage() {
           {partnersData.length > 0 ? (
             partnersData.map((partner) => <PartnerCard key={partner.id} partner={partner} />)
           ) : (
-            <Card className="p-16 text-center bg-gradient-to-br from-white to-gray-50/50 border-0 shadow-lg">
-              <div className="w-20 h-20 bg-muted/30 rounded-2xl flex items-center justify-center mx-auto mb-8">
+            <Card className="bg-card text-card-foreground border border-border shadow-lg p-16 text-center">
+              <div className="w-20 h-20 bg-muted rounded-2xl flex items-center justify-center mx-auto mb-8">
                 <Users className="w-10 h-10 text-muted-foreground" />
               </div>
               <h3 className="font-display font-bold text-2xl mb-6 text-foreground">Building Our Network</h3>
@@ -252,8 +252,7 @@ export default function PartnersPage() {
       {/* Partnership Inquiry */}
       <section className="pb-24 px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
-          <Card className="p-10 md:p-16 bg-gradient-to-br from-white via-gray-50/50 to-white border-0 shadow-2xl relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-primary/5" />
+          <Card className="bg-card text-card-foreground border border-border shadow-2xl p-10 md:p-16 relative">
             <div className="relative">
               <div className="text-center mb-12">
                 <h2 className="font-display font-bold text-4xl mb-6 text-foreground">Become a Partner</h2>
@@ -274,7 +273,7 @@ export default function PartnersPage() {
                       value={partnershipForm.name}
                       onChange={(e) => handleInputChange("name", e.target.value)}
                       required
-                      className="h-14 text-base rounded-2xl border-gray-200 focus:border-primary focus:ring-primary/20"
+                      className="h-14 text-base rounded-2xl border-border focus:border-primary focus:ring-primary/20"
                     />
                   </div>
                   <div>
@@ -287,7 +286,7 @@ export default function PartnersPage() {
                       value={partnershipForm.organization}
                       onChange={(e) => handleInputChange("organization", e.target.value)}
                       required
-                      className="h-14 text-base rounded-2xl border-gray-200 focus:border-primary focus:ring-primary/20"
+                      className="h-14 text-base rounded-2xl border-border focus:border-primary focus:ring-primary/20"
                     />
                   </div>
                 </div>
@@ -295,28 +294,28 @@ export default function PartnersPage() {
                   <label htmlFor="email" className="block text-sm font-semibold mb-3 text-foreground">
                     Email Address *
                   </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="your.email@organization.com"
-                    value={partnershipForm.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
-                    required
-                    className="h-14 text-base rounded-2xl border-gray-200 focus:border-primary focus:ring-primary/20"
-                  />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="your.email@organization.com"
+                  value={partnershipForm.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  required
+                  className="h-14 text-base rounded-2xl border-border focus:border-primary focus:ring-primary/20"
+                />
                 </div>
                 <div>
                   <label htmlFor="message" className="block text-sm font-semibold mb-3 text-foreground">
                     Partnership Proposal *
                   </label>
-                  <Textarea
-                    id="message"
-                    placeholder="Tell us about your organization and how you'd like to partner with us..."
-                    value={partnershipForm.message}
-                    onChange={(e) => handleInputChange("message", e.target.value)}
-                    required
-                    className="min-h-40 text-base rounded-2xl border-gray-200 focus:border-primary focus:ring-primary/20 resize-none"
-                  />
+                <Textarea
+                  id="message"
+                  placeholder="Tell us about your organization and how you'd like to partner with us..."
+                  value={partnershipForm.message}
+                  onChange={(e) => handleInputChange("message", e.target.value)}
+                  required
+                  className="min-h-40 text-base rounded-2xl border-border focus:border-primary focus:ring-primary/20 resize-none"
+                />
                 </div>
                 <Button
                   type="submit"

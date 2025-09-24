@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,32 +10,61 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { Mail, Clock, Send, MessageCircle, Sparkles } from "lucide-react";
+import { contactSchema, type ContactSchema } from "@/api/schema/contact";
+import { toast } from "sonner";
 
 export default function ContactPage() {
   const navItems = ["Features", "Partners", "Contact"]; // for footer links
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-    subscribe: false,
-    inquiryType: "general",
+  const form = useForm<ContactSchema>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+      subscribe: false,
+      inquiryType: "general",
+    },
+    mode: "onChange",
   });
 
-  const handleInputChange = (field: string, value: string | boolean) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    const parsed = contactSchema.safeParse(form.getValues());
+    if (!parsed.success) {
+      parsed.error.issues.forEach((issue) => {
+        if (issue.path.length) {
+          const field = issue.path[0] as keyof ContactSchema;
+          form.setError(field, { type: "manual", message: issue.message });
+        }
+      });
+      toast.error("Please fix the errors", { description: "Check the highlighted fields and try again." });
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(parsed.data),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.success) throw new Error(json.message || "Failed");
+      toast.success("Message sent", { description: "We’ll get back to you shortly." });
+      form.reset();
+    } catch (e: any) {
+      toast.error("Could not send message", { description: e.message ?? "Please try again later." });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="pt-24 pb-16 px-6 lg:px-8">
+      <section className="pb-16 px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <div className="flex justify-center mb-6">
             <Badge
@@ -58,7 +89,7 @@ export default function ContactPage() {
       <section className="pb-16 px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-6 mb-16">
-            <Card className="p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+            <Card className="bg-card text-card-foreground p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Mail className="w-6 h-6 text-accent" />
               </div>
@@ -69,7 +100,7 @@ export default function ContactPage() {
               </a>
             </Card>
 
-            <Card className="p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+            <Card className="bg-card text-card-foreground p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <MessageCircle className="w-6 h-6 text-primary" />
               </div>
@@ -80,7 +111,7 @@ export default function ContactPage() {
               </Button>
             </Card>
 
-            <Card className="p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+            <Card className="bg-card text-card-foreground p-6 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Clock className="w-6 h-6 text-accent" />
               </div>
@@ -95,24 +126,24 @@ export default function ContactPage() {
       {/* Contact Form */}
       <section className="pb-20 px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <Card className="p-8 md:p-12 bg-gradient-to-br from-card to-card/50 border-border/50 shadow-xl">
+          <Card className="bg-card text-card-foreground p-8 md:p-12 border border-border/60 shadow-xl">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Inquiry Type Selection */}
               <div>
                 <label className="block text-sm font-medium mb-3">What can we help you with?</label>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {[
+                  {([
                     { value: "general", label: "General" },
                     { value: "support", label: "Support" },
                     { value: "partnership", label: "Partnership" },
                     { value: "demo", label: "Demo Request" },
-                  ].map((type) => (
+                  ] as Array<{ value: ContactSchema["inquiryType"]; label: string }>).map((type) => (
                     <Button
                       key={type.value}
                       type="button"
-                      variant={formData.inquiryType === type.value ? "default" : "outline"}
+                      variant={form.watch("inquiryType") === type.value ? "default" : "outline"}
                       size="sm"
-                      onClick={() => handleInputChange("inquiryType", type.value)}
+                      onClick={() => form.setValue("inquiryType", type.value)}
                       className="justify-center"
                     >
                       {type.label}
@@ -130,8 +161,7 @@ export default function ContactPage() {
                   <Input
                     id="name"
                     placeholder="Your full name"
-                    value={formData.name}
-                    onChange={(e) => handleInputChange("name", e.target.value)}
+                    {...form.register("name")}
                     required
                     className="h-12"
                   />
@@ -144,8 +174,7 @@ export default function ContactPage() {
                     id="email"
                     type="email"
                     placeholder="your.email@example.com"
-                    value={formData.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    {...form.register("email")}
                     required
                     className="h-12"
                   />
@@ -159,8 +188,7 @@ export default function ContactPage() {
                 <Input
                   id="subject"
                   placeholder="Brief description of your inquiry"
-                  value={formData.subject}
-                  onChange={(e) => handleInputChange("subject", e.target.value)}
+                  {...form.register("subject")}
                   required
                   className="h-12"
                 />
@@ -173,19 +201,18 @@ export default function ContactPage() {
                 <Textarea
                   id="message"
                   placeholder="Please provide details about your inquiry..."
-                  value={formData.message}
-                  onChange={(e) => handleInputChange("message", e.target.value)}
+                  {...form.register("message")}
                   required
                   className="min-h-32 resize-none"
                 />
               </div>
 
               {/* Newsletter Subscription */}
-              <div className="flex items-start space-x-3 p-4 bg-muted/30 rounded-lg">
+              <div className="flex items-start space-x-3 p-4 bg-muted rounded-lg">
                 <Checkbox
                   id="subscribe"
-                  checked={formData.subscribe}
-                  onCheckedChange={(checked) => handleInputChange("subscribe", checked as boolean)}
+                  checked={form.watch("subscribe")}
+                  onCheckedChange={(checked) => form.setValue("subscribe", Boolean(checked))}
                   className="mt-1"
                 />
                 <div>
@@ -202,10 +229,11 @@ export default function ContactPage() {
               {/* Submit Button */}
               <Button
                 type="submit"
+                disabled={isSubmitting || !form.formState.isValid}
                 className="w-full bg-primary hover:bg-primary/90 text-lg py-6 font-semibold transition-all duration-300 hover:shadow-lg"
               >
                 <Send className="w-5 h-5 mr-2" />
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </Card>

@@ -42,7 +42,6 @@ const Header: React.FC<HeaderProps> = ({
     href: string
   ) => {
     if (!href.startsWith("/#")) return;
-    // Only intercept for smooth scroll when already on home page
     if (pathname === "/") {
       e.preventDefault();
       const element = document.querySelector(href.substring(1));
@@ -79,7 +78,7 @@ const Header: React.FC<HeaderProps> = ({
           className={`transition-all duration-300 ${
             isScrolled
               ? "floating-nav"
-              : "mx-4 rounded-3xl border border-gray-100 bg-white/90 backdrop-blur-sm shadow"
+              : "mx-4 rounded-3xl border border-border bg-card/80 backdrop-blur-md shadow"
           }`}
         >
           <div
@@ -130,7 +129,7 @@ const Header: React.FC<HeaderProps> = ({
                   <Button
                     variant="outline"
                     size="sm"
-                    className="text-foreground hover:text-accent hover:bg-accent/10 rounded-full transition-colors duration-200 border-gray-300"
+                    className="text-foreground hover:text-accent hover:bg-accent/10 rounded-full transition-colors duration-200 border-border"
                   >
                     Login
                   </Button>
@@ -149,7 +148,7 @@ const Header: React.FC<HeaderProps> = ({
 
               <button
                 onClick={toggleMenu}
-                className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -167,7 +166,7 @@ const Header: React.FC<HeaderProps> = ({
               transition={{ duration: 0.15 }}
            >
               <motion.div
-                className="bg-white mx-4 mt-2 rounded-2xl shadow-xl border border-gray-200 p-6"
+            className="bg-card text-card-foreground mx-4 mt-2 rounded-2xl shadow-xl border border-border p-6"
                 initial={{ y: -8, opacity: 0, scale: 0.98 }}
                 animate={{ y: 0, opacity: 1, scale: 1 }}
                 exit={{ y: -6, opacity: 0, scale: 0.98 }}
@@ -177,14 +176,14 @@ const Header: React.FC<HeaderProps> = ({
                   {navItems.map((item) => (
                   <Link
                       key={item}
-                      href={
+                    href={
                       item.toLowerCase() === "partners"
                         ? "/partners"
                         : item.toLowerCase() === "contact"
                         ? "/contact"
                         : `/#${item.toLowerCase().replace(/\\s+/g, "-")}`
                       }
-                      className="text-lg text-gray-700 hover:text-accent transition-colors py-2"
+                    className="text-lg text-foreground hover:text-accent transition-colors py-2"
                       onClick={(e) => {
                         toggleMenu();
                         handleNavClick(
@@ -200,7 +199,7 @@ const Header: React.FC<HeaderProps> = ({
                       {item}
                     </Link>
                   ))}
-                  <div className="mt-4 pt-4 border-t border-gray-200">
+                  <div className="mt-4 pt-4 border-t border-border">
                     <Link href="/contact" passHref>
                       <Button
                         size="lg"
@@ -216,9 +215,9 @@ const Header: React.FC<HeaderProps> = ({
                     </Link>
                     <Link href="/login" passHref>
                       <Button
-                        variant="outline"
-                        size="lg"
-                        className="w-full text-gray-700 hover:text-accent hover:bg-accent/10 rounded-full mt-2 transition-colors duration-200 border-gray-300"
+                      variant="outline"
+                      size="lg"
+                      className="w-full text-foreground hover:text-accent hover:bg-accent/10 rounded-full mt-2 transition-colors duration-200 border-border"
                         onClick={() => toggleMenu()}
                       >
                         Login
