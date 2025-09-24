@@ -319,10 +319,10 @@ export default function PartnersPage() {
                 </div>
                 <Button
                   type="submit"
-                  className="w-full bg-primary hover:bg-primary/90 text-lg py-7 font-semibold transition-all duration-300 hover:shadow-xl hover:scale-[1.02] rounded-2xl"
+                  className="w-full bg-primary hover:bg-primary/90 text-lg py-5 md:py-6 font-semibold transition-all duration-300 hover:shadow-xl md:hover:scale-[1.02] rounded-2xl flex items-center justify-center gap-2"
                 >
-                  <Mail className="w-6 h-6 mr-3" />
-                  Submit Partnership Inquiry
+                  <Mail className="w-5 h-5" />
+                  <span>Submit Partnership Inquiry</span>
                 </Button>
               </form>
             </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -141,32 +142,39 @@ export function HeroSection() {
                 isVisible ? "animate-slide-in-up animate-delay-300" : "opacity-0"
               }`}
             >
-              <Button
-                size="lg"
-                className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-4 text-lg font-semibold animate-glow group relative overflow-hidden"
-                onMouseEnter={() => setHoveredElement("cta")}
-                onMouseLeave={() => setHoveredElement(null)}
-              >
-                <span className="relative z-10">Get Started Free</span>
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform relative z-10" />
-                {hoveredElement === "cta" && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-primary/20 animate-pulse" />
-                )}
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="px-8 py-4 text-lg font-semibold group bg-transparent hover:bg-accent/5 relative overflow-hidden"
-                onMouseEnter={() => setHoveredElement("demo")}
-                onMouseLeave={() => setHoveredElement(null)}
-              >
-                <Play
-                  className={`mr-2 h-5 w-5 transition-transform ${
-                    hoveredElement === "demo" ? "scale-110 animate-pulse" : ""
-                  }`}
-                />
-                <span>Watch Demo</span>
-              </Button>
+              <Link href="/login" passHref legacyBehavior>
+                <Button
+                  size="lg"
+                  className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-4 text-lg font-semibold animate-glow group relative overflow-hidden"
+                  onMouseEnter={() => setHoveredElement("cta")}
+                  onMouseLeave={() => setHoveredElement(null)}
+                >
+                  <span className="relative z-10">Get Started</span>
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform relative z-10" />
+                  {hoveredElement === "cta" && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-primary/20 animate-pulse" />
+                  )}
+                </Button>
+              </Link>
+              <Link href="/login" passHref legacyBehavior>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="px-8 py-4 text-lg font-semibold group bg-transparent hover:bg-accent/5 relative overflow-hidden"
+                  onMouseEnter={() => setHoveredElement("demo")}
+                  onMouseLeave={() => setHoveredElement(null)}
+                >
+                  <Play
+                    className={`mr-2 h-5 w-5 transition-transform ${
+                      hoveredElement === "demo" ? "scale-110 animate-pulse" : ""
+                    }`}
+                  />
+                  <span className="relative z-10">Watch Demo</span>
+                  {hoveredElement === "demo" && (
+                    <div className="absolute inset-0 bg-accent/10" />
+                  )}
+                </Button>
+              </Link>
             </div>
 
             {/* <div className={`grid grid-cols-3 gap-6 pt-8 ${isVisible ? "animate-slide-in-up animate-delay-400" : "opacity-0"}`}>
