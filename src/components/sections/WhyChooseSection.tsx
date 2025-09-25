@@ -5,21 +5,21 @@ export function WhyChooseSection() {
   const whyChooseFeatures = [
     {
       icon: Target,
-      title: "Personalized Learning Paths",
+      title: "Personalized Learning Playbooks",
       description:
-        "Our platform adapts to each student's pace and learning style, ensuring effective and engaging education.",
+        "Every learner receives a tailored path, progress checkpoints, and mentorship moments—all orchestrated from one dashboard.",
     },
     {
       icon: GraduationCap,
-      title: "All-In-One Homeschooling Hub",
+      title: "All-in-One Microschool Hub",
       description:
-        "Manage curriculum, assignments, progress, and communication seamlessly in one intuitive platform.",
+        "Plan curriculum, automate communication, and keep families aligned with real-time insights and beautiful reports.",
     },
     {
       icon: Smile,
-      title: "User-Friendly for the Whole Family",
+      title: "Built for Families, Guides, and Learners",
       description:
-        "Designed for ease of use by students, parents, and educators of all technical skill levels.",
+        "From coaches to caregivers, everyone gets a delightfully simple experience that works on every device.",
     },
   ];
 
@@ -29,7 +29,7 @@ export function WhyChooseSection() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="font-display font-bold text-3xl md:text-5xl mb-8 text-balance">
-              Why Choose Us for Your Homeschooling?
+              Why Microschool Builders Choose OurMicroSchool
             </h2>
 
             <div className="space-y-8">

@@ -78,7 +78,7 @@ const Header: React.FC<HeaderProps> = ({
           className={`transition-all duration-300 ${
             isScrolled
               ? "floating-nav"
-              : "mx-4 rounded-3xl border border-border bg-card/80 backdrop-blur-md shadow"
+              : "mx-4 rounded-2xl border border-border bg-card/80 backdrop-blur-md shadow"
           }`}
         >
           <div
@@ -89,11 +89,19 @@ const Header: React.FC<HeaderProps> = ({
             <div className="flex items-center justify-between">
               <Link href="/" className="flex items-center space-x-2">
                 <Image
+                  src="/logos/OMS_LogoDesign_01-09.png"
+                  alt="OurMicroSchool logo"
+                  width={160}
+                  height={48}
+                  className="block md:hidden h-auto w-28"
+                  priority
+                />
+                <Image
                   src="/logos/OMS_LogoDesign_01-08.png"
-                  alt="OMS logo"
-                  width={72}
+                  alt="OurMicroSchool logo with wordmark"
+                  width={224}
                   height={72}
-                  className="h-18 w-18"
+                  className="hidden md:block h-auto w-24"
                   priority
                 />
               </Link>

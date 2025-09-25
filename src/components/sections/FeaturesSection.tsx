@@ -15,55 +15,55 @@ export function FeaturesSection() {
   const studentFeatures = [
     {
       icon: BookOpen,
-      title: "Interactive Learning Modules",
-      description: "Multi-modal content to suit diverse learning preferences",
+      title: "Immersive Learning Modules",
+      description: "Studio-style projects, seminars, and badges that spark curiosity every week.",
     },
     {
       icon: BarChart3,
       title: "Personalized Progress Dashboards",
-      description: "Track your achievements and learning milestones",
+      description: "Celebrate wins with insights that actually make sense to learners and families.",
     },
     {
       icon: Target,
       title: "Adaptive Skill Building",
-      description: "Practice and assessments that match your pace",
+      description: "Target the next best action for every learner with evidence-backed recommendations.",
     },
   ];
 
   const educatorFeatures = [
     {
       icon: Calendar,
-      title: "Flexible Curriculum Planner",
-      description: "Design, assign, and manage learning paths with ease",
+      title: "Cadence Planning",
+      description: "Run your entire term—sprints, studios, expeditions—without spreadsheets.",
     },
     {
       icon: CheckCircle,
-      title: "Automated Grading & Feedback",
-      description: "Streamline assessments and provide timely input",
+      title: "Feedback Loops",
+      description: "Automate formative feedback and reflection prompts that keep momentum high.",
     },
     {
       icon: Users,
-      title: "Class & Assignment Scheduling",
-      description: "Organize group lessons and track student submissions",
+      title: "Community Coordination",
+      description: "Sync caregivers, guides, and specialists with shared calendars and nudges.",
     },
   ];
 
   const parentFeatures = [
     {
       icon: BarChart3,
-      title: "Comprehensive Progress Reports",
-      description: "Detailed insights into learning activities and achievements",
+      title: "Living Portfolios",
+      description: "Share beautiful evidence of growth with families and advisory boards.",
     },
     {
       icon: Bell,
-      title: "Timely Notifications & Alerts",
+      title: "Moments That Matter",
       description:
-        "Stay updated on assignments, progress, and important announcements",
+        "Automated nudges and celebrations that keep every stakeholder engaged.",
     },
     {
       icon: MessageSquare,
-      title: "Secure Communication Tools",
-      description: "Direct messaging with educators and co-op members",
+      title: "Secure Communication",
+      description: "Replace the text threads with AI-assisted updates that keep everyone aligned.",
     },
   ];
 
@@ -72,10 +72,10 @@ export function FeaturesSection() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="font-display font-bold text-3xl md:text-5xl mb-6 text-balance">
-            Built for Every Learning Journey
+            Build, run, and grow your microschool in one OS
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Our platform adapts to the unique needs of students, teachers, and parents
+            OurMicroSchool adapts to each role—learners, guides, and families—so your community can focus on what matters most.
           </p>
         </div>
 

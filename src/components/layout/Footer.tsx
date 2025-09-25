@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import React, { useState } from "react";
 import {
   Twitter,
   Instagram,
@@ -9,7 +10,9 @@ import {
   MapPin,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import React from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 interface FooterProps {
   navItems: string[];
@@ -22,6 +25,42 @@ const Footer: React.FC<FooterProps> = ({
   sectionAnimation,
   handleComingSoonClick,
 }) => {
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [isSubscribing, setIsSubscribing] = useState(false);
+
+  const handleNewsletterSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!newsletterEmail) {
+      toast.error("Email required", { description: "Please enter your email to subscribe." });
+      return;
+    }
+
+    try {
+      setIsSubscribing(true);
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: newsletterEmail }),
+      });
+
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Unable to subscribe right now.");
+      }
+
+      toast.success("Thanks for joining!", {
+        description: "We'll send new updates straight to your inbox.",
+      });
+      setNewsletterEmail("");
+    } catch (error: any) {
+      toast.error("Subscription failed", {
+        description: error.message ?? "Please try again later.",
+      });
+    } finally {
+      setIsSubscribing(false);
+    }
+  };
+
   return (
     <motion.footer
       {...sectionAnimation}
@@ -29,20 +68,22 @@ const Footer: React.FC<FooterProps> = ({
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-4 gap-10 mb-10">
-          <div>
-            <div className="mb-4">
+          <div className="space-y-6">
+            <div className="flex items-center space-x-4">
               <Image
-                src="/logos/OMS_LogoDesign_01-09.png"
-                alt="OMS logo with wordmark"
-                width={448}
-                height={112}
-                className="h-28 w-auto"
+                src="/logos/OMS_LogoDesign_01-08.png"
+                alt="OurMicroSchool logo"
+                width={96}
+                height={96}
+                className="h-20 w-20"
                 priority
               />
+              <span className="font-display font-bold text-2xl md:text-3xl text-foreground tracking-tight">
+                ourmicroschool
+              </span>
             </div>
-            <p className="text-muted-foreground mb-4">
-              The complete operating system for your family's homeschooling
-              success.
+            <p className="text-muted-foreground">
+              The complete operating system for your family's homeschooling success.
             </p>
             <div className="flex space-x-4">
               <Link
@@ -130,6 +171,27 @@ const Footer: React.FC<FooterProps> = ({
                 />
                 <span>Incorporated in Virginia, USA</span>
               </div>
+              <form className="space-y-3" onSubmit={handleNewsletterSubmit}>
+                <label className="block text-sm font-semibold text-foreground">
+                  Join our newsletter
+                </label>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <Input
+                    type="email"
+                    placeholder="you@example.com"
+                    value={newsletterEmail}
+                    onChange={(event) => setNewsletterEmail(event.target.value)}
+                    className="sm:flex-1"
+                    required
+                  />
+                  <Button type="submit" disabled={isSubscribing} className="sm:w-auto w-full">
+                    {isSubscribing ? "Joining..." : "Stay Updated"}
+                  </Button>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Product updates, resources, and launch invites. No spam, ever.
+                </p>
+              </form>
             </div>
           </div>
         </div>

@@ -20,47 +20,46 @@ const fredoka = Fredoka({
 });
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://ourmicroschool.com"; // Using a more realistic placeholder
+  process.env.NEXT_PUBLIC_SITE_URL || "https://ourmicroschool.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "OMS - Homeschool OSS",
-    template: "%s | OMS - Homeschool OSS",
+    default: "OurMicroSchool — The Operating System for Personalized Learning",
+    template: "%s | OurMicroSchool",
   },
   description:
-    "Discover OMS - Homeschool OSS: the all-in-one homeschooling software designed to streamline curriculum planning, track student progress, and foster collaboration. Personalized learning, simplified.",
+    "OurMicroSchool is the operating system built for microschools, co-ops, and homeschooling families. Plan curriculum, collaborate, and track every learner’s growth in one beautiful platform.",
   keywords: [
-    "homeschooling",
-    "oss",
-    "open source homeschooling software",
-    "education software",
-    "personalized learning",
+    "microschool platform",
+    "homeschool software",
+    "learning operating system",
+    "personalized education",
+    "OurMicroSchool",
     "curriculum planning",
+    "family learning hub",
+    "homeschool co-op tools",
     "student progress tracking",
-    "online learning platform",
-    "K-12 education",
-    "microschool",
-    "homeschool co-op",
-    "homeschooling resources",
+    "modern homeschooling",
   ],
   authors: [{ name: "YOLET Labs", url: "https://yoletent.com" }],
-  creator: "YOLET Labs",
-  publisher: "OMS - Homeschooling OSS",
-
+  creator: "OurMicroSchool",
+  publisher: "OurMicroSchool",
+  alternates: {
+    canonical: siteUrl,
+  },
   openGraph: {
-    title:
-      "OMS - Homeschooling OSS | The Operating System for Your Homeschooling Hub",
+    title: "OurMicroSchool — The OS for Every Learning Journey",
     description:
-      "Simplify your homeschooling journey with OMS - Homeschooling OSS. Connect parents, teachers, and students on one powerful platform.",
-    url: siteUrl, // Using the defined siteUrl
-    siteName: "OMS - Homeschooling OSS",
+      "Design beautiful learning journeys, manage microschool operations, and empower families with OurMicroSchool.",
+    url: siteUrl,
+    siteName: "OurMicroSchool",
     images: [
       {
-        url: `/og-image.png`, // Relative path, metadataBase will prepend the siteUrl
+        url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "OMS - Homeschooling OSS Platform Preview",
+        alt: "OurMicroSchool hero showcasing collaborative learning",
       },
     ],
     locale: "en_US",
@@ -68,11 +67,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "OMS - Homeschooling OSS | Revolutionizing Homeschooling",
+    title: "OurMicroSchool",
     description:
-      "Personalized learning, curriculum tools, and progress tracking. Discover the future of homeschooling with OMS - Homeschooling OSS.",
+      "Manage curriculum, track growth, and collaborate with your learning community — all inside OurMicroSchool.",
     creator: "@yoletlabs",
-    images: [`/twitter-image.png`], // Relative path
+    images: ["/og.png"],
   },
   robots: {
     index: true,

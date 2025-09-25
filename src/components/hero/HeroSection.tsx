@@ -97,7 +97,7 @@ export function HeroSection() {
             onMouseLeave={() => setHoveredElement(null)}
           >
             <Sparkles className={`w-4 h-4 mr-2 ${hoveredElement === "banner" ? "animate-spin" : ""}`} />
-            Homeschool OSS for families and co-ops
+            The operating system for modern microschools
             <ArrowRight className="w-4 h-4 ml-2" />
           </Badge>
         </div>

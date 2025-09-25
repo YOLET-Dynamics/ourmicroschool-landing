@@ -23,7 +23,7 @@ export default function CSRPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <main className="pt-32 pb-24">
+      <main className="pb-24">
         {/* Hero Section */}
         <motion.section
           {...sectionAnimation}
