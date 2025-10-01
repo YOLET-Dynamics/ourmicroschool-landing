@@ -16,7 +16,6 @@ export const roleDomain: Record<RoleCode, string> = {
     "https://admin.ourmicroschool.com",
 };
 
-/* role precedence when user has >1 role */
 const precedence: RoleCode[] = ["teacher", "student", "parent", "admin", "root-admin"];
 
 export function pickPrimary(roles: string[]): RoleCode {

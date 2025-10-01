@@ -3,14 +3,14 @@ import type { Metadata } from "next";
 const canonicalUrl = "https://ourmicroschool.com/login";
 
 export const metadata: Metadata = {
-  title: "Login | OurMicroSchool",
+  title: "Login",
   description:
     "Sign in to OurMicroSchool to manage curriculum, track progress, and collaborate with your microschool community.",
   alternates: {
     canonical: canonicalUrl,
   },
   openGraph: {
-    title: "Sign in to OurMicroSchool",
+    title: "Sign in",
     description:
       "Access your OurMicroSchool dashboard to manage personalized learning journeys for families and co-ops.",
     url: canonicalUrl,
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Login | OurMicroSchool",
+    title: "Login",
     description: "Manage your microschool experience by logging in to OurMicroSchool.",
   },
 };

@@ -3,14 +3,14 @@ import type { Metadata } from "next";
 const canonicalUrl = "https://ourmicroschool.com/contact";
 
 export const metadata: Metadata = {
-  title: "Contact OurMicroSchool",
+  title: "Contact",
   description:
     "Get in touch with the OurMicroSchool team for support, partnerships, and product inquiries. We're here to help you craft exceptional learning journeys.",
   alternates: {
     canonical: canonicalUrl,
   },
   openGraph: {
-    title: "Contact OurMicroSchool",
+    title: "Contact",
     description:
       "Reach the OurMicroSchool team for support and partnership opportunities. We respond within 24 hours.",
     url: canonicalUrl,
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact OurMicroSchool",
+    title: "Contact",
     description: "Connect with the OurMicroSchool support and partnerships team.",
     images: ["https://ourmicroschool.com/og.png"],
   },
