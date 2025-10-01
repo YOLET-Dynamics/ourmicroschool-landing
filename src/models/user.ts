@@ -4,15 +4,23 @@ export interface Role {
   code: string;
 }
 
+export interface Organization {
+  id: string;
+  name: string;
+  parent_id?: string | null;
+}
+
 export interface User {
   id: string;
   first_name: string;
   last_name: string;
   display_name: string;
-  email: string | null;
-  phone: string | null;
+  organization_id: string;
+  email?: string | null;
+  phone?: string | null;
   active: boolean;
   roles: Role[];
-  created_at: Date;
-  updated_at: Date;
+  organizations?: Organization[];
+  created_at: string;
+  updated_at: string;
 }
