@@ -11,7 +11,6 @@ import {
   Heart,
   Shield,
   Sparkles,
-  Play,
   ArrowRight,
   CheckCircle,
   Clock,
@@ -79,7 +78,12 @@ export function HeroSection() {
   ];
 
   const floatingElements = [
-    { icon: Lightbulb, delay: 0, size: "w-12 h-12", position: "top-10 right-20" },
+    {
+      icon: Lightbulb,
+      delay: 0,
+      size: "w-12 h-12",
+      position: "top-10 right-20",
+    },
     { icon: Rocket, delay: 1, size: "w-10 h-10", position: "top-32 right-8" },
     { icon: Globe, delay: 2, size: "w-8 h-8", position: "top-48 right-32" },
     { icon: Brain, delay: 0.5, size: "w-14 h-14", position: "top-64 right-12" },
@@ -89,14 +93,22 @@ export function HeroSection() {
   return (
     <section className="pb-12 px-6 lg:px-8 relative">
       <div className="max-w-7xl mx-auto">
-        <div className={`flex justify-center mb-12 ${isVisible ? "animate-slide-in-up" : "opacity-0"}`}>
+        <div
+          className={`flex justify-center mb-12 ${
+            isVisible ? "animate-slide-in-up" : "opacity-0"
+          }`}
+        >
           <Badge
             variant="secondary"
             className="px-4 py-2 text-sm font-medium bg-accent/10 text-accent border-accent/20 hover:bg-accent/20 transition-colors animate-pulse-glow cursor-pointer"
             onMouseEnter={() => setHoveredElement("banner")}
             onMouseLeave={() => setHoveredElement(null)}
           >
-            <Sparkles className={`w-4 h-4 mr-2 ${hoveredElement === "banner" ? "animate-spin" : ""}`} />
+            <Sparkles
+              className={`w-4 h-4 mr-2 ${
+                hoveredElement === "banner" ? "animate-spin" : ""
+              }`}
+            />
             The operating system for modern microschools
             <ArrowRight className="w-4 h-4 ml-2" />
           </Badge>
@@ -107,7 +119,9 @@ export function HeroSection() {
             <div>
               <h1
                 className={`font-display font-bold text-4xl md:text-6xl lg:text-7xl leading-tight mb-6 text-balance ${
-                  isVisible ? "animate-slide-in-up animate-delay-100" : "opacity-0"
+                  isVisible
+                    ? "animate-slide-in-up animate-delay-100"
+                    : "opacity-0"
                 }`}
               >
                 <span className="text-foreground">Run Your</span>
@@ -117,7 +131,8 @@ export function HeroSection() {
                   onMouseEnter={() => setHoveredElement("title")}
                   onMouseLeave={() => setHoveredElement(null)}
                   style={{
-                    transform: hoveredElement === "title" ? "scale(1.05)" : "scale(1)",
+                    transform:
+                      hoveredElement === "title" ? "scale(1.05)" : "scale(1)",
                     transition: "transform 0.3s ease-out",
                   }}
                 >
@@ -129,17 +144,22 @@ export function HeroSection() {
 
               <p
                 className={`text-lg md:text-xl text-muted-foreground leading-relaxed text-pretty mb-8 ${
-                  isVisible ? "animate-slide-in-up animate-delay-200" : "opacity-0"
+                  isVisible
+                    ? "animate-slide-in-up animate-delay-200"
+                    : "opacity-0"
                 }`}
               >
-                Plan curriculum, manage assignments, and track progress—all in one place. Built for students, parents,
-                and educators who believe in personalized learning.
+                Plan curriculum, manage assignments, and track progress—all in
+                one place. Built for students, parents, and educators who
+                believe in personalized learning.
               </p>
             </div>
 
             <div
               className={`flex flex-col sm:flex-row gap-4 ${
-                isVisible ? "animate-slide-in-up animate-delay-300" : "opacity-0"
+                isVisible
+                  ? "animate-slide-in-up animate-delay-300"
+                  : "opacity-0"
               }`}
             >
               <Link href="/login" passHref legacyBehavior>
@@ -156,53 +176,14 @@ export function HeroSection() {
                   )}
                 </Button>
               </Link>
-              <Link href="/login" passHref legacyBehavior>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="px-8 py-4 text-lg font-semibold group bg-transparent hover:bg-accent/5 relative overflow-hidden"
-                  onMouseEnter={() => setHoveredElement("demo")}
-                  onMouseLeave={() => setHoveredElement(null)}
-                >
-                  <Play
-                    className={`mr-2 h-5 w-5 transition-transform ${
-                      hoveredElement === "demo" ? "scale-110 animate-pulse" : ""
-                    }`}
-                  />
-                  <span className="relative z-10">Watch Demo</span>
-                  {hoveredElement === "demo" && (
-                    <div className="absolute inset-0 bg-accent/10" />
-                  )}
-                </Button>
-              </Link>
             </div>
-
-            {/* <div className={`grid grid-cols-3 gap-6 pt-8 ${isVisible ? "animate-slide-in-up animate-delay-400" : "opacity-0"}`}>
-              {[
-                { value: "10K+", label: "Students", color: "accent" },
-                { value: "500+", label: "Schools", color: "primary" },
-                { value: "98%", label: "Satisfaction", color: "accent" },
-              ].map((stat, index) => (
-                <div
-                  key={index}
-                  className="text-center cursor-pointer group"
-                  onMouseEnter={() => setHoveredElement(`stat-${index}`)}
-                  onMouseLeave={() => setHoveredElement(null)}
-                >
-                  <div
-                    className={`text-2xl font-bold mb-1 transition-all duration-300 ${
-                      stat.color === "accent" ? "text-accent" : "text-primary"
-                    } ${hoveredElement === `stat-${index}` ? "scale-110 animate-pulse" : ""}`}
-                  >
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
-                </div>
-              ))}
-            </div> */}
           </div>
 
-          <div className={`relative ${isVisible ? "animate-scale-in animate-delay-300" : "opacity-0"}`}>
+          <div
+            className={`relative ${
+              isVisible ? "animate-scale-in animate-delay-300" : "opacity-0"
+            }`}
+          >
             <div className="relative space-y-4">
               {features.map((feature, index) => {
                 const Icon = feature.icon as any;
@@ -214,13 +195,17 @@ export function HeroSection() {
                       isActive
                         ? "scale-105 shadow-2xl shadow-accent/20 border-accent/30 bg-gradient-to-br from-card to-accent/5"
                         : "scale-95 opacity-70 hover:opacity-90 hover:scale-100"
-                    } ${index === 1 ? "ml-8" : ""} ${index === 2 ? "ml-4" : ""}`}
+                    } ${index === 1 ? "ml-8" : ""} ${
+                      index === 2 ? "ml-4" : ""
+                    }`}
                     style={{ animationDelay: `${index * 0.2}s` }}
                     onMouseEnter={() => setHoveredElement(`card-${index}`)}
                     onMouseLeave={() => setHoveredElement(null)}
                   >
                     <div
-                      className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 transition-opacity duration-300 ${
+                      className={`absolute inset-0 bg-gradient-to-br ${
+                        feature.gradient
+                      } opacity-0 transition-opacity duration-300 ${
                         hoveredElement === `card-${index}` ? "opacity-100" : ""
                       }`}
                     />
@@ -229,12 +214,20 @@ export function HeroSection() {
                       <div className="flex items-start justify-between mb-4">
                         <div
                           className={`p-3 rounded-xl transition-all duration-300 ${
-                            feature.color === "accent" ? "bg-accent/10" : "bg-primary/10"
-                          } ${isActive || hoveredElement === `card-${index}` ? "scale-110 rotate-3" : ""}`}
+                            feature.color === "accent"
+                              ? "bg-accent/10"
+                              : "bg-primary/10"
+                          } ${
+                            isActive || hoveredElement === `card-${index}`
+                              ? "scale-110 rotate-3"
+                              : ""
+                          }`}
                         >
                           <Icon
                             className={`h-6 w-6 ${
-                              feature.color === "accent" ? "text-accent" : "text-primary"
+                              feature.color === "accent"
+                                ? "text-accent"
+                                : "text-primary"
                             } ${isActive ? "animate-pulse" : ""}`}
                           />
                         </div>
@@ -247,8 +240,12 @@ export function HeroSection() {
                           {feature.stats}
                         </Badge>
                       </div>
-                      <h3 className="font-display font-semibold text-lg mb-2">{feature.title}</h3>
-                      <p className="text-muted-foreground text-sm">{feature.description}</p>
+                      <h3 className="font-display font-semibold text-lg mb-2">
+                        {feature.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm">
+                        {feature.description}
+                      </p>
 
                       {null}
                     </div>
@@ -265,9 +262,9 @@ export function HeroSection() {
                   className={`absolute ${element.position} ${element.size} bg-accent/10 rounded-full flex items-center justify-center animate-float cursor-pointer group border border-accent/20 shadow-sm backdrop-blur-sm`}
                   style={{
                     animationDelay: `${element.delay}s`,
-                    transform: `translate(${mousePosition.x * (index + 1) * 2}px, ${
-                      mousePosition.y * (index + 1) * 2
-                    }px)`,
+                    transform: `translate(${
+                      mousePosition.x * (index + 1) * 2
+                    }px, ${mousePosition.y * (index + 1) * 2}px)`,
                     transition: "transform 0.3s ease-out",
                   }}
                   onMouseEnter={() => setHoveredElement(`float-${index}`)}
@@ -275,7 +272,9 @@ export function HeroSection() {
                 >
                   <Icon
                     className={`text-accent h-5 w-5 md:h-6 md:w-6 transition-all duration-300 ${
-                      hoveredElement === `float-${index}` ? "scale-125 animate-spin" : ""
+                      hoveredElement === `float-${index}`
+                        ? "scale-125 animate-spin"
+                        : ""
                     }`}
                   />
                 </div>
@@ -284,9 +283,23 @@ export function HeroSection() {
 
             <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
               <defs>
-                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="rgb(242, 106, 96)" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="rgb(21, 107, 115)" stopOpacity="0.3" />
+                <linearGradient
+                  id="lineGradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop
+                    offset="0%"
+                    stopColor="rgb(242, 106, 96)"
+                    stopOpacity="0.3"
+                  />
+                  <stop
+                    offset="100%"
+                    stopColor="rgb(21, 107, 115)"
+                    stopOpacity="0.3"
+                  />
                 </linearGradient>
               </defs>
               <path
@@ -297,17 +310,32 @@ export function HeroSection() {
                 className="animate-pulse"
                 strokeDasharray="5,5"
               >
-                <animate attributeName="stroke-dashoffset" values="0;10" dur="2s" repeatCount="indefinite" />
+                <animate
+                  attributeName="stroke-dashoffset"
+                  values="0;10"
+                  dur="2s"
+                  repeatCount="indefinite"
+                />
               </path>
             </svg>
 
             <div className="absolute top-1/2 -right-8 w-8 h-8 bg-accent/20 rounded-full animate-pulse" />
-            <div className="absolute top-1/4 -left-8 w-6 h-6 bg-primary/20 rounded-full animate-pulse" style={{ animationDelay: "0.5s" }} />
-            <div className="absolute bottom-1/4 -right-4 w-4 h-4 bg-accent/30 rounded-full animate-pulse" style={{ animationDelay: "1s" }} />
+            <div
+              className="absolute top-1/4 -left-8 w-6 h-6 bg-primary/20 rounded-full animate-pulse"
+              style={{ animationDelay: "0.5s" }}
+            />
+            <div
+              className="absolute bottom-1/4 -right-4 w-4 h-4 bg-accent/30 rounded-full animate-pulse"
+              style={{ animationDelay: "1s" }}
+            />
           </div>
         </div>
 
-        <div className={`text-center mb-16 ${isVisible ? "animate-slide-in-up animate-delay-500" : "opacity-0"}`}>
+        <div
+          className={`text-center mb-16 ${
+            isVisible ? "animate-slide-in-up animate-delay-500" : "opacity-0"
+          }`}
+        >
           <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <CheckCircle className="h-4 w-4 text-primary" />
@@ -327,5 +355,3 @@ export function HeroSection() {
     </section>
   );
 }
-
-

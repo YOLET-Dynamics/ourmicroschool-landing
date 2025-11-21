@@ -31,6 +31,9 @@ import { formatError } from "@/lib/formatError";
 import { useState, useRef } from "react";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 
+const isProdLike =
+  !process.env.NEXT_PUBLIC_ENV || process.env.NEXT_PUBLIC_ENV === "prod";
+
 export default function LoginPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
@@ -41,7 +44,7 @@ export default function LoginPage() {
     defaultValues: {
       identifier: "",
       password: "",
-      captcha: "",
+      captcha: isProdLike ? "" : "",
     },
   });
 
@@ -78,21 +81,6 @@ export default function LoginPage() {
 
   return (
     <main className="min-h-screen flex flex-col">
-      {/* Navigation Bar */}
-      <div className="w-full px-4 sm:px-6 py-4">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Button
-            variant="ghost"
-            onClick={() => router.push("/")}
-            className="text-muted-foreground hover:text-primary hover:bg-primary/10"
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back
-          </Button>
-          <div className="w-16 sm:w-20" />
-        </div>
-      </div>
-
       {/* Login Form */}
       <div className="flex-1 flex items-start justify-center p-4">
         <div className="w-full max-w-md space-y-4 sm:space-y-6">
@@ -111,9 +99,9 @@ export default function LoginPage() {
               <CardTitle className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-center tracking-tight">
                 Welcome Back
               </CardTitle>
-            <CardDescription className="text-center text-muted-foreground text-sm sm:text-base">
-              Enter your credentials to access your account
-            </CardDescription>
+              <CardDescription className="text-center text-muted-foreground text-sm sm:text-base">
+                Enter your credentials to access your account
+              </CardDescription>
             </CardHeader>
             <CardContent className="pb-4 sm:pb-6 px-4 sm:px-6">
               <Form {...form}>
@@ -181,29 +169,33 @@ export default function LoginPage() {
                       </FormItem>
                     )}
                   />
-                  <FormField
-                    control={form.control}
-                    name="captcha"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col items-center pt-2">
-                        <FormControl>
-                          <HCaptcha
-                            sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY!}
-                            onVerify={handleCaptchaVerify}
-                            onExpire={handleCaptchaExpire}
-                            onError={(err) => {
-                              toast.error("Captcha Error", {
-                                description:
-                                  "An issue occurred with the captcha service. Please refresh and try again.",
-                              });
-                            }}
-                            ref={hcaptchaRef}
-                          />
-                        </FormControl>
-                        <FormMessage className="text-xs sm:text-sm" />
-                      </FormItem>
-                    )}
-                  />
+                  {isProdLike && (
+                    <FormField
+                      control={form.control}
+                      name="captcha"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col items-center pt-2">
+                          <FormControl>
+                            <HCaptcha
+                              sitekey={
+                                process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY!
+                              }
+                              onVerify={handleCaptchaVerify}
+                              onExpire={handleCaptchaExpire}
+                              onError={(err) => {
+                                toast.error("Captcha Error", {
+                                  description:
+                                    "An issue occurred with the captcha service. Please refresh and try again.",
+                                });
+                              }}
+                              ref={hcaptchaRef}
+                            />
+                          </FormControl>
+                          <FormMessage className="text-xs sm:text-sm" />
+                        </FormItem>
+                      )}
+                    />
+                  )}
                   <Button
                     type="submit"
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-5 sm:py-6 text-base sm:text-lg font-medium rounded-xl mt-6 transition-all duration-200 hover:shadow"
@@ -215,18 +207,18 @@ export default function LoginPage() {
               </Form>
             </CardContent>
             <CardFooter className="flex flex-col space-y-4 sm:space-y-6 pt-2 pb-6 sm:pb-8 px-4 sm:px-6">
-            <Button
+              <Button
                 variant="link"
-              className="text-accent hover:text-accent/80 font-normal h-auto p-0 text-sm sm:text-base transition-colors"
+                className="text-accent hover:text-accent/80 font-normal h-auto p-0 text-sm sm:text-base transition-colors"
                 onClick={() => router.push("/forgot-password")}
               >
                 Forgot your password?
               </Button>
               <div className="text-xs sm:text-sm text-center text-muted-foreground">
                 Don't have an account?{" "}
-              <Button
+                <Button
                   variant="link"
-                className="text-accent hover:text-accent/80 font-normal h-auto p-0 text-xs sm:text-sm"
+                  className="text-accent hover:text-accent/80 font-normal h-auto p-0 text-xs sm:text-sm"
                   onClick={() => router.push("/contact")}
                 >
                   Contact us to get started

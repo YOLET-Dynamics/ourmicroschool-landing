@@ -5,6 +5,8 @@ const phoneRegex =
 
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
 
+const isProdLike = !process.env.NEXT_PUBLIC_ENV || process.env.NEXT_PUBLIC_ENV === "prod";
+
 export const loginSchema = z.object({
   identifier: z.union([
     z.string().email(),
@@ -17,7 +19,9 @@ export const loginSchema = z.object({
       passwordRegex,
       "Password must contain at least one lowercase letter, one uppercase letter, and one number"
     ),
-  captcha: z.string().min(1, "Captcha is required"),
+  captcha: isProdLike 
+    ? z.string().min(1, "Captcha is required")
+    : z.string().default(""),
 });
 
 export const requestOTPSchema = z.object({
