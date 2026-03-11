@@ -28,6 +28,7 @@ import { authApi } from "@/api/auth";
 import { toast } from "sonner";
 import { loginSchema, LoginSchema as LoginFormValues } from "@/api/schema/auth";
 import { formatError } from "@/lib/formatError";
+import { clearDomainCookiesBeforeLogin } from "@/lib/authCookies";
 import { useState, useRef } from "react";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 
@@ -76,6 +77,7 @@ export default function LoginPage() {
   };
 
   const onSubmit = (data: LoginFormValues) => {
+    clearDomainCookiesBeforeLogin();
     login(data);
   };
 
