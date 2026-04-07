@@ -162,10 +162,13 @@ export function HeroSection() {
                   : "opacity-0"
               }`}
             >
-              <Link href="/login" passHref legacyBehavior>
-                <Button
-                  size="lg"
-                  className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-4 text-lg font-semibold animate-glow group relative overflow-hidden"
+              <Button
+                asChild
+                size="lg"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-4 text-lg font-semibold animate-glow group relative overflow-hidden"
+              >
+                <Link
+                  href="/login"
                   onMouseEnter={() => setHoveredElement("cta")}
                   onMouseLeave={() => setHoveredElement(null)}
                 >
@@ -174,8 +177,8 @@ export function HeroSection() {
                   {hoveredElement === "cta" && (
                     <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-primary/20 animate-pulse" />
                   )}
-                </Button>
-              </Link>
+                </Link>
+              </Button>
             </div>
           </div>
 

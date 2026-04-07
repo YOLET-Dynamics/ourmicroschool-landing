@@ -133,25 +133,26 @@ const Header: React.FC<HeaderProps> = ({
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
                   </Link>
                 ))}
-                <Link href="/login" passHref>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="text-foreground hover:text-accent hover:bg-accent/10 rounded-full transition-colors duration-200 border-border"
-                  >
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="text-foreground hover:text-accent hover:bg-accent/10 rounded-full transition-colors duration-200 border-border"
+                >
+                  <Link href="/login">
                     Login
-                  </Button>
-                </Link>
-                <Link href="/contact" passHref>
-                  <Button
-                    size="sm"
-                    className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-full"
-                    onClick={handleComingSoonClick}
-                  >
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  size="sm"
+                  className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-full"
+                >
+                  <Link href="/contact" onClick={handleComingSoonClick}>
                     Get Started
                     <ArrowRight className="ml-2" size={16} />
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
 
               <button
@@ -208,10 +209,13 @@ const Header: React.FC<HeaderProps> = ({
                     </Link>
                   ))}
                   <div className="mt-4 pt-4 border-t border-border">
-                    <Link href="/contact" passHref>
-                      <Button
-                        size="lg"
-                        className="w-full bg-accent hover:bg-accent/90 text-accent-foreground rounded-full py-3"
+                    <Button
+                      asChild
+                      size="lg"
+                      className="w-full bg-accent hover:bg-accent/90 text-accent-foreground rounded-full py-3"
+                    >
+                      <Link
+                        href="/contact"
                         onClick={() => {
                           handleComingSoonClick();
                           toggleMenu();
@@ -219,18 +223,18 @@ const Header: React.FC<HeaderProps> = ({
                       >
                         Get Started
                         <ArrowRight className="ml-2" size={20} />
-                      </Button>
-                    </Link>
-                    <Link href="/login" passHref>
-                      <Button
+                      </Link>
+                    </Button>
+                    <Button
+                      asChild
                       variant="outline"
                       size="lg"
                       className="w-full text-foreground hover:text-accent hover:bg-accent/10 rounded-full mt-2 transition-colors duration-200 border-border"
-                        onClick={() => toggleMenu()}
-                      >
+                    >
+                      <Link href="/login" onClick={() => toggleMenu()}>
                         Login
-                      </Button>
-                    </Link>
+                      </Link>
+                    </Button>
                   </div>
                 </div>
               </motion.div>
