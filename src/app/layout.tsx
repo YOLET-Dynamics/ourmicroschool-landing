@@ -1,14 +1,16 @@
 import QueryProvider from "@/providers/QueryProvider";
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter, Fredoka } from "next/font/google";
+import { Fredoka } from "next/font/google";
+import localFont from "next/font/local";
 import { Toaster } from "sonner";
 import SiteChrome from "@/components/layout/SiteChrome";
 
-const inter = Inter({
-  subsets: ["latin"],
+const akt = localFont({
+  src: "../../public/fonts/Akt.ttf",
+  variable: "--font-akt",
   display: "swap",
-  variable: "--font-inter",
+  weight: "100 900",
 });
 
 const fredoka = Fredoka({
@@ -99,7 +101,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${fredoka.variable}`}>
+    <html lang="en" className={`${akt.variable} ${fredoka.variable}`}>
       <body>
         <QueryProvider>
           <SiteChrome>{children}</SiteChrome>
