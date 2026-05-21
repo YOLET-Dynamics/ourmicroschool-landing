@@ -1,5 +1,4 @@
 import QueryProvider from "@/providers/QueryProvider";
-import HttpInterceptor from "@/providers/HttpInterceptor";
 import type { Metadata } from "next";
 import "./globals.css";
 import { Inter, Fredoka } from "next/font/google";
@@ -36,15 +35,16 @@ export const metadata: Metadata = {
     "learning operating system",
     "personalized education",
     "OurMicroSchool",
+    "OMS",
     "curriculum planning",
     "family learning hub",
     "homeschool co-op tools",
     "student progress tracking",
     "modern homeschooling",
   ],
-  authors: [{ name: "YOLET Labs", url: "https://yoletent.com" }],
-  creator: "OurMicroSchool",
-  publisher: "OurMicroSchool",
+  authors: [{ name: "SYMVERGE PLATFORMS LLC" }],
+  creator: "SYMVERGE PLATFORMS LLC",
+  publisher: "SYMVERGE PLATFORMS LLC",
   alternates: {
     canonical: siteUrl,
   },
@@ -102,9 +102,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${fredoka.variable}`}>
       <body>
         <QueryProvider>
-          <SiteChrome>
-            <HttpInterceptor>{children}</HttpInterceptor>
-          </SiteChrome>
+          <SiteChrome>{children}</SiteChrome>
           <Toaster richColors position="bottom-right" />
         </QueryProvider>
       </body>

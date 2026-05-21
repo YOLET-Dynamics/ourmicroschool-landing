@@ -1,126 +1,90 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Heart, Sprout, Users, Globe, Sparkles, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { Globe, Heart, Sprout, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { toast } from "sonner";
+import {
+  FeatureCard,
+  GradientText,
+  Section,
+  SectionHeading,
+} from "@/components/layout";
 
-
-const sectionAnimation = {
-  initial: { opacity: 0, y: 50 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.6, ease: "easeInOut" },
-};
+const pillars = [
+  {
+    icon: Heart,
+    title: "Educational access",
+    description: "Breaking down barriers to quality learning for underserved communities.",
+  },
+  {
+    icon: Sprout,
+    title: "Environmental stewardship",
+    description: "Promoting sustainable practices in education and operations.",
+  },
+  {
+    icon: Users,
+    title: "Community engagement",
+    description: "Partnering with local organizations and educational institutions.",
+  },
+  {
+    icon: Globe,
+    title: "Global citizenship",
+    description: "Fostering cultural understanding and global perspectives.",
+  },
+];
 
 export default function CSRPage() {
-  const handleComingSoonClick = () => {
-    toast.info("Coming soon!", {
-      description: "This feature is under development and will be available shortly.",
-    });
-  };
-
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <main className="pb-24">
-        {/* Hero Section */}
-        <motion.section
-          {...sectionAnimation}
-          className="text-center px-6 mb-24"
-        >
-        <div className="max-w-4xl mx-auto">
-            <div className="flex justify-center mb-6">
-              <Badge
-                variant="secondary"
-                className="px-4 py-2 text-sm font-medium bg-accent/10 text-accent border-accent/20 hover:bg-accent/20 transition-colors animate-slide-in-up animate-delay-100"
-              >
-                <Sparkles className="w-4 h-4 mr-2" />
-                Community-driven impact initiatives
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Badge>
-            </div>
-          <h1 className="font-display text-3xl md:text-5xl font-bold text-foreground tracking-tight mb-6">
-            Our Commitment to{" "}
-            <span className="text-accent">Social Impact</span>
-          </h1>
-          <p className="text-xl text-muted-foreground mb-8">
-              Empowering communities through education and fostering a more inclusive future for all learners.
-            </p>
+    <>
+      <Section spacing="tight">
+        <SectionHeading
+          as="h1"
+          eyebrow="Social impact"
+          title={
+            <>
+              Education that{" "}
+              <GradientText>lifts every community.</GradientText>
+            </>
+          }
+          lead="Programs that broaden access to thoughtful, learner-led education for every community."
+        />
+      </Section>
+
+      <Section spacing="tight">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {pillars.map((pillar, i) => (
+            <FeatureCard
+              key={pillar.title}
+              icon={pillar.icon}
+              title={pillar.title}
+              description={pillar.description}
+              tone={i % 2 === 0 ? "accent" : "primary"}
+            />
+          ))}
+        </div>
+      </Section>
+
+      <Section spacing="tight" size="narrow">
+        <div className="rounded-[2rem] border border-border/70 bg-card p-6 sm:p-10 md:p-14 text-center">
+          <SectionHeading
+            eyebrow="Coming soon"
+            title={
+              <>
+                <GradientText>Initiatives</GradientText> in motion.
+              </>
+            }
+            lead="We're shaping programs that broaden access to thoughtful, learner-led education. Stay close."
+          />
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button asChild size="lg" className="h-12 px-7 text-base font-medium">
+              <Link href="/contact">Get notified</Link>
+            </Button>
+            <Button asChild size="lg" variant="ghost" className="h-12 px-7 text-base font-medium">
+              <Link href="/partners">Partner with us</Link>
+            </Button>
           </div>
-        </motion.section>
-
-        {/* Coming Soon Content */}
-        <motion.section
-          {...sectionAnimation}
-          className="px-6"
-        >
-          <div className="max-w-7xl mx-auto">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
-              {[
-                {
-                  icon: Heart,
-                  title: "Educational Access",
-                  description: "Breaking down barriers to quality education for underserved communities"
-                },
-                {
-                  icon: Sprout,
-                  title: "Environmental Impact",
-                  description: "Promoting sustainable practices in education and operations"
-                },
-                {
-                  icon: Users,
-                  title: "Community Engagement",
-                  description: "Building partnerships with local organizations and educational institutions"
-                },
-                {
-                  icon: Globe,
-                  title: "Global Citizenship",
-                  description: "Fostering cultural understanding and global perspectives in education"
-                }
-              ].map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-card text-card-foreground rounded-2xl p-6 text-center border border-border shadow hover:shadow-md transition-all"
-                >
-                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <item.icon className="w-8 h-8 text-accent" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground">{item.description}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="bg-card text-card-foreground rounded-3xl p-10 md:p-12 text-center border border-border shadow">
-              <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-6">
-                Exciting Initiatives Coming Soon
-              </h2>
-              <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                We're working on impactful programs that will make a real difference
-                in education accessibility and community development. Stay tuned for
-                our upcoming initiatives!
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  onClick={handleComingSoonClick}
-                  className="bg-accent hover:bg-accent/90 text-accent-foreground px-8 py-4 text-lg rounded-full"
-                >
-                  Get Notified
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={handleComingSoonClick}
-                  className="border-accent text-accent hover:bg-accent/10 px-8 py-4 text-lg rounded-full"
-                >
-                  Partner With Us
-                </Button>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-      </main>
-
-    </div>
+        </div>
+      </Section>
+    </>
   );
-} 
+}

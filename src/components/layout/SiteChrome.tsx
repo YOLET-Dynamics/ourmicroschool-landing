@@ -1,17 +1,11 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { toast } from "sonner";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { toast } from "sonner";
 
 const navItems = ["Features", "Partners", "Contact"];
-const sectionAnimation = {
-  initial: { opacity: 0, y: 50 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.6, ease: "easeInOut" },
-};
 
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,7 +13,7 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -38,16 +32,9 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
         isMenuOpen={isMenuOpen}
         toggleMenu={toggleMenu}
         isScrolled={isScrolled}
-        handleComingSoonClick={handleComingSoonClick}
       />
       <main className="site-content">{children}</main>
-      <Footer
-        navItems={navItems}
-        sectionAnimation={sectionAnimation}
-        handleComingSoonClick={handleComingSoonClick}
-      />
+      <Footer navItems={navItems} handleComingSoonClick={handleComingSoonClick} />
     </div>
   );
 }
-
-

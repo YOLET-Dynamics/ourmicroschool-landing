@@ -2,18 +2,28 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import React, { useCallback, useEffect, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { ArrowRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ArrowRight } from "lucide-react";
-import React, { useEffect, useCallback, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useRouter, usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 interface HeaderProps {
   navItems: string[];
   isMenuOpen: boolean;
   toggleMenu: () => void;
   isScrolled: boolean;
-  handleComingSoonClick: () => void;
+}
+
+const OMS_APP_URL =
+  process.env.NEXT_PUBLIC_OMS_URL ?? "https://app.ourmicroschool.com";
+
+function navHref(item: string): string {
+  const slug = item.toLowerCase().replace(/\s+/g, "-");
+  if (slug === "partners") return "/partners";
+  if (slug === "contact") return "/contact";
+  return `/#${slug}`;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -21,43 +31,27 @@ const Header: React.FC<HeaderProps> = ({
   isMenuOpen,
   toggleMenu,
   isScrolled,
-  handleComingSoonClick,
 }) => {
   const pathname = usePathname();
+  const headerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const hash = window.location.hash;
-    if (hash) {
-      setTimeout(() => {
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
-    }
+    if (!hash) return;
+    const id = setTimeout(() => {
+      const element = document.querySelector(hash);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+    return () => clearTimeout(id);
   }, [pathname]);
 
-  const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
-  ) => {
-    if (!href.startsWith("/#")) return;
-    if (pathname === "/") {
-      e.preventDefault();
-      const element = document.querySelector(href.substring(1));
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  };
-
-  const headerRef = useRef<HTMLElement | null>(null);
-
   const updateHeaderHeight = useCallback(() => {
-    if (headerRef.current) {
-      const height = headerRef.current.offsetHeight;
-      document.documentElement.style.setProperty("--header-height", `${height}px`);
-    }
+    if (!headerRef.current) return;
+    const height = headerRef.current.offsetHeight;
+    document.documentElement.style.setProperty(
+      "--header-height",
+      `${height}px`
+    );
   }, []);
 
   useEffect(() => {
@@ -66,183 +60,175 @@ const Header: React.FC<HeaderProps> = ({
     return () => window.removeEventListener("resize", updateHeaderHeight);
   }, [updateHeaderHeight, isScrolled]);
 
-  return (
-    <>
-      <header
-        ref={headerRef}
-        className={`fixed max-w-7xl mx-auto top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? "py-2" : "py-4"
-        }`}
-      >
-        <nav
-          className={`transition-all duration-300 ${
-            isScrolled
-              ? "floating-nav"
-              : "mx-4 rounded-2xl border border-border bg-card/80 backdrop-blur-md shadow"
-          }`}
-        >
-          <div
-            className={`max-w-6xl mx-auto px-4 sm:px-6 ${
-              isScrolled ? "py-3" : "py-4"
-            }`}
-          >
-            <div className="flex items-center justify-between">
-              <Link href="/" className="flex items-center space-x-2">
-                <Image
-                  src="/logos/OMS_LogoDesign_01-09.png"
-                  alt="OurMicroSchool logo"
-                  width={160}
-                  height={48}
-                  className="block md:hidden h-auto w-28"
-                  priority
-                />
-                <Image
-                  src="/logos/OMS_LogoDesign_01-08.png"
-                  alt="OurMicroSchool logo with wordmark"
-                  width={224}
-                  height={72}
-                  className="hidden md:block h-auto w-24"
-                  priority
-                />
-              </Link>
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    if (!href.startsWith("/#") || pathname !== "/") return;
+    e.preventDefault();
+    const element = document.querySelector(href.substring(1));
+    if (element) element.scrollIntoView({ behavior: "smooth" });
+  };
 
-              <div className="hidden md:flex items-center space-x-8">
+  return (
+    <header
+      ref={headerRef}
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        isScrolled ? "py-2" : "py-4"
+      )}
+    >
+      <nav
+        className={cn(
+          "mx-4 max-w-6xl rounded-2xl border border-border/60 bg-card/80 backdrop-blur-xl transition-all duration-300 md:mx-auto",
+          isScrolled
+            ? "shadow-lg shadow-black/5"
+            : "shadow-sm"
+        )}
+      >
+        <div className="flex items-center justify-between gap-6 px-4 py-3 sm:px-6">
+          <div className="flex items-center gap-8 md:gap-10">
+            <Link
+              href="/"
+              className="flex items-center"
+              aria-label="OurMicroSchool home"
+            >
+              <Image
+                src="/logos/OMS_LogoDesign_01-09.png"
+                alt="OurMicroSchool"
+                width={160}
+                height={48}
+                className="block h-9 w-auto md:hidden"
+                priority
+              />
+              <Image
+                src="/logos/OMS_LogoDesign_01-08.png"
+                alt="OurMicroSchool"
+                width={224}
+                height={72}
+                className="hidden h-12 w-auto md:block"
+                priority
+              />
+            </Link>
+
+            <nav className="hidden items-center gap-7 md:flex">
+              {navItems.map((item) => (
+                <Link
+                  key={item}
+                  href={navHref(item)}
+                  onClick={(e) => handleNavClick(e, navHref(item))}
+                  className="group relative text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
+                >
+                  {item}
+                  <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-accent transition-all duration-300 group-hover:w-full" />
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          <div className="hidden items-center gap-2 md:flex">
+            <Button
+              asChild
+              variant="ghost"
+              size="sm"
+              className="h-9 rounded-full px-4 text-sm font-medium text-muted-foreground hover:text-foreground"
+            >
+              <a href={OMS_APP_URL} target="_blank" rel="noopener noreferrer">
+                Login
+              </a>
+            </Button>
+            <Button
+              asChild
+              size="sm"
+              className="h-9 rounded-full px-4 text-sm font-medium shadow-sm"
+            >
+              <a href={OMS_APP_URL} target="_blank" rel="noopener noreferrer">
+                Get Started
+                <ArrowRight className="ml-1 h-3.5 w-3.5" />
+              </a>
+            </Button>
+          </div>
+
+          <button
+            type="button"
+            onClick={toggleMenu}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-muted md:hidden"
+          >
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+      </nav>
+
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            className="mobile-menu-overlay top-header fixed inset-x-0 bottom-0 z-40 md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            <motion.div
+              className="mx-4 mt-2 rounded-2xl border border-border/60 bg-card p-6 shadow-xl"
+              initial={{ y: -8, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -6, opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              <div className="flex flex-col">
                 {navItems.map((item) => (
                   <Link
                     key={item}
-                    href={
-                      item.toLowerCase() === "partners"
-                        ? "/partners"
-                        : item.toLowerCase() === "contact"
-                        ? "/contact"
-                        : `/#${item.toLowerCase().replace(/\\s+/g, "-")}`
-                    }
-                    className="text-foreground hover:text-accent transition-colors duration-200 relative group"
-                    onClick={(e) =>
-                      handleNavClick(
-                        e,
-                        item.toLowerCase() === "partners"
-                          ? "/partners"
-                          : item.toLowerCase() === "contact"
-                          ? "/contact"
-                          : `/#${item.toLowerCase().replace(/\\s+/g, "-")}`
-                      )
-                    }
+                    href={navHref(item)}
+                    onClick={(e) => {
+                      toggleMenu();
+                      handleNavClick(e, navHref(item));
+                    }}
+                    className="rounded-xl px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted"
                   >
                     {item}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
                   </Link>
                 ))}
+              </div>
+
+              <div className="mt-4 flex flex-col gap-2 border-t border-border/60 pt-4">
+                <Button
+                  asChild
+                  size="lg"
+                  className="h-12 w-full rounded-full text-base font-medium"
+                >
+                  <a
+                    href={OMS_APP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={toggleMenu}
+                  >
+                    Get Started
+                    <ArrowRight className="ml-1.5 h-4 w-4" />
+                  </a>
+                </Button>
                 <Button
                   asChild
                   variant="outline"
-                  size="sm"
-                  className="text-foreground hover:text-accent hover:bg-accent/10 rounded-full transition-colors duration-200 border-border"
+                  size="lg"
+                  className="h-12 w-full rounded-full text-base font-medium"
                 >
-                  <Link href="/login">
+                  <a
+                    href={OMS_APP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={toggleMenu}
+                  >
                     Login
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="sm"
-                  className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-full"
-                >
-                  <Link href="/contact" onClick={handleComingSoonClick}>
-                    Get Started
-                    <ArrowRight className="ml-2" size={16} />
-                  </Link>
+                  </a>
                 </Button>
               </div>
-
-              <button
-                onClick={toggleMenu}
-                className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
-          </div>
-        </nav>
-
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              className="md:hidden fixed inset-x-0 bottom-0 top-header mobile-menu-overlay z-40"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.15 }}
-           >
-              <motion.div
-            className="bg-card text-card-foreground mx-4 mt-2 rounded-2xl shadow-xl border border-border p-6"
-                initial={{ y: -8, opacity: 0, scale: 0.98 }}
-                animate={{ y: 0, opacity: 1, scale: 1 }}
-                exit={{ y: -6, opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-              >
-                <div className="flex flex-col space-y-4">
-                  {navItems.map((item) => (
-                  <Link
-                      key={item}
-                    href={
-                      item.toLowerCase() === "partners"
-                        ? "/partners"
-                        : item.toLowerCase() === "contact"
-                        ? "/contact"
-                        : `/#${item.toLowerCase().replace(/\\s+/g, "-")}`
-                      }
-                    className="text-lg text-foreground hover:text-accent transition-colors py-2"
-                      onClick={(e) => {
-                        toggleMenu();
-                        handleNavClick(
-                          e,
-                        item.toLowerCase() === "partners"
-                          ? "/partners"
-                          : item.toLowerCase() === "contact"
-                          ? "/contact"
-                          : `/#${item.toLowerCase().replace(/\\s+/g, "-")}`
-                        );
-                      }}
-                    >
-                      {item}
-                    </Link>
-                  ))}
-                  <div className="mt-4 pt-4 border-t border-border">
-                    <Button
-                      asChild
-                      size="lg"
-                      className="w-full bg-accent hover:bg-accent/90 text-accent-foreground rounded-full py-3"
-                    >
-                      <Link
-                        href="/contact"
-                        onClick={() => {
-                          handleComingSoonClick();
-                          toggleMenu();
-                        }}
-                      >
-                        Get Started
-                        <ArrowRight className="ml-2" size={20} />
-                      </Link>
-                    </Button>
-                    <Button
-                      asChild
-                      variant="outline"
-                      size="lg"
-                      className="w-full text-foreground hover:text-accent hover:bg-accent/10 rounded-full mt-2 transition-colors duration-200 border-border"
-                    >
-                      <Link href="/login" onClick={() => toggleMenu()}>
-                        Login
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </motion.div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
-    </>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   );
 };
 

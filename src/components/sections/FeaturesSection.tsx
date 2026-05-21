@@ -1,166 +1,100 @@
 import {
-  BookOpen,
-  Heart,
-  GraduationCap,
   BarChart3,
-  Target,
+  Bell,
+  BookOpen,
   Calendar,
   CheckCircle,
-  Users,
-  Bell,
   MessageSquare,
+  Target,
+  Users,
 } from "lucide-react";
+import {
+  FeatureCard,
+  GradientText,
+  Section,
+  SectionHeading,
+} from "@/components/layout";
+
+const features = [
+  {
+    icon: Calendar,
+    title: "Cadence planning",
+    description:
+      "Run your entire term — sprints, studios, expeditions — without spreadsheets.",
+  },
+  {
+    icon: BookOpen,
+    title: "Immersive learning",
+    description:
+      "Studio-style projects, seminars, and badges that spark curiosity every week.",
+  },
+  {
+    icon: Target,
+    title: "Adaptive skill building",
+    description:
+      "Surface the next best step for every learner with evidence-backed recommendations.",
+  },
+  {
+    icon: BarChart3,
+    title: "Living portfolios",
+    description:
+      "Share beautiful evidence of growth with families and advisory boards.",
+  },
+  {
+    icon: CheckCircle,
+    title: "Feedback loops",
+    description:
+      "Automate formative feedback and reflection prompts that keep momentum high.",
+  },
+  {
+    icon: Users,
+    title: "Community coordination",
+    description:
+      "Sync caregivers, guides, and specialists with shared calendars and gentle nudges.",
+  },
+  {
+    icon: Bell,
+    title: "Moments that matter",
+    description:
+      "Automated nudges and celebrations that keep every stakeholder engaged.",
+  },
+  {
+    icon: MessageSquare,
+    title: "Secure communication",
+    description:
+      "Replace text threads with thoughtful updates that keep everyone aligned.",
+  },
+] as const;
 
 export function FeaturesSection() {
-  const studentFeatures = [
-    {
-      icon: BookOpen,
-      title: "Immersive Learning Modules",
-      description: "Studio-style projects, seminars, and badges that spark curiosity every week.",
-    },
-    {
-      icon: BarChart3,
-      title: "Personalized Progress Dashboards",
-      description: "Celebrate wins with insights that actually make sense to learners and families.",
-    },
-    {
-      icon: Target,
-      title: "Adaptive Skill Building",
-      description: "Target the next best action for every learner with evidence-backed recommendations.",
-    },
-  ];
-
-  const educatorFeatures = [
-    {
-      icon: Calendar,
-      title: "Cadence Planning",
-      description: "Run your entire term—sprints, studios, expeditions—without spreadsheets.",
-    },
-    {
-      icon: CheckCircle,
-      title: "Feedback Loops",
-      description: "Automate formative feedback and reflection prompts that keep momentum high.",
-    },
-    {
-      icon: Users,
-      title: "Community Coordination",
-      description: "Sync caregivers, guides, and specialists with shared calendars and nudges.",
-    },
-  ];
-
-  const parentFeatures = [
-    {
-      icon: BarChart3,
-      title: "Living Portfolios",
-      description: "Share beautiful evidence of growth with families and advisory boards.",
-    },
-    {
-      icon: Bell,
-      title: "Moments That Matter",
-      description:
-        "Automated nudges and celebrations that keep every stakeholder engaged.",
-    },
-    {
-      icon: MessageSquare,
-      title: "Secure Communication",
-      description: "Replace the text threads with AI-assisted updates that keep everyone aligned.",
-    },
-  ];
-
   return (
-    <section id="features" className="py-20 px-6 lg:px-8 bg-background">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="font-display font-bold text-3xl md:text-5xl mb-6 text-balance">
-            Build, run, and grow your microschool in one OS
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            OurMicroSchool adapts to each role—learners, guides, and families—so your community can focus on what matters most.
-          </p>
-        </div>
+    <Section id="features" className="relative overflow-hidden">
+      <div
+        aria-hidden
+        className="bg-dots mask-fade-radial pointer-events-none absolute inset-0 -z-10"
+      />
+      <SectionHeading
+        eyebrow="Everything in one place"
+        title={
+          <>
+            Everything you need to{" "}
+            <GradientText>run a beautiful microschool.</GradientText>
+          </>
+        }
+        lead="Tools that fit how guides plan, how families stay close, and how learners grow."
+      />
 
-        <div className="grid lg:grid-cols-3 gap-12">
-          {/* For Students */}
-          <div className="text-center">
-            <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6 group hover:bg-accent/20 transition-colors">
-              <GraduationCap className="h-10 w-10 text-accent group-hover:scale-110 transition-transform" />
-            </div>
-            <h3 className="font-display font-bold text-2xl mb-4">For Students</h3>
-            <p className="text-muted-foreground mb-8">Engaging lessons and tools for independent learning</p>
-
-            <div className="space-y-6 text-left">
-              {studentFeatures.map((feature, index) => {
-                const Icon = feature.icon;
-                return (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="p-2 bg-accent/10 rounded-lg flex-shrink-0">
-                      <Icon className="h-5 w-5 text-accent" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">{feature.title}</h4>
-                      <p className="text-sm text-muted-foreground">{feature.description}</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* For Educators & Co-ops */}
-          <div className="text-center">
-            <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group hover:bg-primary/20 transition-colors">
-              <BookOpen className="h-10 w-10 text-primary group-hover:scale-110 transition-transform" />
-            </div>
-            <h3 className="font-display font-bold text-2xl mb-4">For Educators & Co-ops</h3>
-            <p className="text-muted-foreground mb-8">Robust tools for curriculum design and student management</p>
-
-            <div className="space-y-6 text-left">
-              {educatorFeatures.map((feature, index) => {
-                const Icon = feature.icon;
-                return (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="p-2 bg-primary/10 rounded-lg flex-shrink-0">
-                      <Icon className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">{feature.title}</h4>
-                      <p className="text-sm text-muted-foreground">{feature.description}</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* For Parents */}
-          <div className="text-center">
-            <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6 group hover:bg-accent/20 transition-colors">
-              <Heart className="h-10 w-10 text-accent group-hover:scale-110 transition-transform" />
-            </div>
-            <h3 className="font-display font-bold text-2xl mb-4">For Parents</h3>
-            <p className="text-muted-foreground mb-8">Stay connected and informed about your child's education</p>
-
-            <div className="space-y-6 text-left">
-              {parentFeatures.map((feature, index) => {
-                const Icon = feature.icon;
-                return (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="p-2 bg-accent/10 rounded-lg flex-shrink-0">
-                      <Icon className="h-5 w-5 text-accent" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">{feature.title}</h4>
-                      <p className="text-sm text-muted-foreground">{feature.description}</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
+      <div className="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {features.map((feature, index) => (
+          <FeatureCard
+            key={feature.title}
+            icon={feature.icon}
+            title={feature.title}
+            description={feature.description}
+            tone={index % 2 === 0 ? "accent" : "primary"}
+          />
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }
-
-

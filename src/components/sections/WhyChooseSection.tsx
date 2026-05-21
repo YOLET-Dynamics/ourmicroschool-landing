@@ -1,76 +1,65 @@
-import { Card } from "@/components/ui/card";
-import { Target, GraduationCap, Smile } from "lucide-react";
+import { GraduationCap, Smile, Target } from "lucide-react";
+import {
+  GradientText,
+  IconBadge,
+  Section,
+  SectionHeading,
+} from "@/components/layout";
+
+const points = [
+  {
+    icon: Target,
+    title: "Personalized learning playbooks",
+    description:
+      "Every learner gets a tailored path, progress checkpoints, and mentorship moments — orchestrated from one dashboard.",
+  },
+  {
+    icon: GraduationCap,
+    title: "All-in-one microschool hub",
+    description:
+      "Plan curriculum, automate communication, and keep families aligned with real-time insights and beautiful reports.",
+  },
+  {
+    icon: Smile,
+    title: "Built for families, guides, and learners",
+    description:
+      "From coaches to caregivers, everyone gets a simple, delightful experience on every device.",
+  },
+];
 
 export function WhyChooseSection() {
-  const whyChooseFeatures = [
-    {
-      icon: Target,
-      title: "Personalized Learning Playbooks",
-      description:
-        "Every learner receives a tailored path, progress checkpoints, and mentorship moments—all orchestrated from one dashboard.",
-    },
-    {
-      icon: GraduationCap,
-      title: "All-in-One Microschool Hub",
-      description:
-        "Plan curriculum, automate communication, and keep families aligned with real-time insights and beautiful reports.",
-    },
-    {
-      icon: Smile,
-      title: "Built for Families, Guides, and Learners",
-      description:
-        "From coaches to caregivers, everyone gets a delightfully simple experience that works on every device.",
-    },
-  ];
-
   return (
-    <section id="features" className="py-20 px-6 lg:px-8 scroll-mt-32 bg-background">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="font-display font-bold text-3xl md:text-5xl mb-8 text-balance">
-              Why Microschool Builders Choose OurMicroSchool
-            </h2>
-
-            <div className="space-y-8">
-              {whyChooseFeatures.map((feature, index) => {
-                const Icon = feature.icon as any;
-                return (
-                  <Card
-                    key={index}
-                    className="p-6 border-border/50 hover:border-accent/30 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10 group"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 bg-accent/10 rounded-xl group-hover:bg-accent/20 transition-colors flex-shrink-0">
-                        <Icon className="h-6 w-6 text-accent" />
-                      </div>
-                      <div>
-                        <h3 className="font-display font-semibold text-xl mb-2">{feature.title}</h3>
-                        <p className="text-muted-foreground">{feature.description}</p>
-                      </div>
-                    </div>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="relative">
-            <Card className="p-8 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 text-center">
-              <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Target className="h-12 w-12 text-primary" />
-              </div>
-              <h3 className="font-display font-bold text-2xl mb-4">Adaptive Learning</h3>
-              <p className="text-muted-foreground text-lg">
-                Our platform adapts to each student's pace and learning style, ensuring effective and engaging
-                education.
-              </p>
-            </Card>
-          </div>
+    <Section id="why" tone="muted">
+      <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-5 lg:sticky lg:top-32">
+          <SectionHeading
+            align="left"
+            eyebrow="Why OurMicroSchool"
+            title={
+              <>
+                A platform{" "}
+                <GradientText>your community will love.</GradientText>
+              </>
+            }
+            lead="Calm, considered tools that respect the time of guides and parents — and the curiosity of learners."
+          />
         </div>
+
+        <ul className="lg:col-span-7 space-y-3">
+          {points.map((point) => (
+            <li
+              key={point.title}
+              className="flex gap-5 rounded-3xl border border-border/60 bg-card p-6 md:p-7"
+            >
+              <IconBadge icon={point.icon} tone="primary" size="md" className="shrink-0" />
+              <div>
+                <h3 className="text-h3 mb-2">{point.title}</h3>
+                <p className="text-body text-muted-foreground">{point.description}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
-    </section>
+    </Section>
   );
 }
-
-
