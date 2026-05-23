@@ -5,6 +5,7 @@ import { Fredoka } from "next/font/google";
 import localFont from "next/font/local";
 import { Toaster } from "sonner";
 import SiteChrome from "@/components/layout/SiteChrome";
+import { Analytics } from "@vercel/analytics/next"
 
 const akt = localFont({
   src: "../../public/fonts/Akt.ttf",
@@ -107,6 +108,7 @@ export default function RootLayout({
           <SiteChrome>{children}</SiteChrome>
           <Toaster richColors position="bottom-right" />
         </QueryProvider>
+        <Analytics />
       </body>
     </html>
   );
