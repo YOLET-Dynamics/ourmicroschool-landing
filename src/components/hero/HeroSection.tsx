@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { GradientText, Orb, Section } from "@/components/layout";
-import { ArrowRight, BookOpen, Calendar, MessageSquare, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Calendar, MessageSquare, School } from "lucide-react";
 
 const OMS_APP_URL =
   process.env.NEXT_PUBLIC_OMS_URL ?? "https://app.ourmicroschool.com";
@@ -20,7 +20,7 @@ export function HeroSection() {
 
       <div className="flex flex-col items-center text-center animate-fade-up">
         <span className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/70 px-4 py-1.5 text-meta backdrop-blur">
-          <Sparkles className="h-3.5 w-3.5 text-accent" aria-hidden />
+          <School className="h-3.5 w-3.5 text-accent" aria-hidden />
           Built for modern microschools
         </span>
 
