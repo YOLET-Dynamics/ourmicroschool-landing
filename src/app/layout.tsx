@@ -27,11 +27,11 @@ const siteUrl =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "OurMicroSchool — The Operating System for Personalized Learning",
+    default: "OurMicroSchool — The operating system for modern microschools",
     template: "%s | OurMicroSchool",
   },
   description:
-    "OurMicroSchool is the operating system built for microschools, co-ops, and homeschooling families. Plan curriculum, collaborate, and track every learner’s growth in one beautiful platform.",
+    "OurMicroSchool is the operating system for modern microschools, co-ops, and homeschooling families. Plan curriculum, share weekly progress, and stay close to every family — all from one simple workspace.",
   keywords: [
     "microschool platform",
     "homeschool software",
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   openGraph: {
-    title: "OurMicroSchool — The OS for Every Learning Journey",
+    title: "OurMicroSchool — The operating system for modern microschools",
     description:
-      "Design beautiful learning journeys, manage microschool operations, and empower families with OurMicroSchool.",
+      "Plan curriculum, share weekly progress, and stay close to every family — all from one simple workspace.",
     url: siteUrl,
     siteName: "OurMicroSchool",
     images: [
@@ -96,6 +96,25 @@ export const metadata: Metadata = {
   manifest: `/site.webmanifest`,
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "OurMicroSchool",
+  alternateName: "OMS",
+  url: siteUrl,
+  logo: `${siteUrl}/logos/OMS_LogoDesign_01-08.png`,
+  description:
+    "The operating system for modern microschools, co-ops, and homeschooling families.",
+  parentOrganization: { "@type": "Organization", name: "SYMVERGE PLATFORMS LLC" },
+  email: "hello@ourmicroschool.com",
+  address: {
+    "@type": "PostalAddress",
+    addressRegion: "Virginia",
+    addressCountry: "US",
+  },
+  sameAs: ["https://yoletent.com"],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -104,6 +123,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${akt.variable} ${fredoka.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <QueryProvider>
           <SiteChrome>{children}</SiteChrome>
           <Toaster richColors position="bottom-right" />

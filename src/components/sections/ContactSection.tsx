@@ -25,15 +25,15 @@ export function ContactSection() {
             eyebrow="Get started"
             title={
               <>
-                Bring <GradientText>calm</GradientText> to your microschool.
+                Run your microschool the <GradientText>simple way.</GradientText>
               </>
             }
-            lead="Open the app to start planning, or reach out and we'll help you get going."
+            lead="Open the app to start planning, or reach out and we'll help you get set up."
           />
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild size="lg" className="h-12 px-7 text-base font-medium">
               <a href={OMS_APP_URL} target="_blank" rel="noopener noreferrer">
-                Open OurMicroSchool
+                Get started
                 <ArrowRight className="ml-1.5 h-4 w-4" aria-hidden />
               </a>
             </Button>

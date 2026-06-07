@@ -28,7 +28,7 @@ const personas: Persona[] = [
     audience: "For learners",
     title: "A place to grow at their pace",
     description:
-      "Tools that make curiosity visible — and every learner the author of their own progress.",
+      "Tools that help every learner see their progress and take ownership of it.",
     points: [
       "Personalized weekly plan",
       "Living portfolio of work",
@@ -41,7 +41,7 @@ const personas: Persona[] = [
     audience: "For guides",
     title: "Run your studio without spreadsheets",
     description:
-      "Plan expeditions, capture evidence, and stay close to every learner — all in one calm interface.",
+      "Plan your week, capture evidence, and stay close to every learner — all in one place.",
     points: [
       "Cadence + curriculum planner",
       "Formative feedback loops",
@@ -54,7 +54,7 @@ const personas: Persona[] = [
     audience: "For families",
     title: "See the journey, not just the grades",
     description:
-      "Beautiful, thoughtful updates that bring caregivers into the learning every week.",
+      "Clear weekly updates that bring families into the learning — not just the report card.",
     points: [
       "Weekly highlights & nudges",
       "Real evidence of growth",
@@ -69,11 +69,11 @@ export function PersonasSection() {
     <Section id="for-everyone" className="relative overflow-hidden">
       <Orb tone="accent" size="xl" className="left-1/2 top-32 -translate-x-1/2 opacity-70" />
       <SectionHeading
-        eyebrow="Built for everyone"
+        eyebrow="For learners, guides & families"
         title={
           <>
             One platform.{" "}
-            <GradientText>Three thoughtful experiences.</GradientText>
+            <GradientText>Three experiences, each done right.</GradientText>
           </>
         }
         lead="Each role gets exactly what they need — and nothing they don't."

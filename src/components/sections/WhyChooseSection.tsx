@@ -9,21 +9,21 @@ import {
 const points = [
   {
     icon: Target,
-    title: "Personalized learning playbooks",
+    title: "Personalized learning paths",
     description:
-      "Every learner gets a tailored path, progress checkpoints, and mentorship moments — orchestrated from one dashboard.",
+      "Every learner gets a tailored path, progress checkpoints, and mentorship moments — all from one dashboard.",
   },
   {
     icon: GraduationCap,
     title: "All-in-one microschool hub",
     description:
-      "Plan curriculum, automate communication, and keep families aligned with real-time insights and beautiful reports.",
+      "Plan curriculum, automate communication, and keep families aligned with real-time progress and clear reports.",
   },
   {
     icon: Smile,
     title: "Built for families, guides, and learners",
     description:
-      "From coaches to caregivers, everyone gets a simple, delightful experience on every device.",
+      "From guides to caregivers, everyone gets a simple, friendly experience on every device.",
   },
 ];
 
@@ -41,7 +41,7 @@ export function WhyChooseSection() {
                 <GradientText>your community will love.</GradientText>
               </>
             }
-            lead="Calm, considered tools that respect the time of guides and parents — and the curiosity of learners."
+            lead="Simple, considered tools that respect the time of guides and parents — and the curiosity of learners."
           />
         </div>
 

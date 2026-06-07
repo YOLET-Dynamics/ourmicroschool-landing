@@ -43,7 +43,7 @@ export default function CSRPage() {
           title={
             <>
               Education that{" "}
-              <GradientText>lifts every community.</GradientText>
+              <GradientText>reaches more communities.</GradientText>
             </>
           }
           lead="Programs that broaden access to thoughtful, learner-led education for every community."

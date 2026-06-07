@@ -220,7 +220,7 @@ export default function ContactPage() {
               />
               <span>
                 <span className="block text-sm font-medium">
-                  Keep me in the loop
+                  Email me occasional updates
                 </span>
                 <span className="block text-meta mt-0.5">
                   Occasional updates on new features and resources. Unsubscribe anytime.

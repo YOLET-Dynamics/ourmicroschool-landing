@@ -4,8 +4,8 @@ import { Container } from "@/components/layout";
 const proofs = [
   "Built with educators",
   "Family-first design",
-  "FERPA-aware",
-  "Made in Virginia",
+  "Student data stays private",
+  "Made in Virginia, USA",
 ];
 
 export function TrustStrip() {
@@ -13,7 +13,7 @@ export function TrustStrip() {
     <div className="py-20 md:py-24">
       <Container>
         <p className="text-eyebrow text-center text-muted-foreground/70">
-          Trusted by communities reimagining learning
+          Designed around how microschools actually work
         </p>
 
         <ul

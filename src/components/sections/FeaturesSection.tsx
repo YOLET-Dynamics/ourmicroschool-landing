@@ -18,15 +18,15 @@ import {
 const features = [
   {
     icon: Calendar,
-    title: "Cadence planning",
+    title: "Term & lesson planning",
     description:
-      "Run your entire term — sprints, studios, expeditions — without spreadsheets.",
+      "Plan your whole term — units, projects, and field days — without spreadsheets.",
   },
   {
     icon: BookOpen,
     title: "Immersive learning",
     description:
-      "Studio-style projects, seminars, and badges that spark curiosity every week.",
+      "Project-based learning, seminars, and badges that spark curiosity every week.",
   },
   {
     icon: Target,
@@ -38,7 +38,7 @@ const features = [
     icon: BarChart3,
     title: "Living portfolios",
     description:
-      "Share beautiful evidence of growth with families and advisory boards.",
+      "Share real evidence of growth with families and advisory boards.",
   },
   {
     icon: CheckCircle,
@@ -54,9 +54,9 @@ const features = [
   },
   {
     icon: Bell,
-    title: "Moments that matter",
+    title: "Nudges & celebrations",
     description:
-      "Automated nudges and celebrations that keep every stakeholder engaged.",
+      "Automated reminders and milestone celebrations that keep families engaged.",
   },
   {
     icon: MessageSquare,
@@ -78,7 +78,7 @@ export function FeaturesSection() {
         title={
           <>
             Everything you need to{" "}
-            <GradientText>run a beautiful microschool.</GradientText>
+            <GradientText>run a thriving microschool.</GradientText>
           </>
         }
         lead="Tools that fit how guides plan, how families stay close, and how learners grow."

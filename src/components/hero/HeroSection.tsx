@@ -21,18 +21,17 @@ export function HeroSection() {
       <div className="flex flex-col items-center text-center animate-fade-up">
         <span className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/70 px-4 py-1.5 text-meta backdrop-blur">
           <School className="h-3.5 w-3.5 text-accent" aria-hidden />
-          Built for modern microschools
+          Software built for modern microschools
         </span>
 
         <h1 className="text-display mt-8 max-w-3xl text-foreground">
-          A <GradientText>calm home</GradientText>
-          <br className="hidden sm:block" />
-          for the whole microschool.
+          The simplest way to{" "}
+          <GradientText>run your microschool.</GradientText>
         </h1>
 
         <p className="text-lead mt-6 max-w-2xl text-pretty">
           Plan curriculum, share weekly progress, and stay close to every family —
-          all from one beautifully simple workspace.
+          all from one simple workspace.
         </p>
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">
@@ -42,7 +41,7 @@ export function HeroSection() {
             className="h-12 px-7 text-base font-medium shadow-sm"
           >
             <a href={OMS_APP_URL} target="_blank" rel="noopener noreferrer">
-              Get Started
+              Get started
               <ArrowRight className="ml-1.5 h-4 w-4" aria-hidden />
             </a>
           </Button>

@@ -143,7 +143,7 @@ const Header: React.FC<HeaderProps> = ({
               className="h-9 rounded-full px-4 text-sm font-medium shadow-sm"
             >
               <a href={OMS_APP_URL} target="_blank" rel="noopener noreferrer">
-                Get Started
+                Get started
                 <ArrowRight className="ml-1 h-3.5 w-3.5" />
               </a>
             </Button>
@@ -204,7 +204,7 @@ const Header: React.FC<HeaderProps> = ({
                     rel="noopener noreferrer"
                     onClick={toggleMenu}
                   >
-                    Get Started
+                    Get started
                     <ArrowRight className="ml-1.5 h-4 w-4" />
                   </a>
                 </Button>

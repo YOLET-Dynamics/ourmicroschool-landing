@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { GradientText, Section, SectionHeading } from "@/components/layout";
+import { toast } from "sonner";
 
 interface Partner {
   id: string;
@@ -159,12 +160,36 @@ function EmptyState() {
 
 function PartnerInquiry() {
   const [form, setForm] = useState({ name: "", organization: "", email: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (field: keyof typeof form, value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    try {
+      setIsSubmitting(true);
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          subject: `Partnership inquiry from ${form.organization}`,
+          message: form.message,
+          inquiryType: "partnership",
+        }),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.success) throw new Error(json.message || "Failed");
+      toast.success("Inquiry sent", { description: "We'll be in touch soon." });
+      setForm({ name: "", organization: "", email: "", message: "" });
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Please try again later.";
+      toast.error("Could not send inquiry", { description: message });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -219,9 +244,13 @@ function PartnerInquiry() {
               className="min-h-36 rounded-2xl resize-none"
             />
           </Field>
-          <Button type="submit" className="h-12 w-full text-base font-medium">
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="h-12 w-full text-base font-medium"
+          >
             <Mail className="mr-1.5 h-4 w-4" aria-hidden />
-            Submit inquiry
+            {isSubmitting ? "Sending…" : "Submit inquiry"}
           </Button>
         </form>
       </div>
