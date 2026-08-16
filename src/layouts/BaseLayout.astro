@@ -22,7 +22,7 @@ const {
 const site = Astro.site ?? new URL("https://ourmicroschool.com");
 const canonical = new URL(canonicalPath, site);
 const imageUrl = new URL(image, site);
-const appUrl = import.meta.env.PUBLIC_OMS_URL ?? import.meta.env.NEXT_PUBLIC_OMS_URL ?? "https://app.ourmicroschool.com";
+const appUrl = import.meta.env.PUBLIC_OMS_URL ?? "https://app.ourmicroschool.com";
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
