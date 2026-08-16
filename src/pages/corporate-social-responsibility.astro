@@ -1,0 +1,65 @@
+---
+import PageHero from "@/components/PageHero.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+const pillars = [
+  { icon: "♡", title: "Educational access", body: "Breaking down barriers to quality learning for underserved communities.", tone: "coral" },
+  { icon: "↟", title: "Environmental stewardship", body: "Promoting sustainable practices in education and operations.", tone: "green" },
+  { icon: "◎", title: "Community engagement", body: "Partnering with local organizations and educational institutions.", tone: "teal" },
+  { icon: "◉", title: "Global citizenship", body: "Fostering cultural understanding and global perspectives.", tone: "amber" },
+];
+---
+
+<BaseLayout
+  title="Social Impact | OurMicroSchool"
+  description="Learn how OurMicroSchool is broadening access to thoughtful, learner-led education through community partnerships and responsible practices."
+  canonicalPath="/corporate-social-responsibility"
+>
+  <PageHero
+    eyebrow="Social impact"
+    title="Education that reaches"
+    accent="more communities."
+    lead="We’re shaping practical programs that broaden access to thoughtful, learner-led education and strengthen the communities around it."
+  />
+
+  <section class="container impact-grid" data-reveal>
+    {pillars.map((pillar, index) => (
+      <article class:list={["impact-row", index % 2 === 1 && "reverse"]}>
+        <span class={pillar.tone}>{pillar.icon}</span>
+        <div><small>0{index + 1}</small><h2 class="heading-md">{pillar.title}</h2><p>{pillar.body}</p></div>
+      </article>
+    ))}
+  </section>
+
+  <section class="container impact-cta" data-reveal>
+    <div>
+      <p class="eyebrow">Initiatives in motion</p>
+      <h2 class="heading-lg">Help us shape what comes next.</h2>
+      <p>We’re building these programs with partners who know their communities best.</p>
+      <span><a class="button button-light" href="/contact?inquiry=general">Get notified</a><a class="button button-ghost-light" href="/partners">Partner with us</a></span>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .impact-grid { display: grid; border-top: 1px solid var(--border); }
+  .impact-row { display: grid; grid-template-columns: 0.55fr 1.45fr; align-items: center; gap: clamp(2rem, 8vw, 7rem); border-bottom: 1px solid var(--border); padding-block: clamp(2rem, 5vw, 3.5rem); }
+  .impact-row.reverse { grid-template-columns: 1.45fr 0.55fr; }
+  .impact-row.reverse > span { grid-column: 2; }
+  .impact-row.reverse > div { grid-row: 1; grid-column: 1; }
+  .impact-row > span { display: grid; aspect-ratio: 1; width: min(100%, 13rem); place-items: center; border-radius: 50%; font-size: clamp(2.3rem, 6vw, 4rem); font-weight: 500; }
+  .impact-row > span.teal { background: var(--primary-soft); color: var(--primary); }
+  .impact-row > span.coral { background: var(--accent-soft); color: var(--accent); }
+  .impact-row > span.green { background: var(--success-soft); color: var(--success); }
+  .impact-row > span.amber { background: var(--amber-soft); color: oklch(0.55 0.15 75); }
+  .impact-row small { color: var(--accent); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.14em; }
+  .impact-row h2 { margin-top: 0.4rem; }
+  .impact-row p { max-width: 32rem; margin-top: 0.6rem; color: var(--ink-soft); }
+  .impact-cta { padding-top: clamp(5rem, 10vw, 8rem); }
+  .impact-cta > div { border-radius: 1.8rem; background: var(--primary); padding: clamp(2rem, 6vw, 4rem); color: var(--surface); }
+  .impact-cta .eyebrow { color: oklch(0.85 0.11 45); }
+  .impact-cta h2 { max-width: 38rem; margin-top: 0.8rem; }
+  .impact-cta p { max-width: 34rem; margin-top: 0.8rem; color: oklch(0.94 0.02 200); }
+  .impact-cta > div > span { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.5rem; }
+  @media (max-width: 42rem) { .impact-row, .impact-row.reverse { grid-template-columns: 1fr; gap: 1.5rem; } .impact-row.reverse > span, .impact-row.reverse > div { grid-row: auto; grid-column: auto; } .impact-row > span { width: 7rem; } }
+  @media (max-width: 30rem) { .impact-cta .button { width: 100%; } }
+</style>

@@ -1,0 +1,72 @@
+---
+import PageHero from "@/components/PageHero.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Partners | OurMicroSchool"
+  description="Meet organizations working with OurMicroSchool and explore ways to bring thoughtful, learner-led education to more communities."
+  canonicalPath="/partners"
+>
+  <PageHero
+    eyebrow="Partners"
+    title="Better learning is"
+    accent="built together."
+    lead="We work with organizations that share our commitment to holistic, learner-led education and strong local communities."
+  />
+
+  <section class="container partner-story" data-reveal>
+    <div class="partner-logo panel"><img src="/r2r.png" width="966" height="1038" alt="Root to Rise Microschool logo" loading="eager" fetchpriority="high" /></div>
+    <article>
+      <p class="eyebrow">Microschool partner · Established 2023</p>
+      <h2 class="heading-lg">Root to Rise Microschool</h2>
+      <p class="partner-lead">A holistic educational community committed to raising conscious, confident, and connected young people.</p>
+      <ul><li>Holistic education</li><li>Cultural wisdom</li><li>Community-centered</li><li>Identity-focused</li></ul>
+      <details>
+        <summary>Read their story</summary>
+        <div>
+          <p>Root to Rise reimagines education by centering cultural wisdom, wellness, creativity, and community throughout the learning journey.</p>
+          <p>Their mission is to nurture rooted children who rise into their fullest potential—grounded in identity, guided by purpose, and equipped for liberation.</p>
+          <p>They create brave and affirming learning spaces where children and families can reconnect with their innate brilliance and co-create new paradigms of education.</p>
+        </div>
+      </details>
+    </article>
+  </section>
+
+  <section class="narrow partner-form" data-reveal>
+    <p class="eyebrow">Partner with us</p>
+    <h2 class="heading-lg">Let’s build something useful together.</h2>
+    <p class="lead">Tell us about your organization and the kind of impact you want to make.</p>
+    <form class="form-grid panel" data-api-form action="/api/contact" method="post">
+      <input type="hidden" name="inquiryType" value="partnership" />
+      <input type="hidden" name="subject" value="Partnership inquiry" />
+      <div class="form-grid two-columns">
+        <div class="field"><label for="partner-name">Contact name</label><input class="input" id="partner-name" name="name" autocomplete="name" minlength="2" maxlength="100" required /></div>
+        <div class="field"><label for="partner-email">Email</label><input class="input" id="partner-email" name="email" type="email" autocomplete="email" maxlength="200" required /></div>
+      </div>
+      <div class="field"><label for="partner-message">Partnership idea</label><textarea class="input" id="partner-message" name="message" minlength="10" maxlength="2000" required></textarea></div>
+      <button class="button button-primary" type="submit">Submit inquiry</button>
+      <p class="form-status" data-form-status aria-live="polite"></p>
+    </form>
+  </section>
+</BaseLayout>
+
+<style>
+  .partner-story { display: grid; grid-template-columns: minmax(16rem, 0.7fr) 1.3fr; align-items: center; gap: clamp(2.5rem, 8vw, 7rem); padding-block: 1rem 3rem; }
+  .partner-logo { display: grid; aspect-ratio: 1 / 1; place-items: center; overflow: hidden; padding: 2rem; }
+  .partner-logo img { width: 100%; height: 100%; object-fit: contain; }
+  .partner-story h2 { margin-top: 0.65rem; }
+  .partner-lead { max-width: 40rem; margin-top: 1rem; color: var(--ink-soft); font-size: 1.05rem; }
+  .partner-story ul { display: flex; flex-wrap: wrap; gap: 0.45rem; padding: 0; margin-top: 1.25rem; list-style: none; }
+  .partner-story li { border-radius: 99rem; background: var(--primary-soft); padding: 0.35rem 0.75rem; color: var(--primary); font-size: 0.72rem; font-weight: 800; }
+  details { margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1.1rem; }
+  summary { width: fit-content; color: var(--primary); cursor: pointer; font-size: 0.86rem; font-weight: 800; }
+  details div { display: grid; gap: 0.8rem; margin-top: 1rem; color: var(--ink-soft); font-size: 0.9rem; }
+  .partner-form { padding-block: clamp(5rem, 10vw, 8rem) 1rem; }
+  .partner-form > h2 { margin-top: 0.7rem; }
+  .partner-form > .lead { margin-top: 0.8rem; }
+  .partner-form form { margin-top: 2rem; padding: clamp(1.3rem, 4vw, 2.3rem); }
+  .partner-form .button { justify-self: start; }
+  @media (max-width: 48rem) { .partner-story { grid-template-columns: 1fr; } .partner-logo { width: min(100%, 24rem); } }
+  @media (max-width: 30rem) { .partner-form .button { width: 100%; } }
+</style>

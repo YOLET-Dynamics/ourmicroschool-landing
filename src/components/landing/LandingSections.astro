@@ -1,0 +1,240 @@
+---
+import BrandIcon from "@/components/BrandIcon.astro";
+
+const appUrl = import.meta.env.PUBLIC_OMS_URL ?? import.meta.env.NEXT_PUBLIC_OMS_URL ?? "https://app.ourmicroschool.com";
+const steps = [
+  { number: "1", title: "Plan the path", body: "Teachers lay out the lessons, day by day.", tone: "teal" },
+  { number: "2", title: "Students follow along", body: "One clear step at a time, always knowing what to do next.", tone: "coral" },
+  { number: "3", title: "Everyone stays close", body: "Teachers and families see real progress as it happens.", tone: "green" },
+];
+const features = [
+  { icon: "path", title: "A clear path", body: "Lessons laid out day by day, so no one feels lost.", tone: "teal" },
+  { icon: "step", title: "One step at a time", body: "A single thing to do, with one big button.", tone: "coral" },
+  { icon: "autosave", title: "Saves by itself", body: "Work stays safe, even if the tab closes.", tone: "amber" },
+  { icon: "quiz", title: "Instant quiz scores", body: "Multiple-choice quizzes grade themselves.", tone: "green" },
+  { icon: "progress", title: "Progress at a glance", body: "A clear picture of how each child is doing.", tone: "teal" },
+  { icon: "message", title: "Close to families", body: "Simple updates and private notes in one place.", tone: "coral" },
+] as const;
+const reasons = [
+  { icon: "educators", title: "Made with real educators", body: "Shaped around how small schools really run.", tone: "teal" },
+  { icon: "family", title: "Family-first", body: "Parents see growth without needing a manual.", tone: "coral" },
+  { icon: "calm", title: "Calm, not cluttered", body: "Kind words and one clear next step, always.", tone: "green" },
+  { icon: "devices", title: "Works everywhere", body: "Phone, tablet or laptop, all the same.", tone: "amber" },
+] as const;
+---
+
+<section class="section container how" id="how" data-reveal>
+  <div class="section-heading center">
+    <p class="eyebrow">How it works</p>
+    <h2 class="heading-lg">From lesson plan to <span class="accent-text">real progress.</span></h2>
+    <p class="lead">Teachers set the path, students follow it, and families stay in the loop. All in one place.</p>
+  </div>
+  <div class="steps" data-reveal-sequence>
+    <div class="step-line" aria-hidden="true"></div>
+    {steps.map((step) => (
+      <article class:list={["step", step.tone]}>
+        <span>{step.number}</span>
+        <h3>{step.title}</h3>
+        <p>{step.body}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<section class="section container" data-reveal>
+  <div class="operator-band">
+    <div class="operator-copy">
+      <p class="eyebrow">For school leaders</p>
+      <h2 class="heading-lg">Plan a whole term in an afternoon.</h2>
+      <p>Set up your lessons once, then change them anytime. Everything stays organized, and student work is always safe.</p>
+      <ul>
+        <li><i>✓</i> Change your plan in a tap</li>
+        <li><i>✓</i> Student work always stays safe</li>
+        <li><i>✓</i> Less busywork, more teaching</li>
+      </ul>
+    </div>
+    <div class="builder" aria-label="A lesson plan changing from ten to fourteen days">
+      <div class="builder-bar"><strong>Money Choices</strong><span>Length changed</span></div>
+      <div class="builder-body">
+        <p class="change">10 days <span>➜</span> <b>14 days</b></p>
+        <div class="plans">
+          <div><small>Before</small><p>Day 1 · Read</p><p>Day 3 · Quiz</p><p>Day 5 · Project</p></div>
+          <div><small>After</small><p>Day 1 · Read</p><p>Day 4 · Quiz</p><p>Day 7 · Project</p></div>
+        </div>
+        <div class="builder-footer"><strong><BrandIcon name="lock" />Student work is safe</strong><span>Apply plan</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section container roles" id="roles" data-reveal>
+  <div class="section-heading center">
+    <p class="eyebrow">For everyone</p>
+    <h2 class="heading-lg">Friendly for <span class="accent-text">everyone.</span></h2>
+    <p class="lead">A calm, simple experience for students, teachers and families alike.</p>
+  </div>
+  <div class="role-grid">
+    <article class="role-card student lift">
+      <div class="role-demo">
+        <span class="role-label">Students</span>
+        <p><i>✓</i><strong>What is money?</strong></p>
+        <p><i>▤</i><strong>Where money came from</strong><b>Start</b></p>
+        <p><i>✎</i><strong>Money quiz</strong></p>
+      </div>
+      <div class="role-copy"><h3>Always knows what’s next</h3><p>One clear step at a time, with one big button. Reading is a single tap. Work saves by itself and celebrates when they turn it in.</p></div>
+    </article>
+    <article class="role-card teacher lift">
+      <div class="role-demo">
+        <span class="role-label">Teachers</span>
+        <p><i>MJ</i><span><strong>Maya J.</strong><small>Money quiz</small></span><b>8/10 auto</b></p>
+        <p><i>LB</i><span><strong>Leo B.</strong><small>Build a budget</small></span><b>To review</b></p>
+        <p><i>AR</i><span><strong>Ava R.</strong><small>Reflection</small></span><b>To review</b></p>
+      </div>
+      <div class="role-copy"><h3>One tidy review list</h3><p>Everything waiting for you in one place. Quizzes come back already scored, so you only spend time on the work that needs your eyes.</p></div>
+    </article>
+    <article class="role-card family lift">
+      <div class="role-demo">
+        <span class="role-label">Families</span>
+        <div class="family-progress"><span><BrandIcon name="learner" /></span><div><strong>Maya</strong><small>Money Choices</small></div><b>62%</b><i><em></em></i></div>
+        <p><i><BrandIcon name="celebrate" /></i><strong>Finished “What is money?”</strong></p>
+        <p><i><BrandIcon name="message" /></i><strong>Note from Ms. Rivera</strong></p>
+      </div>
+      <div class="role-copy"><h3>See real progress, not grades</h3><p>A clear picture of how your child is doing, plus a simple way to send a note to the teacher. No app-switching, no guesswork.</p></div>
+    </article>
+  </div>
+</section>
+
+<section class="section container" id="features" data-reveal>
+  <div class="section-heading center">
+    <p class="eyebrow">What’s inside</p>
+    <h2 class="heading-lg">Simple tools that <span class="accent-text">just work.</span></h2>
+  </div>
+  <div class="feature-grid">
+    {features.map((feature) => (
+      <article class="feature lift">
+        <span class={feature.tone}><BrandIcon name={feature.icon} /></span>
+        <h3>{feature.title}</h3>
+        <p>{feature.body}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<section class="section container" id="why" data-reveal>
+  <div class="why-band">
+    <div class="why-copy">
+      <p class="eyebrow">Why OurMicroSchool</p>
+      <h2 class="heading-lg">Built for real school days, <span class="accent-text">not spreadsheets.</span></h2>
+      <p class="lead">Simple, calm tools that respect your time and a child’s curiosity. Kind words instead of jargon, on every screen and every device.</p>
+    </div>
+    <ul>
+      {reasons.map((reason) => (
+        <li class="lift"><span class={reason.tone}><BrandIcon name={reason.icon} /></span><div><h3>{reason.title}</h3><p>{reason.body}</p></div></li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="section container" id="cta" data-reveal>
+  <div class="big-cta">
+    <h2 class="heading-lg">Ready to run your school the simple way?</h2>
+    <p>Open the app to start planning, or say hello and we’ll help you get set up.</p>
+    <div><a class="button button-light" href={appUrl} rel="noreferrer">Get started</a><a class="button button-ghost-light" href="/contact?inquiry=demo">Talk to us</a></div>
+  </div>
+</section>
+
+<style>
+  .section-heading h2 { margin-top: 0.75rem; }
+  .section-heading .lead { margin-top: 0.9rem; }
+  .steps { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.3rem; }
+  .step-line { position: absolute; top: 2.35rem; right: 16%; left: 16%; z-index: -1; height: 3px; border-radius: 99rem; background: linear-gradient(90deg, var(--primary), var(--accent), var(--success)); opacity: 0.3; transform: scaleX(0); transform-origin: left; transition: transform 850ms var(--ease-out) 150ms; }
+  .steps.is-visible .step-line { transform: scaleX(1); }
+  .step { opacity: 0; transform: translateY(1.25rem) scale(0.96); text-align: center; transition: opacity 550ms var(--ease-out), transform 550ms var(--ease-out); }
+  .steps.is-visible .step { opacity: 1; transform: none; }
+  .steps.is-visible .step:nth-of-type(1) { transition-delay: 180ms; }
+  .steps.is-visible .step:nth-of-type(2) { transition-delay: 320ms; }
+  .steps.is-visible .step:nth-of-type(3) { transition-delay: 460ms; }
+  .step > span { display: grid; width: 4.75rem; height: 4.75rem; place-items: center; margin-inline: auto; border: 2px solid; border-radius: 50%; background: var(--surface); font-size: 1.7rem; font-weight: 800; box-shadow: 0 1rem 2rem -1.2rem currentColor; transition: transform 220ms var(--ease-out), background 220ms ease, color 220ms ease; }
+  .step.teal > span { border-color: oklch(0.86 0.05 195); color: var(--primary); }
+  .step.coral > span { border-color: oklch(0.88 0.07 45); color: var(--accent); }
+  .step.green > span { border-color: oklch(0.86 0.06 155); color: var(--success); }
+  .step h3 { margin-top: 1rem; font-size: 1.05rem; letter-spacing: -0.015em; }
+  .step p { max-width: 16rem; margin: 0.35rem auto 0; color: var(--ink-soft); font-size: 0.86rem; font-weight: 650; line-height: 1.5; }
+  @media (hover: hover) and (pointer: fine) { .step > span:hover { transform: translateY(-0.3rem) scale(1.05); background: currentColor; color: var(--surface); } }
+  .operator-band { position: relative; display: grid; grid-template-columns: 1fr 1.05fr; align-items: center; gap: clamp(2.5rem, 6vw, 5rem); overflow: hidden; border-radius: 1.9rem; background: linear-gradient(150deg, oklch(0.32 0.07 200), oklch(0.25 0.06 205)); padding: clamp(1.75rem, 5vw, 3.5rem); color: var(--surface); }
+  .operator-band::before, .operator-band::after { position: absolute; width: 17rem; height: 17rem; border-radius: 50%; content: ""; filter: blur(1.25rem); }
+  .operator-band::before { top: -6rem; right: -3rem; background: oklch(0.62 0.19 32 / 0.24); }
+  .operator-band::after { bottom: -7rem; left: -3rem; background: oklch(0.55 0.14 155 / 0.2); }
+  .operator-copy, .builder { position: relative; z-index: 1; }
+  .operator-copy .eyebrow { color: oklch(0.82 0.12 45); }
+  .operator-copy h2 { margin-top: 0.8rem; }
+  .operator-copy > p:not(.eyebrow) { margin-top: 0.9rem; color: oklch(0.88 0.02 200); }
+  .operator-copy ul { display: grid; gap: 0.65rem; padding: 0; margin-top: 1.35rem; list-style: none; }
+  .operator-copy li { display: flex; align-items: center; gap: 0.7rem; color: oklch(0.94 0.01 200); font-size: 0.9rem; font-weight: 650; }
+  .operator-copy li i { display: grid; width: 1.5rem; height: 1.5rem; place-items: center; border-radius: 0.48rem; background: var(--accent); font-style: normal; font-weight: 800; }
+  .builder { overflow: hidden; border-radius: 1.25rem; background: var(--surface); color: var(--ink); box-shadow: 0 2rem 4rem -2rem oklch(0.1 0.02 200 / 0.7); }
+  .builder-bar { display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border); background: var(--surface-muted); padding: 0.8rem 1rem; font-size: 0.8rem; }
+  .builder-bar span { margin-left: auto; border-radius: 99rem; background: var(--accent-soft); color: oklch(0.5 0.15 35); padding: 0.3rem 0.7rem; font-size: 0.67rem; font-weight: 800; }
+  .builder-body { padding: 1rem; }
+  .change { border-radius: 0.75rem; background: var(--primary-soft); padding: 0.65rem; color: var(--ink-soft); font-size: 0.76rem; font-weight: 800; text-align: center; }
+  .change b { color: var(--primary); }
+  .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 0.8rem; }
+  .plans > div { border-radius: 0.85rem; background: var(--surface-muted); padding: 0.8rem; }
+  .plans > div:last-child { background: var(--success-soft); color: oklch(0.32 0.08 155); }
+  .plans small { color: var(--ink-faint); font-size: 0.65rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+  .plans p { padding-top: 0.28rem; font-size: 0.75rem; font-weight: 750; }
+  .builder-footer { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.9rem; }
+  .builder-footer strong { display: inline-flex; flex: 1; align-items: center; gap: 0.35rem; color: var(--success); font-size: 0.7rem; }
+  .builder-footer span { border-radius: 99rem; background: var(--primary); box-shadow: 0 3px 0 var(--primary-pressed); color: var(--surface); padding: 0.55rem 0.95rem; font-size: 0.72rem; font-weight: 800; }
+  .role-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.15rem; margin-top: 2.7rem; }
+  .role-card { overflow: hidden; border: 1px solid var(--border); border-radius: 1.5rem; background: var(--surface); padding: 0.45rem; }
+  .role-demo { min-height: 15.5rem; border-radius: 1.1rem; padding: 1rem; }
+  .student .role-demo { background: linear-gradient(165deg, var(--accent-soft), oklch(0.975 0.02 40)); }
+  .teacher .role-demo { background: linear-gradient(165deg, var(--success-soft), oklch(0.975 0.02 155)); }
+  .family .role-demo { background: linear-gradient(165deg, var(--primary-soft), oklch(0.975 0.012 195)); }
+  .role-label { display: inline-block; margin-bottom: 0.7rem; border-radius: 99rem; padding: 0.25rem 0.65rem; color: var(--surface); font-size: 0.65rem; font-weight: 800; }
+  .student .role-label { background: var(--accent); }
+  .teacher .role-label { background: var(--success); }
+  .family .role-label { background: var(--primary); }
+  .role-demo > p { display: flex; min-height: 3rem; align-items: center; gap: 0.55rem; margin-bottom: 0.5rem; border-radius: 0.8rem; background: var(--surface); padding: 0.55rem 0.65rem; box-shadow: 0 4px 10px -8px oklch(0.4 0.03 200 / 0.28); font-size: 0.73rem; }
+  .role-demo > p > i { display: grid; width: 1.85rem; height: 1.85rem; flex: 0 0 auto; place-items: center; border-radius: 50%; background: var(--surface-muted); color: var(--primary); font-size: 0.66rem; font-style: normal; font-weight: 800; }
+  .student .role-demo > p:first-of-type > i { background: var(--success); color: var(--surface); }
+  .role-demo > p strong { flex: 1; line-height: 1.2; }
+  .role-demo > p b { border-radius: 99rem; background: var(--accent); color: var(--surface); padding: 0.32rem 0.55rem; font-size: 0.6rem; }
+  .teacher .role-demo > p:first-of-type b { background: var(--success); }
+  .teacher .role-demo p span { display: grid; flex: 1; line-height: 1.2; }
+  .teacher .role-demo small, .family-progress small { color: var(--ink-faint); font-size: 0.62rem; font-weight: 700; }
+  .family-progress { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 0.55rem; margin-bottom: 0.5rem; border-radius: 0.8rem; background: var(--surface); padding: 0.7rem; font-size: 0.74rem; }
+  .family-progress > span { display: grid; width: 2.1rem; height: 2.1rem; place-items: center; border-radius: 50%; background: var(--success-soft); }
+  .family-progress > div { display: grid; line-height: 1.2; }
+  .family-progress b { color: var(--primary); }
+  .family-progress > i { grid-column: 1 / -1; height: 0.5rem; overflow: hidden; border-radius: 99rem; background: oklch(0.93 0.01 195); }
+  .family-progress em { display: block; width: 62%; height: 100%; border-radius: inherit; background: var(--primary); }
+  .role-copy { padding: 1rem 0.85rem 0.8rem; }
+  .role-copy h3 { font-size: 1rem; letter-spacing: -0.015em; }
+  .role-copy p { margin-top: 0.35rem; color: var(--ink-soft); font-size: 0.79rem; font-weight: 650; line-height: 1.5; }
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2.7rem; }
+  .feature { border: 1px solid var(--border); border-radius: 1.2rem; background: var(--surface); padding: 1.4rem; }
+  .feature > span, .why-band li > span { display: grid; width: 3rem; height: 3rem; place-items: center; border-radius: 0.9rem; font-size: 1.35rem; }
+  .feature .teal, .why-band .teal { background: var(--primary-soft); color: var(--primary); }
+  .feature .coral, .why-band .coral { background: var(--accent-soft); color: var(--accent); }
+  .feature .green, .why-band .green { background: var(--success-soft); color: var(--success); }
+  .feature .amber, .why-band .amber { background: var(--amber-soft); color: oklch(0.58 0.14 78); }
+  .feature h3 { margin-top: 0.85rem; font-size: 0.96rem; letter-spacing: -0.015em; }
+  .feature p { margin-top: 0.3rem; color: var(--ink-soft); font-size: 0.8rem; font-weight: 650; line-height: 1.5; }
+  .why-band { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2.5rem, 6vw, 5rem); border: 1px solid var(--border); border-radius: 1.9rem; background: var(--surface-muted); padding: clamp(1.75rem, 5vw, 3.4rem); }
+  .why-copy { position: sticky; top: 7rem; align-self: start; }
+  .why-copy h2 { margin-top: 0.8rem; }
+  .why-copy .lead { margin-top: 0.9rem; font-size: 1rem; }
+  .why-band ul { display: grid; gap: 0.75rem; padding: 0; list-style: none; }
+  .why-band li { display: flex; gap: 0.85rem; border: 1px solid var(--border); border-radius: 1rem; background: var(--surface); padding: 1rem; }
+  .why-band li > span { width: 2.65rem; height: 2.65rem; flex: 0 0 auto; font-size: 1.15rem; }
+  .why-band h3 { font-size: 0.94rem; }
+  .why-band li p { margin-top: 0.2rem; color: var(--ink-soft); font-size: 0.78rem; font-weight: 650; line-height: 1.45; }
+  .big-cta { overflow: hidden; border-radius: 1.9rem; background: var(--primary); padding: clamp(2.3rem, 6vw, 4.4rem); color: var(--surface); text-align: center; }
+  .big-cta p { max-width: 33rem; margin: 0.9rem auto 0; color: oklch(0.94 0.02 200); font-size: 1rem; }
+  .big-cta > div { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; margin-top: 1.6rem; }
+  @media (max-width: 55rem) { .operator-band, .why-band { grid-template-columns: 1fr; } .role-grid { grid-template-columns: 1fr 1fr; } .role-card:last-child { grid-column: 1 / -1; } .feature-grid { grid-template-columns: 1fr 1fr; } .why-copy { position: static; } }
+  @media (max-width: 42rem) { .steps { grid-template-columns: 1fr; gap: 2rem; } .step-line { top: 2rem; bottom: 2rem; left: 50%; width: 3px; height: auto; transform: scaleY(0); transform-origin: top; } .steps.is-visible .step-line { transform: scaleY(1); } .step { position: relative; z-index: 1; background: var(--page); } .operator-band { border-radius: 1.4rem; } .role-grid, .feature-grid { grid-template-columns: 1fr; } .role-card:last-child { grid-column: auto; } }
+  @media (max-width: 30rem) { .builder-footer { align-items: flex-start; flex-direction: column; } .big-cta .button { width: 100%; } }
+</style>

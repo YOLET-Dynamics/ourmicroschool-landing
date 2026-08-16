@@ -1,0 +1,173 @@
+---
+import SiteFooter from "@/components/SiteFooter.astro";
+import SiteHeader from "@/components/SiteHeader.astro";
+import "@/styles/global.css";
+
+type Props = {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  image?: string;
+  noindex?: boolean;
+};
+
+const {
+  title = "OurMicroSchool — Run your whole school from one simple place",
+  description = "Plan lessons, check student work, and keep families in the loop with one calm workspace built for microschools.",
+  canonicalPath = Astro.url.pathname,
+  image = "/og.png",
+  noindex = false,
+} = Astro.props;
+
+const site = Astro.site ?? new URL("https://ourmicroschool.com");
+const canonical = new URL(canonicalPath, site);
+const imageUrl = new URL(image, site);
+const appUrl = import.meta.env.PUBLIC_OMS_URL ?? import.meta.env.NEXT_PUBLIC_OMS_URL ?? "https://app.ourmicroschool.com";
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "OurMicroSchool",
+  alternateName: "OMS",
+  url: site.href,
+  logo: new URL("/logos/OMS_LogoDesign_01-08.png", site).href,
+  email: "hello@ourmicroschool.com",
+  parentOrganization: { "@type": "Organization", name: "SYMVERGE PLATFORMS LLC" },
+  address: { "@type": "PostalAddress", addressRegion: "Virginia", addressCountry: "US" },
+  sameAs: ["https://yoletent.com"],
+};
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "OurMicroSchool",
+  applicationCategory: "EducationalApplication",
+  operatingSystem: "Web",
+  url: appUrl,
+  description,
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f3ec" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? "noindex,nofollow" : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="OurMicroSchool" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="OurMicroSchool learning workspace" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify([organizationSchema, softwareSchema])}></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <SiteHeader />
+    <main id="main-content"><slot /></main>
+    <SiteFooter />
+    <script>
+      const header = document.querySelector("[data-site-header]");
+      const setHeaderState = () => {
+        if (header instanceof HTMLElement) header.dataset.scrolled = String(window.scrollY > 12);
+      };
+      setHeaderState();
+      window.addEventListener("scroll", setHeaderState, { passive: true });
+
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const revealTargets = document.querySelectorAll("[data-reveal], [data-backdrop-reveal]");
+      const revealSequences = document.querySelectorAll("[data-reveal-sequence]");
+      if (reduceMotion || !("IntersectionObserver" in window)) {
+        revealTargets.forEach((target) => target.classList.add("is-visible"));
+        revealSequences.forEach((target) => target.classList.add("is-visible"));
+      } else {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          });
+        }, { threshold: 0.15, rootMargin: "0px 0px -14% 0px" });
+        revealTargets.forEach((target) => observer.observe(target));
+
+        const sequenceObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-visible");
+            sequenceObserver.unobserve(entry.target);
+          });
+        }, { threshold: 0.24, rootMargin: "0px 0px -10% 0px" });
+        revealSequences.forEach((target) => sequenceObserver.observe(target));
+      }
+
+      document.querySelectorAll("details").forEach((details) => {
+        const summary = details.querySelector("summary");
+        if (!(summary instanceof HTMLElement)) return;
+        const updateLabel = () => {
+          if (!details.classList.contains("mobile-menu")) return;
+          summary.setAttribute("aria-label", details.open ? "Close navigation menu" : "Open navigation menu");
+        };
+        updateLabel();
+        details.addEventListener("toggle", updateLabel);
+      });
+
+      document.querySelectorAll("[data-api-form]").forEach((element) => {
+        if (!(element instanceof HTMLFormElement)) return;
+        element.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          if (!element.reportValidity()) return;
+          const status = element.querySelector("[data-form-status]");
+          const button = element.querySelector('button[type="submit"]');
+          if (!(status instanceof HTMLElement) || !(button instanceof HTMLButtonElement)) return;
+          const idleLabel = button.textContent ?? "Submit";
+          button.disabled = true;
+          button.setAttribute("aria-busy", "true");
+          button.textContent = "Sending…";
+          status.textContent = "";
+          delete status.dataset.kind;
+          try {
+            const formData = new FormData(element);
+            const payload: Record<string, FormDataEntryValue | boolean> = Object.fromEntries(formData.entries());
+            if ("subscribe" in payload) payload.subscribe = payload.subscribe === "on";
+            const response = await fetch(element.action, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+            const data = await response.json();
+            if (!response.ok || !data.success) throw new Error(data.message || "Please try again.");
+            status.dataset.kind = "success";
+            status.textContent = element.action.endsWith("newsletter")
+              ? "You’re on the list. Thanks for joining us."
+              : "Message sent. We’ll be in touch shortly.";
+            element.reset();
+          } catch (error) {
+            status.dataset.kind = "error";
+            status.textContent = error instanceof Error ? error.message : "Something went wrong. Please try again.";
+          } finally {
+            button.disabled = false;
+            button.removeAttribute("aria-busy");
+            button.textContent = idleLabel;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

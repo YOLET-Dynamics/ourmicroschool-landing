@@ -1,0 +1,106 @@
+---
+import BrandIcon from "@/components/BrandIcon.astro";
+
+const appUrl = import.meta.env.PUBLIC_OMS_URL ?? import.meta.env.NEXT_PUBLIC_OMS_URL ?? "https://app.ourmicroschool.com";
+const proof = ["Set up in a day", "Loved by families", "Works on any device"];
+const path = [
+  { state: "done", icon: "✓", title: "What is money?", meta: "All done" },
+  { state: "current", icon: "▤", title: "Where money came from", meta: "Read this, then tap Start" },
+  { state: "locked", icon: "✎", title: "Money quiz", meta: "Locked until you finish reading" },
+];
+---
+
+<section class="hero container" id="top">
+  <div class="hero-copy hero-enter">
+    <h1 class="heading-xl">Run your micro-school from <span class="accent-text">one place.</span></h1>
+    <p class="lead">Plan the lessons, check student work, and keep families in the loop. Students always know what to do next, and everything lives in one friendly place.</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href={appUrl} rel="noreferrer">Get started</a>
+      <a class="button button-secondary" href="#how">See how it works</a>
+    </div>
+    <div class="hero-proof" aria-label="Product highlights">
+      {proof.map((item) => <span><i>✓</i>{item}</span>)}
+    </div>
+  </div>
+
+  <div class="hero-visual" data-reveal aria-label="A preview of Maya's learning path">
+    <div class="visual-glow" aria-hidden="true"></div>
+    <div class="product-window">
+      <div class="window-bar">
+        <span></span><span></span><span></span><strong>Maya’s path</strong>
+      </div>
+      <div class="student-path">
+        <div class="student-heading">
+          <span class="avatar"><BrandIcon name="learner" /></span>
+          <div><strong>Hi Maya!</strong><small>Money Choices</small></div>
+          <span class="streak"><BrandIcon name="streak" />4</span>
+          <span class="xp"><BrandIcon name="spark" />1,240</span>
+        </div>
+        <div class="progress-card">
+          <div><strong>You’re on a roll!</strong><b>62%</b></div>
+          <span><i></i></span>
+        </div>
+        <div class="path-list">
+          {path.map((item) => (
+            <div class:list={["path-item", item.state]}>
+              <span class="path-icon"><i aria-hidden="true"></i>{item.icon}</span>
+              <div><strong>{item.title}</strong><small>{item.meta}</small></div>
+              {item.state === "current" && <span class="start-chip">Start</span>}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { position: relative; display: grid; min-height: min(45rem, calc(100svh - 5rem)); grid-template-columns: 1.04fr 1fr; align-items: center; gap: clamp(2.5rem, 6vw, 5rem); overflow: clip; padding-block: clamp(4rem, 8vw, 6.75rem) 2rem; }
+  .hero-copy { position: relative; z-index: 2; }
+  .hero h1 { max-width: 39rem; margin-top: 0; }
+  .hero .lead { max-width: 34rem; margin-top: 1.45rem; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.8rem; }
+  .hero-proof { display: flex; flex-wrap: wrap; gap: 0.65rem 1.2rem; margin-top: 1.65rem; color: var(--ink-soft); font-size: 0.79rem; font-weight: 700; }
+  .hero-proof span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .hero-proof i { color: var(--success); font-style: normal; font-weight: 800; }
+  .hero-visual { position: relative; min-width: 0; }
+  .visual-glow { position: absolute; inset: 8% 8% -5%; border-radius: 3rem; background: oklch(0.46 0.13 195 / 0.18); filter: blur(2.8rem); }
+  .product-window { position: relative; overflow: hidden; border: 1px solid var(--border); border-radius: 1.5rem; background: var(--surface); box-shadow: 0 38px 90px -34px oklch(0.3 0.03 200 / 0.5); }
+  .window-bar { display: flex; align-items: center; gap: 0.42rem; border-bottom: 1px solid var(--border); background: var(--surface-muted); padding: 0.72rem 0.9rem; }
+  .window-bar > span { width: 0.68rem; height: 0.68rem; border-radius: 50%; }
+  .window-bar > span:nth-child(1) { background: oklch(0.72 0.16 30); }
+  .window-bar > span:nth-child(2) { background: oklch(0.82 0.14 90); }
+  .window-bar > span:nth-child(3) { background: oklch(0.72 0.13 155); }
+  .window-bar strong { margin-left: 0.55rem; color: var(--ink-faint); font-size: 0.72rem; }
+  .student-path { background: linear-gradient(180deg, oklch(0.97 0.02 195), var(--surface-muted) 44%); padding: clamp(1rem, 3.5vw, 1.4rem); }
+  .student-heading { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: 0.65rem; margin-bottom: 1rem; }
+  .avatar { display: grid; width: 2.75rem; height: 2.75rem; place-items: center; border-radius: 50%; background: oklch(0.9 0.06 155); color: var(--success); font-size: 1.35rem; }
+  .student-heading div { display: grid; line-height: 1.2; }
+  .student-heading div strong { font-size: 1.16rem; letter-spacing: -0.02em; }
+  .student-heading small { color: var(--ink-soft); font-size: 0.75rem; font-weight: 650; }
+  .streak, .xp { display: inline-flex; align-items: center; gap: 0.28rem; border-radius: 99rem; padding: 0.35rem 0.7rem; font-size: 0.75rem; font-weight: 800; }
+  .streak { background: var(--accent-soft); color: oklch(0.5 0.15 35); }
+  .xp { background: var(--amber-soft); color: oklch(0.5 0.12 75); }
+  .progress-card { border-radius: 1rem; background: var(--surface); padding: 0.8rem 0.9rem; box-shadow: 0 4px 12px -8px oklch(0.4 0.03 200 / 0.25); }
+  .progress-card div { display: flex; justify-content: space-between; color: var(--ink-soft); font-size: 0.75rem; }
+  .progress-card b { color: var(--primary); }
+  .progress-card > span { display: block; height: 0.58rem; overflow: hidden; margin-top: 0.5rem; border-radius: 99rem; background: oklch(0.93 0.01 195); }
+  .progress-card > span i { display: block; width: 62%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--success), var(--primary)); }
+  .path-list { display: grid; gap: 0.65rem; margin-top: 1rem; }
+  .path-item { display: flex; min-width: 0; align-items: center; gap: 0.75rem; border: 2px solid var(--border); border-radius: 1rem; background: var(--surface); padding: 0.72rem 0.85rem; }
+  .path-item.done { border-color: oklch(0.86 0.06 155); background: var(--success-soft); }
+  .path-item.current { border-color: var(--accent); }
+  .path-item.locked { background: var(--surface-muted); color: var(--ink-faint); }
+  .path-icon { position: relative; display: grid; width: 2.4rem; height: 2.4rem; flex: 0 0 auto; place-items: center; border-radius: 50%; background: var(--surface-muted); color: var(--ink-faint); font-weight: 800; }
+  .done .path-icon { background: var(--success); color: var(--surface); }
+  .current .path-icon { background: var(--accent-soft); color: var(--accent); }
+  .current .path-icon i { position: absolute; inset: 0; border-radius: 50%; background: oklch(0.62 0.19 32 / 0.4); animation: pulse-ring 1.8s ease-out infinite; }
+  .path-item > div { display: grid; min-width: 0; flex: 1; line-height: 1.25; }
+  .path-item strong { overflow: hidden; font-size: 0.84rem; text-overflow: ellipsis; white-space: nowrap; }
+  .path-item small { overflow: hidden; color: var(--ink-soft); font-size: 0.68rem; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+  .done small { color: oklch(0.45 0.09 155); }
+  .current small { color: oklch(0.5 0.15 35); }
+  .start-chip { flex: 0 0 auto; border-radius: 99rem; background: var(--accent); box-shadow: 0 3px 0 var(--accent-pressed); color: var(--surface); padding: 0.55rem 0.95rem; font-size: 0.75rem; font-weight: 800; }
+  @media (max-width: 54rem) { .hero { min-height: auto; grid-template-columns: 1fr; padding-top: 4.5rem; } .hero-copy { max-width: 43rem; } .hero-visual { width: min(100%, 38rem); margin-inline: auto; } }
+  @media (max-width: 34rem) { .hero { padding-top: 3.5rem; } .hero-actions .button { width: 100%; } .hero-proof { display: grid; } .student-heading { grid-template-columns: auto 1fr auto; } .xp { display: none; } .path-item { padding: 0.62rem; } .start-chip { padding-inline: 0.75rem; } }
+</style>

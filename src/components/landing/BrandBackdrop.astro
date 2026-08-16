@@ -1,0 +1,135 @@
+<div class="brand-backdrop" aria-hidden="true">
+  <div class="trail-scene scene-one teal" data-backdrop-reveal>
+    <svg viewBox="0 0 440 520" role="presentation">
+      <path class="trail-echo" d="M424 18C318 44 391 144 278 177C181 205 252 300 146 337C80 360 77 433 18 502" />
+      <path class="trail-line" d="M424 18C318 44 391 144 278 177C181 205 252 300 146 337C80 360 77 433 18 502" />
+      <g transform="translate(278 177)"><g class="checkpoint"><circle r="15"></circle><circle class="checkpoint-dot" r="4"></circle></g></g>
+      <path class="doodle coral" d="M327 350v25m-12-12h25" />
+    </svg>
+  </div>
+
+  <div class="trail-scene scene-two coral" data-backdrop-reveal>
+    <svg viewBox="0 0 440 520" role="presentation">
+      <path class="trail-echo" d="M10 8C132 54 49 147 161 193C265 236 177 324 295 365C361 388 371 447 430 510" />
+      <path class="trail-line" d="M10 8C132 54 49 147 161 193C265 236 177 324 295 365C361 388 371 447 430 510" />
+      <g transform="translate(161 193)"><g class="checkpoint"><circle r="15"></circle><path class="checkpoint-mark" d="m-6 0 4 4 8-9" /></g></g>
+      <path class="doodle green" d="M80 355c13-17 26 17 39 0s26 17 39 0" />
+    </svg>
+  </div>
+
+  <div class="trail-scene scene-three green" data-backdrop-reveal>
+    <svg viewBox="0 0 440 520" role="presentation">
+      <path class="trail-echo" d="M432 12C306 54 394 152 269 198C168 236 250 320 135 364C71 389 68 454 12 510" />
+      <path class="trail-line" d="M432 12C306 54 394 152 269 198C168 236 250 320 135 364C71 389 68 454 12 510" />
+      <g transform="translate(269 198)"><g class="checkpoint"><circle r="15"></circle><circle class="checkpoint-dot" r="4"></circle></g></g>
+      <path class="doodle amber" d="m333 358 4 10 11 1-8 7 2 11-9-6-10 6 3-11-8-7 11-1 4-10Z" />
+    </svg>
+  </div>
+
+  <div class="trail-scene scene-four amber" data-backdrop-reveal>
+    <svg viewBox="0 0 440 520" role="presentation">
+      <path class="trail-echo" d="M8 14C116 46 45 142 155 184C273 229 183 315 299 357C369 383 370 452 432 507" />
+      <path class="trail-line" d="M8 14C116 46 45 142 155 184C273 229 183 315 299 357C369 383 370 452 432 507" />
+      <g transform="translate(299 357)"><g class="checkpoint"><circle r="15"></circle><path class="checkpoint-mark" d="m-6 0 4 4 8-9" /></g></g>
+      <path class="doodle teal" d="M91 295c10-7 18-7 27 0s18 7 28 0" />
+    </svg>
+  </div>
+
+  <div class="trail-scene scene-five teal" data-backdrop-reveal>
+    <svg viewBox="0 0 440 520" role="presentation">
+      <path class="trail-echo" d="M430 10C318 48 390 146 274 190C164 232 246 322 132 366C66 391 67 457 10 510" />
+      <path class="trail-line" d="M430 10C318 48 390 146 274 190C164 232 246 322 132 366C66 391 67 457 10 510" />
+      <g transform="translate(132 366)"><g class="checkpoint"><circle r="15"></circle><circle class="checkpoint-dot" r="4"></circle></g></g>
+      <path class="doodle coral" d="M330 132v24m-12-12h24" />
+    </svg>
+  </div>
+</div>
+
+<style>
+  .brand-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: clip;
+    pointer-events: none;
+  }
+
+  .trail-scene {
+    position: absolute;
+    width: clamp(26rem, 43vw, 45rem);
+    opacity: 0;
+    transform: translateY(1.25rem);
+    transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+  }
+
+  .trail-scene.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .scene-one { top: 2%; right: -1rem; }
+  .scene-two { top: 22%; left: -1rem; }
+  .scene-three { top: 42%; right: -1rem; }
+  .scene-four { top: 62%; left: -1rem; }
+  .scene-five { top: 80%; right: -1rem; }
+
+  .trail-scene.teal { color: var(--primary); }
+  .trail-scene.coral { color: var(--accent); }
+  .trail-scene.green { color: var(--success); }
+  .trail-scene.amber { color: oklch(0.62 0.14 78); }
+
+  svg { width: 100%; height: auto; overflow: visible; }
+
+  .trail-line,
+  .trail-echo,
+  .doodle,
+  .checkpoint-mark {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .trail-line { stroke-width: 2.4; stroke-dasharray: 5 10; opacity: 0.5; }
+  .trail-echo { stroke-width: 1.2; opacity: 0.17; transform: translate(0.2rem, 0.15rem); }
+
+  .checkpoint {
+    opacity: 0;
+    transform: scale(0.72);
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: opacity 400ms ease 380ms, transform 600ms var(--ease-out) 380ms;
+  }
+
+  .is-visible .checkpoint { opacity: 0.96; transform: scale(1); }
+  .checkpoint > circle:first-child { fill: var(--page); stroke: currentColor; stroke-width: 2; vector-effect: non-scaling-stroke; }
+  .checkpoint-dot { fill: currentColor; }
+  .checkpoint-mark { stroke-width: 2; }
+
+  .doodle { stroke-width: 1.7; opacity: 0; transition: opacity 400ms ease 620ms; }
+  .is-visible .doodle { opacity: 0.46; }
+  .doodle.teal { color: var(--primary); }
+  .doodle.coral { color: var(--accent); }
+  .doodle.green { color: var(--success); }
+  .doodle.amber { color: oklch(0.62 0.14 78); }
+
+  @media (max-width: 58rem) {
+    .trail-scene { width: clamp(23rem, 72vw, 32rem); }
+    .scene-one, .scene-three, .scene-five { right: -5rem; }
+    .scene-two, .scene-four { left: -5rem; }
+  }
+
+  @media (max-width: 38rem) {
+    .trail-scene { width: 25rem; }
+    .scene-one, .scene-three, .scene-five { right: -6.5rem; }
+    .scene-two, .scene-four { left: -6.5rem; }
+    .doodle { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trail-scene,
+    .checkpoint,
+    .doodle { transition: none; }
+  }
+</style>

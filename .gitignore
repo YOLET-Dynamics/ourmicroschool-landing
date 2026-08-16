@@ -83,7 +83,8 @@ web_modules/
 .cache
 .parcel-cache
 
-# Next.js build output
+# Framework build output
+.astro/
 .next
 out
 

@@ -1,0 +1,206 @@
+---
+const appUrl = import.meta.env.PUBLIC_OMS_URL ?? import.meta.env.NEXT_PUBLIC_OMS_URL ?? "https://app.ourmicroschool.com";
+const links = [
+  { label: "How it works", href: "/#how" },
+  { label: "Features", href: "/#features" },
+  { label: "Why OMS", href: "/#why" },
+];
+---
+
+<header class="site-header" data-site-header>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <a class="brand" href="/" aria-label="OurMicroSchool home">
+      <img
+        src="/logos/OMS_LogoDesign_01-09.png"
+        width="3000"
+        height="2365"
+        alt=""
+        decoding="async"
+      />
+      <span>OurMicroSchool</span>
+    </a>
+
+    <div class="desktop-links">
+      {links.map((link) => <a href={link.href}>{link.label}<span class="link-arrow" aria-hidden="true">↗</span></a>)}
+    </div>
+
+    <div class="nav-actions">
+      <a class="login-link" href={appUrl} rel="noreferrer">Log in</a>
+      <a class="nav-cta" href={appUrl} rel="noreferrer">Get started</a>
+    </div>
+
+    <details class="mobile-menu">
+      <summary aria-label="Open navigation menu">
+        <span></span><span></span><span></span>
+      </summary>
+      <div class="mobile-panel">
+        {links.map((link) => <a href={link.href}>{link.label}<span class="link-arrow" aria-hidden="true">↗</span></a>)}
+        <a href="/partners">Partners<span class="link-arrow" aria-hidden="true">↗</span></a>
+        <a href="/contact">Contact<span class="link-arrow" aria-hidden="true">↗</span></a>
+        <a class="mobile-app-link" href={appUrl} rel="noreferrer">Open the app</a>
+      </div>
+    </details>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0.75rem;
+    z-index: 50;
+    width: min(100% - (2 * var(--page-gutter)), var(--container));
+    margin: 0.75rem auto 0;
+  }
+
+  .site-nav {
+    display: flex;
+    min-height: 4.25rem;
+    align-items: center;
+    gap: 1.5rem;
+    border: 1px solid oklch(0.92 0.01 106 / 0.9);
+    border-radius: 1.15rem;
+    background: oklch(0.995 0.003 106 / 0.86);
+    padding: 0.7rem 1rem 0.7rem 1.15rem;
+    box-shadow: 0 14px 34px -24px oklch(0.35 0.03 200 / 0.55);
+    backdrop-filter: blur(18px);
+    transition: box-shadow 220ms ease, background 220ms ease;
+  }
+
+  .site-header[data-scrolled="true"] .site-nav {
+    background: oklch(0.995 0.003 106 / 0.95);
+    box-shadow: 0 18px 42px -24px oklch(0.3 0.03 200 / 0.58);
+  }
+
+  .brand {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.97rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1;
+  }
+
+  .brand img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.55rem;
+    object-fit: cover;
+  }
+
+  .desktop-links {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1.25rem, 2.8vw, 2rem);
+  }
+
+  .desktop-links a,
+  .login-link {
+    color: var(--ink-soft);
+    font-size: 0.84rem;
+    font-weight: 700;
+    transition: color 160ms ease;
+  }
+
+  :global(.link-arrow) {
+    display: inline-block;
+    margin-left: 0.6rem;
+    opacity: 0;
+    transform: translate(-0.18rem, 0.18rem);
+    transition: opacity 160ms ease, transform 220ms var(--ease-out);
+  }
+
+  .desktop-links a:hover :global(.link-arrow),
+  .desktop-links a:focus-visible :global(.link-arrow),
+  .mobile-panel a:hover :global(.link-arrow),
+  .mobile-panel a:focus-visible :global(.link-arrow) {
+    opacity: 1;
+    transform: none;
+  }
+
+  .desktop-links a:hover,
+  .login-link:hover {
+    color: var(--primary);
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .nav-cta {
+    border-radius: 999px;
+    background: var(--primary);
+    box-shadow: 0 3px 0 var(--primary-pressed);
+    color: var(--surface);
+    padding: 0.67rem 1.2rem;
+    font-size: 0.84rem;
+    font-weight: 800;
+    line-height: 1;
+    transition: transform 120ms ease, box-shadow 120ms ease, background 160ms ease;
+  }
+
+  .nav-cta:hover { background: var(--primary-hover); }
+  .nav-cta:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--primary-pressed); }
+
+  .mobile-menu { display: none; margin-left: auto; }
+  .mobile-menu summary { list-style: none; }
+  .mobile-menu summary::-webkit-details-marker { display: none; }
+
+  @media (max-width: 57rem) {
+    .desktop-links,
+    .login-link { display: none; }
+    .nav-actions { margin-left: auto; }
+  }
+
+  @media (max-width: 40rem) {
+    .site-header { top: 0.5rem; margin-top: 0.5rem; }
+    .site-nav { min-height: 3.75rem; border-radius: 1rem; padding: 0.55rem 0.6rem 0.55rem 0.8rem; }
+    .brand span { font-size: 0.9rem; }
+    .brand img { width: 1.85rem; height: 1.85rem; }
+    .nav-actions { display: none; }
+    .mobile-menu { display: block; }
+    .mobile-menu summary {
+      display: grid;
+      width: 2.75rem;
+      height: 2.75rem;
+      place-content: center;
+      gap: 0.26rem;
+      border-radius: 0.8rem;
+      cursor: pointer;
+    }
+    .mobile-menu summary:hover { background: var(--primary-soft); }
+    .mobile-menu summary span { width: 1.15rem; height: 2px; border-radius: 99px; background: var(--ink); }
+    .mobile-menu summary span { transition: opacity 180ms ease, transform 220ms var(--ease-out); }
+    .mobile-menu[open] summary span:nth-child(1) { transform: translateY(0.385rem) rotate(45deg); }
+    .mobile-menu[open] summary span:nth-child(2) { opacity: 0; transform: scaleX(0.35); }
+    .mobile-menu[open] summary span:nth-child(3) { transform: translateY(-0.385rem) rotate(-45deg); }
+    .mobile-panel {
+      position: absolute;
+      top: calc(100% + 0.5rem);
+      right: 0;
+      left: 0;
+      display: grid;
+      gap: 0.25rem;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      background: var(--surface);
+      padding: 0.7rem;
+      box-shadow: var(--shadow-soft);
+      transform-origin: top center;
+      animation: mobile-panel-in 240ms var(--ease-out) both;
+    }
+    .mobile-panel a { display: flex; min-height: 2.8rem; align-items: center; border-radius: 0.7rem; padding: 0.65rem 0.8rem; font-size: 0.95rem; font-weight: 750; }
+    .mobile-panel a:hover { background: var(--primary-soft); color: var(--primary); }
+    .mobile-panel .mobile-app-link { margin-top: 0.35rem; background: var(--primary); color: var(--surface); text-align: center; }
+  }
+
+  @keyframes mobile-panel-in {
+    from { opacity: 0; transform: translateY(-0.45rem) scale(0.985); }
+    to { opacity: 1; transform: none; }
+  }
+</style>

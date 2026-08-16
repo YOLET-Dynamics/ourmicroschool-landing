@@ -1,0 +1,82 @@
+---
+import PageHero from "@/components/PageHero.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const initialInquiry = Astro.url.searchParams.get("inquiry") === "demo" ? "demo" : "general";
+---
+
+<BaseLayout
+  title="Contact | OurMicroSchool"
+  description="Talk with the OurMicroSchool team about a demo, support, partnerships, or anything else on your mind."
+  canonicalPath="/contact"
+>
+  <PageHero
+    eyebrow="Contact"
+    title="Let’s make school days"
+    accent="feel simpler."
+    lead="Questions, ideas, partnership inquiries, or help getting started—we’re listening and usually reply within one business day."
+  />
+
+  <section class="container contact-layout" data-reveal>
+    <aside>
+      <p class="eyebrow">Ways to reach us</p>
+      <a class="contact-method lift" href="mailto:hello@ourmicroschool.com"><span>✉</span><div><strong>Email us</strong><small>hello@ourmicroschool.com</small></div></a>
+      <div class="contact-method"><span>◷</span><div><strong>Response time</strong><small>Within one business day</small></div></div>
+      <div class="contact-method"><span>⌖</span><div><strong>Based in</strong><small>Virginia, USA</small></div></div>
+    </aside>
+
+    <div class="contact-form panel">
+      <h2 class="heading-md">Tell us what you need.</h2>
+      <p>Share a little context and we’ll connect you with the right person.</p>
+      <form class="form-grid" data-api-form action="/api/contact" method="post">
+        <fieldset class="inquiry-field">
+          <legend>What can we help with?</legend>
+          <div>
+            {[
+              ["general", "General"], ["support", "Support"], ["partnership", "Partnership"], ["demo", "Demo"],
+            ].map(([value, label]) => (
+              <label><input type="radio" name="inquiryType" value={value} checked={value === initialInquiry} /><span>{label}</span></label>
+            ))}
+          </div>
+        </fieldset>
+        <div class="form-grid two-columns">
+          <div class="field"><label for="name">Full name</label><input class="input" id="name" name="name" autocomplete="name" minlength="2" maxlength="100" required /></div>
+          <div class="field"><label for="email">Email</label><input class="input" id="email" name="email" type="email" autocomplete="email" maxlength="200" required /></div>
+        </div>
+        <div class="field"><label for="subject">Subject</label><input class="input" id="subject" name="subject" minlength="3" maxlength="150" required /></div>
+        <div class="field"><label for="message">Message</label><textarea class="input" id="message" name="message" minlength="10" maxlength="2000" required></textarea></div>
+        <label class="subscribe"><input type="checkbox" name="subscribe" /><span><strong>Email me occasional updates</strong><small>Product news and useful resources. Unsubscribe anytime.</small></span></label>
+        <button class="button button-primary" type="submit">Send message</button>
+        <p class="form-status" data-form-status aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-layout { display: grid; grid-template-columns: 0.72fr 1.28fr; align-items: start; gap: clamp(2.5rem, 7vw, 6rem); padding-top: 1rem; }
+  aside { display: grid; gap: 0.7rem; }
+  aside .eyebrow { margin-bottom: 0.5rem; }
+  .contact-method { display: flex; align-items: center; gap: 0.8rem; border-bottom: 1px solid var(--border); padding: 1rem 0; }
+  .contact-method > span { display: grid; width: 2.7rem; height: 2.7rem; flex: 0 0 auto; place-items: center; border-radius: 0.85rem; background: var(--primary-soft); color: var(--primary); font-size: 1.1rem; font-weight: 800; }
+  .contact-method div { display: grid; line-height: 1.35; }
+  .contact-method strong { font-size: 0.9rem; }
+  .contact-method small { color: var(--ink-soft); font-size: 0.78rem; font-weight: 650; }
+  .contact-form { padding: clamp(1.4rem, 4vw, 2.5rem); }
+  .contact-form > p { margin: 0.45rem 0 1.8rem; color: var(--ink-soft); font-size: 0.9rem; }
+  .inquiry-field { min-width: 0; margin: 0; border: 0; padding: 0; }
+  .inquiry-field legend { margin-bottom: 0.65rem; font-size: 0.875rem; font-weight: 800; }
+  .inquiry-field > div { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .inquiry-field label input { position: absolute; opacity: 0; pointer-events: none; }
+  .inquiry-field label span { display: block; min-height: 2.5rem; border: 1px solid var(--border); border-radius: 99rem; padding: 0.48rem 0.9rem; cursor: pointer; font-size: 0.78rem; font-weight: 750; }
+  .inquiry-field input:checked + span { border-color: var(--primary); background: var(--primary); color: var(--surface); }
+  .inquiry-field input:focus-visible + span { outline: 3px solid oklch(0.62 0.19 32 / 0.65); outline-offset: 3px; }
+  .subscribe { display: flex; align-items: flex-start; gap: 0.7rem; border-radius: 0.9rem; background: var(--surface-muted); padding: 0.9rem; cursor: pointer; }
+  .subscribe input { width: 1.1rem; height: 1.1rem; margin-top: 0.2rem; accent-color: var(--primary); }
+  .subscribe span { display: grid; }
+  .subscribe strong { font-size: 0.82rem; }
+  .subscribe small { color: var(--ink-soft); font-size: 0.72rem; }
+  .contact-form .button { justify-self: start; margin-top: 0.2rem; }
+  @media (max-width: 48rem) { .contact-layout { grid-template-columns: 1fr; } .contact-method { max-width: 30rem; } }
+  @media (max-width: 30rem) { .contact-form .button { width: 100%; } }
+</style>
